@@ -1,0 +1,10 @@
+[Unit]
+Description=xremap
+
+[Service]
+Restart=always
+ExecStart=/home/jisoo/.cargo/bin/xremap /home/jisoo/.config/xremap/config.yml --watch
+Type=simple
+
+[Install]
+WantedBy=default.target

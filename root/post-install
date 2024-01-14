@@ -1,0 +1,5 @@
+copy_root_config_files() {
+	echo "Copying root config files from dotfiles to /."
+	# cp -R "$basedir"/boot "$basedir"/etc "$basedir"/usr "$basedir"/var /
+	cp -R "$basedir"/etc /
+}

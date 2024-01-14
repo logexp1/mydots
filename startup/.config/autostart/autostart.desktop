@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Startup script
+Type=Application
+Exec=/home/jisoo/bin/autostart.sh
+Terminal=false
+X-GNOME-Autostart-enabled=true

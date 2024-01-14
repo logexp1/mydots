@@ -1,0 +1,14 @@
+modmap:
+  - name: keyboard layout
+    remap:
+      CapsLock : Super_L
+      Alt_L : Ctrl_L
+      Ctrl_L : Alt_L
+
+keymap:
+  - name: launch applications
+    remap:
+      super-i:
+        launch: ["firefox"]
+      super-e:
+        launch: ["emacsclient", "-c", "-a", ""]
