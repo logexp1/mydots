@@ -93,13 +93,29 @@ home_config_setup(){
 		&& HOME=/home/"$user" restow
 }
 
+docker_setup(){
+	dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+	dnf install docker-ce docker-ce-cli containerd.io
+	systemctl enable docker
+
+}
+
+xremap_setup(){
+	sudo --preserve-env -u "$user" cargo install xremap --features gnome
+	sudo --preserve-env -u "$user" systemctl --user enable xremap
+	sudo --preserve-env -u "$user" systemctl --user start xremap
+}
+
 default() {
 	sudo_setup || fail_echo "Failed to update sudo configuration."
 	update_user_groups || fail_echo "Failed to update user groups."
 	install_packages
+	docker_setup || fail_echo "Failed to set up docker"
 	font_setup || fail_echo "Failed to set up fonts"
 	doom_setup || fail_echo "Failed to set up doom"
 	home_config_setup || fail_echo "Failed to set up home config"
+	xremap_setup || fail_echo "Failed to set up xremap"
+
 }
 
 case $1 in
