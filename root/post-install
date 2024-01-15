@@ -1,5 +1,108 @@
-copy_root_config_files() {
-	echo "Copying root config files from dotfiles to /."
-	# cp -R "$basedir"/boot "$basedir"/etc "$basedir"/usr "$basedir"/var /
-	cp -R "$basedir"/etc /
+#!/usr/bin/env bash
+# exit immediately if command exits with a non-zero status
+# set -e
+
+if [[ $EUID -ne 0 ]]; then
+	echo "Please run this script as root."
+	exit 1
+fi
+
+LOG="install-$(date +%d-%H%M%S).log"
+user=jisoo
+
+# Set some colors for output messages
+OK="$(tput setaf 2)[OK]$(tput sgr0)"
+ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
+NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
+WARN="$(tput setaf 166)[WARN]$(tput sgr0)"
+CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
+ORANGE=$(tput setaf 166)
+YELLOW=$(tput setaf 3)
+RESET=$(tput sgr0)
+
+
+# Function to add dnf config if not present in a file
+add_config_if_not_present() {
+	local file="$1"
+	local config="$2"
+	grep -qF "$config" "$file" || echo "$config" | sudo tee -a "$file" > /dev/null
 }
+
+
+root_config() {
+	add_config_if_not_present "/etc/udev/rules.d/input.rules" "KERNEL==\"uinput\", GROUP=\"input\", TAG+=\"uaccess\""
+}
+
+
+install_package() {
+	# Checking if package is already installed
+	if dnf list installed "$1" &>> /dev/null ; then
+		echo -e "${OK} $1 is already installed. Skipping..."
+	else
+		# Package not installed
+		echo -e "${NOTE} Installing $1 ..."
+		dnf install -y "$1"
+		# Making sure package is installed
+		if dnf list installed "$1" &>> /dev/null ; then
+			echo -e "\e[1A\e[K${OK} $1 was installed."
+		else
+			# Something is missing, exiting to review log
+			echo -e "\e[1A\e[K${ERROR} $1 failed to install :( , please check the $LOG. You may need to install manually! Sorry I have tried :("
+			exit 1
+		fi
+	fi
+}
+
+install_packages() {
+	while read -r line; do
+		install_package "$line"
+	done < packages
+}
+
+fail_echo() {
+	echo "$1" | tee --append "$LOG"
+}
+
+sudo_setup() {
+	echo "Updating sudo configuration."
+	chown -R $user:$user /home/$user
+	echo "root ALL=(ALL) ALL
+%wheel ALL=(ALL) ALL
+$user ALL= NOPASSWD: /usr/bin/dnf" | EDITOR='tee' visudo
+}
+
+update_user_groups() {
+	echo "Updating ${user}'s groups."
+	groupadd docker
+	groupadd libvirt
+	groupadd input
+	usermod --append --groups docker,libvirt,input "$user"
+}
+
+font_setup() {
+	sudo -u "$user" fc-cache -v
+}
+
+doom_setup() {
+	sudo -u "$user" git clone --depth 1 https://github.com/doomemacs/doomemacs /home/$user/.config/emacs
+	sudo -u "$user" /home/$user/.config/emacs/bin/doom install
+}
+
+home_config_setup(){
+	source /home/"$user"/fedoradots/terminal/.zsh/stow_functions.sh \
+		&& HOME=/home/"$user" restow
+}
+
+default() {
+	sudo_setup || fail_echo "Failed to update sudo configuration."
+	update_user_groups || fail_echo "Failed to update user groups."
+	install_packages
+	font_setup || fail_echo "Failed to set up fonts"
+	doom_setup || fail_echo "Failed to set up doom"
+	home_config_setup || fail_echo "Failed to set up home config"
+}
+
+case $1 in
+	root-config) root_config;;
+	*) default 2>&1 | tee "$LOG";;
+esac
