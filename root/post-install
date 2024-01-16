@@ -101,6 +101,7 @@ docker_setup(){
 }
 
 xremap_setup(){
+	echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | tee /etc/udev/rules.d/input.rules
 	sudo -u "$user" cargo install xremap --features gnome
 	sudo -u "$user" systemctl --user enable xremap
 	sudo -u "$user" systemctl --user start xremap
