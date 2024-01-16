@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # exit immediately if command exits with a non-zero status
-# set -e
+set -e
 
 if [[ $EUID -ne 0 ]]; then
 	echo "Please run this script as root."
 	exit 1
 fi
 
-LOG="install.log"
+LOG="system_setup.log"
 user=jisoo
 
 # Set some colors for output messages
@@ -25,6 +25,9 @@ RESET=$(tput sgr0)
 add_config_if_not_present() {
 	local file="$1"
 	local config="$2"
+	if [ ! -f $file ]; then
+		touch $file
+	fi
 	grep -qF "$config" "$file" || echo "$config" | sudo tee -a "$file" > /dev/null
 }
 
@@ -76,23 +79,6 @@ update_user_groups() {
 	usermod --append --groups docker,libvirt,input "$user"
 }
 
-font_setup() {
-	sudo -u "$user" fc-cache -v
-}
-
-home_config_setup(){
-	source /home/"$user"/fedoradots/terminal/.zsh/stow_functions.sh \
-		&& HOME=/home/"$user" restow
-}
-
-doom_setup() {
-	sudo -u "$user" git clone --depth 1 https://github.com/doomemacs/doomemacs /home/$user/.config/emacs
-	sudo -u "$user" /home/$user/.config/emacs/bin/doom install
-	rm /home/$user/.config/doom/*
-	home_config_setup
-	/home/$user/.config/emacs/bin/doom sync
-}
-
 docker_setup(){
 	/usr/bin/dnf4 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 	dnf install -y docker-ce docker-ce-cli containerd.io
@@ -100,11 +86,26 @@ docker_setup(){
 
 }
 
-xremap_setup(){
-	echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | tee /etc/udev/rules.d/input.rules
-	sudo -u "$user" cargo install xremap --features gnome
-	sudo -u "$user" systemctl --user enable xremap
-	sudo -u "$user" systemctl --user start xremap
+pass_git_setup() {
+    build_dir="$uhome"/build
+    latest_tag=$(curl -s https://api.github.com/repos/languitar/pass-git-helper/releases/latest | grep "tag_name" | cut -d '"' -f 4)
+    tarball_url=$(curl -s https://api.github.com/repos/languitar/pass-git-helper/releases/latest | grep "tarball_url" | cut -d '"' -f 4)
+    file_name="pass-git-helper-${latest_tag}.tar.gz"
+    for dir in $build_dir/*pass-git-helper-*/; do
+        if [ -d "$dir" ]; then
+            rm -rf $dir
+        fi
+    done
+    if curl -L "$tarball_url" -o "$build_dir/$file_name"; then
+        cd $build_dir
+        tar -xzf "${file_name}" || exit 1
+        extracted_dir=$(tar -tf "$file_name" | grep -o '^[^/]\+' | uniq)
+        cd $extracted_dir
+        sudo pip install .
+    else
+        echo "Failed to download pass-git-helper release"
+        exit 1
+    fi
 }
 
 default() {
@@ -112,10 +113,10 @@ default() {
 	update_user_groups
 	install_packages
 	docker_setup
-	font_setup
 	doom_setup
+	pass_git_setup
 	# home_config_setup
-	xremap_setup
+	# xremap_setup
 }
 
 case $1 in

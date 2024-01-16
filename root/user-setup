@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -e
+# Before executing this, should do some things like
+# - onedrive authentification and synchronize
+# - GnuPG settings and pass initialization
+
+if [[ $EUID -eq 0 ]]; then
+	echo "Please run this script as user"
+	exit 1
+fi
+
+
+LOG="system_setup.log"
+user=jisoo
+uhome=/home/"$user"
+tmp="$(dirname "$(realpath "$0")")"
+basedir=$(dirname "$tmp")
+
+
+font_setup() {
+	fc-cache -v
+}
+
+link_setup() {
+    ln -sn "$uhome"/OneDrive/org "$uhome"/.org
+}
+
+
+git_setup() {
+    git config --global user.email "jisoo.h.lee@gmail.com"
+    git config --global user.name "Jisoo Lee"
+    git config --global credential.helper '!pass-git-helper $@'
+    pass git init && pass git remote add origin "https://github.com/mlmaniac/password-store.git"
+    pass git pull origin master --allow-unrelated-histories --rebase
+}
+
+home_config_setup(){
+	source $basedir/terminal/.zsh/stow_functions.sh \
+		&& restow
+}
+
+doom_setup() {
+	git clone --depth 1 https://github.com/doomemacs/doomemacs /home/$user/.config/emacs
+	/home/$user/.config/emacs/bin/doom install
+	rm /home/$user/.config/doom/*
+	home_config_setup
+	/home/$user/.config/emacs/bin/doom sync
+}
+
+systemd_setup() {
+	cargo install xremap --features gnome
+	systemctl --user enable xremap
+    systemctl --user enable onedrive
+}
+
+
+default() {
+    # font_setup
+    # link_setup
+    # git_setup
+    # doom_setup
+    # systemd_setup
+    browserpass_setup
+}
+
+default

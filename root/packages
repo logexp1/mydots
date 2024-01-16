@@ -26,3 +26,5 @@ adobe-source-han-mono-fonts
 python3-pip
 zsh
 onedrive
+nodejs-bash-language-server
+python3-lsp-server

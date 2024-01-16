@@ -3,5 +3,7 @@
 *.log
 tmp/
 common/.gnupg/pubring.kbx
+common/.gnupg/*~
+common/.gnupg/.*
 common/.gnupg/trustdb.gpg
 startup/.config/systemd/user/default.target.wants/
