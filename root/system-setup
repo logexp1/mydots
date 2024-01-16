@@ -87,7 +87,8 @@ docker_setup(){
 }
 
 pass_git_setup() {
-    build_dir="$uhome"/build
+    build_dir=/tmp/build
+	mkdir -p $build_dir
     latest_tag=$(curl -s https://api.github.com/repos/languitar/pass-git-helper/releases/latest | grep "tag_name" | cut -d '"' -f 4)
     tarball_url=$(curl -s https://api.github.com/repos/languitar/pass-git-helper/releases/latest | grep "tarball_url" | cut -d '"' -f 4)
     file_name="pass-git-helper-${latest_tag}.tar.gz"
@@ -98,10 +99,10 @@ pass_git_setup() {
     done
     if curl -L "$tarball_url" -o "$build_dir/$file_name"; then
         cd $build_dir
-        tar -xzf "${file_name}" || exit 1
+        tar -xzf "${file_name}" || echo "Error while extracting ${file_name}" >&2; exit 1
         extracted_dir=$(tar -tf "$file_name" | grep -o '^[^/]\+' | uniq)
         cd $extracted_dir
-        sudo pip install .
+        pip install .
     else
         echo "Failed to download pass-git-helper release"
         exit 1
@@ -113,10 +114,7 @@ default() {
 	update_user_groups
 	install_packages
 	docker_setup
-	doom_setup
 	pass_git_setup
-	# home_config_setup
-	# xremap_setup
 }
 
 case $1 in
