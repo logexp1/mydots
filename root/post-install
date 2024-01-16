@@ -36,14 +36,14 @@ root_config() {
 
 install_package() {
 	# Checking if package is already installed
-	if dnf list installed "$1" &>> /dev/null ; then
+	if dnf list --installed "$1" &>> /dev/null ; then
 		echo -e "${OK} $1 is already installed. Skipping..."
 	else
 		# Package not installed
 		echo -e "${NOTE} Installing $1 ..."
 		dnf install -y "$1"
 		# Making sure package is installed
-		if dnf list installed "$1" &>> /dev/null ; then
+		if dnf list --installed "$1" &>> /dev/null ; then
 			echo -e "\e[1A\e[K${OK} $1 was installed."
 		else
 			# Something is missing, exiting to review log
@@ -86,6 +86,7 @@ font_setup() {
 doom_setup() {
 	sudo -u "$user" git clone --depth 1 https://github.com/doomemacs/doomemacs /home/$user/.config/emacs
 	sudo -u "$user" /home/$user/.config/emacs/bin/doom install
+	rm /home/$user/.config/doom/*
 }
 
 home_config_setup(){
@@ -94,7 +95,7 @@ home_config_setup(){
 }
 
 docker_setup(){
-	dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+	/usr/bin/dnf4 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 	dnf install docker-ce docker-ce-cli containerd.io
 	systemctl enable docker
 
@@ -107,14 +108,14 @@ xremap_setup(){
 }
 
 default() {
-	sudo_setup || fail_echo "Failed to update sudo configuration."
-	update_user_groups || fail_echo "Failed to update user groups."
+	sudo_setup
+	update_user_groups
 	install_packages
-	docker_setup || fail_echo "Failed to set up docker"
-	font_setup || fail_echo "Failed to set up fonts"
-	doom_setup || fail_echo "Failed to set up doom"
-	home_config_setup || fail_echo "Failed to set up home config"
-	xremap_setup || fail_echo "Failed to set up xremap"
+	docker_setup
+	font_setup
+	doom_setup
+	home_config_setup
+	xremap_setup
 
 }
 
