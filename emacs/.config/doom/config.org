@@ -390,7 +390,7 @@ size 를 float 로 설정하면 hidpi setting 을 따르게 된다.
 (setq!
  doom-font (font-spec :family "Cascadia Code" :size 10.0)
  ;; doom-font (font-spec :family "Roboto Mono" :size 15)
- doom-variable-pitch-font (font-spec :family "GFS Baskerville")
+ doom-variable-pitch-font (font-spec :family "Source Code Pro")
  ;; doom-serif-font (font-spec :family "Libre Baskerville")
  doom-symbol-font (font-spec :family "Source Han Mono K")
  ;; doom-unicode-font (font-spec :family "NanumBarunGothic")

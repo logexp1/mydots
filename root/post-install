@@ -7,7 +7,7 @@ if [[ $EUID -ne 0 ]]; then
 	exit 1
 fi
 
-LOG="install-$(date +%d-%H%M%S).log"
+LOG="install.log"
 user=jisoo
 
 # Set some colors for output messages
@@ -59,9 +59,6 @@ install_packages() {
 	done < packages
 }
 
-fail_echo() {
-	echo "$1" | tee --append "$LOG"
-}
 
 sudo_setup() {
 	echo "Updating sudo configuration."
@@ -102,9 +99,9 @@ docker_setup(){
 }
 
 xremap_setup(){
-	sudo --preserve-env -u "$user" cargo install xremap --features gnome
-	sudo --preserve-env -u "$user" systemctl --user enable xremap
-	sudo --preserve-env -u "$user" systemctl --user start xremap
+	sudo -u "$user" cargo install xremap --features gnome
+	sudo -u "$user" systemctl --user enable xremap
+	sudo -u "$user" systemctl --user start xremap
 }
 
 default() {
@@ -116,7 +113,6 @@ default() {
 	doom_setup
 	home_config_setup
 	xremap_setup
-
 }
 
 case $1 in

@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-ONEDRIVE_DATA_DIR="$HOME/OneDrive"
-mkdir -p ${ONEDRIVE_DATA_DIR}
-firstRun='-d'
-docker pull driveone/onedrive:edge-fedora
-docker inspect onedrive_conf > /dev/null 2>&1 || { docker volume create onedrive_conf; firstRun='-it'; }
-docker inspect onedrive > /dev/null 2>&1 && docker rm -f onedrive
-docker run $firstRun --restart unless-stopped --name onedrive -v onedrive_conf:/onedrive/conf -v "${ONEDRIVE_DATA_DIR}:/onedrive/data" driveone/onedrive:edge-fedora
