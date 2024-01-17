@@ -73,9 +73,9 @@ $user ALL= NOPASSWD: /usr/bin/dnf" | EDITOR='tee' visudo
 
 update_user_groups() {
 	echo "Updating ${user}'s groups."
-	groupadd docker
-	groupadd libvirt
-	groupadd input
+	groupadd docker || echo "group docker already exists"
+	groupadd libvirt || echo "group libvirt already exists"
+	groupadd input || echo "group input already exists"
 	usermod --append --groups docker,libvirt,input "$user"
 }
 
@@ -111,6 +111,7 @@ pass_git_setup() {
 
 default() {
 	sudo_setup
+	root_config
 	update_user_groups
 	install_packages
 	docker_setup
