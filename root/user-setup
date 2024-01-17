@@ -53,13 +53,46 @@ systemd_setup() {
     	systemctl --user enable onedrive
 }
 
+browserpass_setup() {
+    curl https://maximbaz.com/pgp_keys.asc | gpg --import
+    build_dir=$uhome/build
+	mkdir -p $build_dir
+    latest_tag=$(curl -s https://api.github.com/repos/browserpass/browserpass-native/releases | jq -r '.[0].name')
+    tarball_url=$(curl -s https://api.github.com/repos/browserpass/browserpass-native/releases | jq -r '.[0].tarball_url')
+    file_name="browserpass-native-${latest_tag}.tar.gz"
+
+    for dir in $build_dir/*browserpass-native-*/; do
+        if [ -d "$dir" ]; then
+            rm -rf $dir
+        fi
+    done
+    if curl -L "$tarball_url" -o "$build_dir/$file_name"; then
+        cd $build_dir
+        tar -xzf "${file_name}" || echo "Error while extracting ${file_name}" >&2
+        extracted_dir=$(tar -tf "$file_name" | grep -o '^[^/]\+' | uniq)
+        echo "extracted to $extracted_dir"
+        cd $extracted_dir
+        docker build -t browserpass-native .
+        docker run --rm -v "$(pwd)":/src browserpass-native browserpass-linux64
+        make BIN=browserpass-linux64 configure
+        sudo make BIN=browserpass-linux64 install
+        cd /usr/lib/browserpass
+        make hosts-firefox-user
+        make hosts-brave-user
+    else
+        echo "Failed to download browserpass release"
+        exit 1
+    fi
+}
+
 
 default() {
-    #font_setup
-    #link_setup
-    #git_setup
-    #doom_setup
+    font_setup
+    link_setup
+    git_setup
+    doom_setup
     systemd_setup
+    browserpass_setup
 }
 
 default

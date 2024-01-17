@@ -99,8 +99,9 @@ pass_git_setup() {
     done
     if curl -L "$tarball_url" -o "$build_dir/$file_name"; then
         cd $build_dir
-        tar -xzf "${file_name}" || echo "Error while extracting ${file_name}" >&2; exit 1
+        tar -xzf "${file_name}" || echo "Error while extracting ${file_name}" >&2
         extracted_dir=$(tar -tf "$file_name" | grep -o '^[^/]\+' | uniq)
+        echo "extracted to $extracted_dir"
         cd $extracted_dir
         pip install .
     else
