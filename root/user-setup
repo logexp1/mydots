@@ -10,7 +10,7 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 
-LOG="system_setup.log"
+LOG="user_setup.log"
 user=jisoo
 uhome=/home/"$user"
 tmp="$(dirname "$(realpath "$0")")"
@@ -72,8 +72,7 @@ browserpass_setup() {
         extracted_dir=$(tar -tf "$file_name" | grep -o '^[^/]\+' | uniq)
         echo "extracted to $extracted_dir"
         cd $extracted_dir
-        docker build -t browserpass-native .
-        docker run --rm -v "$(pwd)":/src browserpass-native browserpass-linux64
+        make browserpass-linux64
         make BIN=browserpass-linux64 configure
         sudo make BIN=browserpass-linux64 install
         cd /usr/lib/browserpass
@@ -84,7 +83,6 @@ browserpass_setup() {
         exit 1
     fi
 }
-
 
 default() {
     font_setup
