@@ -33,3 +33,7 @@ typescript
 gnome-shell-extension-pop-shell
 xprop
 ncdu
+rofi-wayland
+gnome-pass-search-provider
+gpaste
+gnome-shell-extension-gpaste

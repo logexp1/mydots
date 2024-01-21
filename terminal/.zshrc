@@ -106,6 +106,7 @@ setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
 ## * My configuration
+source ~/.zsh/stow_functions.sh
 # load systemd om-my-zsh plugin
 emulate zsh -c 'z4h load ohmyzsh/ohmyzsh/plugins/systemd'
 ## Aliases
@@ -138,3 +139,5 @@ alias ports='sudo lsof -i -P -n'
 # concatenate images horizontally or vertically
 alias hor_concat_img='montage -mode Concatenate -tile x1 -border 20 -background black -bordercolor black'
 alias vert_concat_img='montage -mode Concatenate -tile 1x -border 20 -background black -bordercolor black'
+
+alias dump_gnome='dconf dump /org/gnome/ > ~/mydots/settings/gnome-settings.ini'

@@ -84,6 +84,10 @@ browserpass_setup() {
     fi
 }
 
+gnome_setup() {
+    dconf load /org/gnome/ < $basedir/gnome/.gnome-settings.ini
+}
+
 default() {
     font_setup
     link_setup

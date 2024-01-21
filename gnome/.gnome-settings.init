@@ -1,0 +1,214 @@
+[calendar]
+active-view='month'
+window-maximized=true
+window-size=(768, 600)
+
+[control-center]
+last-panel='keyboard'
+window-state=(788, 472, false)
+
+[desktop/a11y/magnifier]
+mag-factor=2.0
+
+[desktop/app-folders]
+folder-children=['Utilities', 'YaST', 'Pardus']
+
+[desktop/app-folders/folders/Pardus]
+categories=['X-Pardus-Apps']
+name='X-Pardus-Apps.directory'
+translate=true
+
+[desktop/app-folders/folders/Utilities]
+apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.Loupe.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
+categories=['X-GNOME-Utilities']
+name='X-GNOME-Utilities.directory'
+translate=true
+
+[desktop/app-folders/folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
+
+[desktop/input-sources]
+current=uint32 0
+mru-sources=[('xkb', 'us'), ('ibus', 'hangul')]
+per-window=false
+show-all-sources=false
+sources=[('xkb', 'us'), ('ibus', 'hangul')]
+xkb-options=['grp:ctrl_space_toggle']
+
+[desktop/interface]
+enable-animations=true
+font-antialiasing='grayscale'
+font-hinting='slight'
+gtk-key-theme='Default'
+
+[desktop/notifications]
+application-children=['firefox', 'gnome-power-panel', 'org-gnome-terminal', 'org-gnome-shell-extensions-gsconnect', 'org-freedesktop-problems-applet', 'emacs', 'org-gnome-settings', 'org-gnome-software', 'org-gnome-tweaks', 'org-codeberg-dnkl-foot', 'org-gnome-shell-extensions', 'guake']
+
+[desktop/notifications/application/emacs]
+application-id='emacs.desktop'
+
+[desktop/notifications/application/firefox]
+application-id='firefox.desktop'
+
+[desktop/notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
+
+[desktop/notifications/application/guake]
+application-id='guake.desktop'
+
+[desktop/notifications/application/org-codeberg-dnkl-foot]
+application-id='org.codeberg.dnkl.foot.desktop'
+
+[desktop/notifications/application/org-freedesktop-problems-applet]
+application-id='org.freedesktop.problems.applet.desktop'
+
+[desktop/notifications/application/org-gnome-settings]
+application-id='org.gnome.Settings.desktop'
+
+[desktop/notifications/application/org-gnome-shell-extensions-gsconnect]
+application-id='org.gnome.Shell.Extensions.GSConnect.desktop'
+
+[desktop/notifications/application/org-gnome-shell-extensions]
+application-id='org.gnome.Shell.Extensions.desktop'
+
+[desktop/notifications/application/org-gnome-software]
+application-id='org.gnome.Software.desktop'
+
+[desktop/notifications/application/org-gnome-terminal]
+application-id='org.gnome.Terminal.desktop'
+
+[desktop/notifications/application/org-gnome-tweaks]
+application-id='org.gnome.tweaks.desktop'
+
+[desktop/peripherals/keyboard]
+numlock-state=false
+
+[desktop/privacy]
+report-technical-problems=true
+
+[desktop/wm/keybindings]
+switch-applications=['<Control>Tab']
+switch-applications-backward=['<Shift><Control>Tab']
+switch-input-source=['<Control>space']
+switch-input-source-backward=['<Shift><Control>space']
+
+[evolution-data-server]
+migrated=true
+
+[login-screen]
+enable-fingerprint-authentication=true
+enable-password-authentication=true
+enable-smartcard-authentication=false
+
+[mutter]
+edge-tiling=false
+overlay-key='Super_R'
+
+[nautilus/preferences]
+default-folder-viewer='icon-view'
+migrated-gtk-settings=true
+search-filter-time-type='last_modified'
+
+[nautilus/window-state]
+initial-size=(788, 472)
+
+[nm-applet/eap/049f7933-d44e-4cb7-a1ac-a19cd60830bf]
+ignore-ca-cert=true
+ignore-phase2-ca-cert=false
+
+[settings-daemon/plugins/color]
+night-light-last-coordinates=(37.50909424455299, 126.97410000000001)
+
+[settings-daemon/plugins/media-keys]
+email=@as []
+search=['<Super>s']
+www=@as []
+
+[shell]
+command-history=['r']
+disabled-extensions=['window-list@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['extension-list@tu.berry', 'dash-to-dock@micxgx.gmail.com', 'blur-my-shell@aunetx', 'just-perfection-desktop@just-perfection', 'caffeine@patapon.info', 'gsconnect@andyholmes.github.io', 'clipboard-history@alexsaveau.dev', 'compiz-alike-magic-lamp-effect@hermes83.github.com', 'Vitals@CoreCoding.com', 'background-logo@fedorahosted.org', 'pop-shell@system76.com', 'mediacontrols@cliffniff.github.com', 'ddterm@amezin.github.com']
+last-selected-power-profile='power-saver'
+welcome-dialog-last-shown-version='45.0'
+
+[shell/extensions/caffeine]
+indicator-position-max=2
+
+[shell/extensions/dash-to-dock]
+background-opacity=0.80000000000000004
+dash-max-icon-size=48
+dock-position='BOTTOM'
+height-fraction=0.90000000000000002
+preferred-monitor=-2
+preferred-monitor-by-connector='eDP-1'
+
+[shell/extensions/extension-list]
+button-icon=uint32 0
+
+[shell/extensions/gsconnect]
+id='e240ed2d-66ef-406e-a044-8d4c4d4b083c'
+name='fedora'
+
+[shell/extensions/just-perfection]
+accessibility-menu=true
+background-menu=true
+controls-manager-spacing-size=0
+dash=true
+dash-icon-size=0
+double-super-to-appgrid=true
+osd=true
+panel=true
+panel-in-overview=true
+ripple-box=true
+search=true
+show-apps-button=true
+startup-status=1
+theme=false
+window-demands-attention-focus=false
+window-picker-icon=true
+window-preview-caption=true
+window-preview-close-button=true
+workspace=true
+workspace-background-corner-size=0
+workspace-popup=true
+workspaces-in-app-grid=true
+
+[shell/extensions/mediacontrols]
+fixed-label-width=false
+label-width=uint32 200
+
+[shell/extensions/pop-shell]
+active-hint=true
+log-level=uint32 4
+smart-gaps=false
+tile-by-default=true
+toggle-stacking-global=@as []
+
+[shell/keybindings]
+toggle-quick-settings=@as []
+
+[shell/world-clocks]
+locations=@av []
+
+[software]
+check-timestamp=int64 1705713455
+first-run=false
+flatpak-purge-timestamp=int64 1705657840
+install-timestamp=int64 1705671933
+packagekit-historical-updates-timestamp=uint64 1705671933
+update-notification-timestamp=int64 1705671992
+
+[system/location]
+enabled=true
+
+[terminal/legacy/profiles:]
+list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9']
+
+[terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+font='MesloLGS NF 12'
+use-system-font=false
+
+[tweaks]
+show-extensions-notice=false

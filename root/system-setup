@@ -56,7 +56,12 @@ install_package() {
 	fi
 }
 
+copr_setup() {
+    dnf copr enable jle64/gnome-pass-search-provider
+}
+
 install_packages() {
+    copr_setup
 	while read -r line; do
 		install_package "$line"
 	done < packages
