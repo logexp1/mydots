@@ -79,7 +79,7 @@ sudo_setup() {
 	chown -R $user:$user /home/$user
 	echo "root ALL=(ALL) ALL
 %wheel ALL=(ALL) ALL
-$user ALL= NOPASSWD: /usr/bin/dnf" | EDITOR='tee' visudo
+$user ALL= NOPASSWD: /usr/bin/dnf, /usr/bin/btrbk" | EDITOR='tee' visudo
 }
 
 update_user_groups() {
