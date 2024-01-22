@@ -4,6 +4,7 @@ modmap:
       CapsLock : Super_L
       Alt_L : Ctrl_L
       Ctrl_L : Alt_L
+      Win_L : LEFTMETA
 
 keymap:
   - name: launch applications

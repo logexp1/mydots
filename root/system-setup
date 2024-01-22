@@ -9,6 +9,7 @@ fi
 
 LOG="system_setup.log"
 user=jisoo
+basedir="$(dirname "$(realpath "$0")")"
 
 # Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
@@ -33,9 +34,14 @@ add_config_if_not_present() {
 
 
 root_config() {
-	add_config_if_not_present "/etc/udev/rules.d/input.rules" "KERNEL==\"uinput\", GROUP=\"input\", TAG+=\"uaccess\""
+	# add_config_if_not_present "/etc/udev/rules.d/input.rules" "KERNEL==\"uinput\", GROUP=\"input\", TAG+=\"uaccess\""
+    cp -R "$basedir"/etc /
 }
 
+btrbk_setup() {
+    mkdir /btrbk_snapshots
+    systemctl enable btrbk.timer
+}
 
 install_package() {
 	# Checking if package is already installed
@@ -117,6 +123,7 @@ pass_git_setup() {
 
 default() {
 	sudo_setup
+    btrbk_setup
 	root_config
 	update_user_groups
 	install_packages
