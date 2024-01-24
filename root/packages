@@ -21,7 +21,7 @@ cascadia-code-fonts
 naver-nanum-fonts-all
 cmake
 libtool
-gnome-tweaks
+# gnome-tweaks
 dnf-plugins-core
 adobe-source-han-mono-fonts
 python3-pip
@@ -30,11 +30,11 @@ onedrive
 nodejs-bash-language-server
 python3-lsp-server
 typescript
-gnome-shell-extension-pop-shell
+# gnome-shell-extension-pop-shell
 xprop
 ncdu
 rofi-wayland
-gnome-pass-search-provider
+# gnome-pass-search-provider
 gpaste
-gnome-shell-extension-gpaste
+# gnome-shell-extension-gpaste
 btrbk

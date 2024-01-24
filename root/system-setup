@@ -63,12 +63,16 @@ install_package() {
 }
 
 copr_setup() {
-    dnf copr enable jle64/gnome-pass-search-provider
+    # dnf copr enable jle64/gnome-pass-search-provider
+    dnf copr enable sunwire/envycontrol
 }
 
 install_packages() {
     copr_setup
 	while read -r line; do
+		if [[ -z $line ]] || [[ $line =~ \# ]]; then
+            continue
+        fi
 		install_package "$line"
 	done < packages
 }
