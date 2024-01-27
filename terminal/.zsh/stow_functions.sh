@@ -1,10 +1,10 @@
 # as of stow 2.2.2, READMEs are automatically ignored
 restow() {
 	cd ~/mydots && \
-		stow -Rvt ~/ emacs terminal remap scripts startup common browsing assets
+		stow -Rvt ~/ emacs terminal remap scripts startup common browsing assets wm
 }
 
 unstow() {
 	cd ~/mydots && \
-		stow -Dvt ~/ emacs terminal remap scripts startup common browsing assets
+		stow -Dvt ~/ emacs terminal remap scripts startup common browsing assets wm
 }

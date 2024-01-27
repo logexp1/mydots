@@ -1,0 +1,9 @@
+PATH=$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$PATH
+ALTERNATE_EDITOR=""
+EDITOR="emacsclient -t"
+VISUAL="emacsclient -c -a emacs"
+BROWSER="firefox"
+GTK_IM_MODULE=kime
+QT_IM_MODULE=kime
+XMODIFIERS=@im=kime
+LANG=en_US.UTF-8
