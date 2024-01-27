@@ -1,0 +1,18 @@
+# default settings
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[**{rc,.conf}]
+indent_style = tab
+
+[**.sh]
+indent_style = tab
+
+[**.py]
+max_line_length = 79
+
+[**.{json,ts,tsx,js,jsx}]
+indent_size = 4

@@ -1,0 +1,41 @@
+
+env:
+  TERM: alacritty
+
+font:
+  normal:
+    family: MesloLGS NF
+    style: Regular
+  bold:
+    family: MesloLGS NF
+    style: Bold
+  italic:
+    family: MesloLGS NF
+    style: Italic
+  bold_italic:
+    family: MesloLGS NF
+    style: Bold Italic
+
+window:
+  opacity: 0.8
+
+shell:
+ program: /bin/zsh
+
+
+hints:
+ enabled:
+  - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:|telnet:)\
+            [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+    command: xdg-open
+    post_processing: true
+    mouse:
+      enabled: true
+      mods: Control
+    binding:
+      key: U
+      mods: Control|Shift
+
+key_bindings:
+  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
