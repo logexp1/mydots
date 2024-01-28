@@ -2,3 +2,4 @@
 
 kime
 emacsclient -c -a ""
+udiskie &

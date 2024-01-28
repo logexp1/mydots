@@ -64,10 +64,11 @@ install_package() {
 
 dnf_setup() {
     # dnf copr enable jle64/gnome-pass-search-provider
-    dnf copr enable sunwire/envycontrol
-    dnf copr enable toroidalfox/kime
+    # dnf copr enable -y sunwire/envycontrol
+    dnf copr enable -y toroidalfox/kime
+    dnf copr enable -y solopasha/hyprland
     dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-    dnf upgrade
+    dnf upgrade -y
 }
 
 install_packages() {
