@@ -40,3 +40,7 @@ gpaste
 btrbk
 kime
 alacritty
+akmod-nvidia
+xorg-x11-drv-nvidia-cuda
+libva-nvidia-driver
+xorg-x11-drv-nvidia-libs.i686

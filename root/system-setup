@@ -35,7 +35,7 @@ add_config_if_not_present() {
 
 root_config() {
 	# add_config_if_not_present "/etc/udev/rules.d/input.rules" "KERNEL==\"uinput\", GROUP=\"input\", TAG+=\"uaccess\""
-    cp -R "$basedir"/etc /
+    cp -R "$basedir"/etc "$basedir"/usr /
 }
 
 btrbk_setup() {
@@ -62,14 +62,16 @@ install_package() {
 	fi
 }
 
-copr_setup() {
+dnf_setup() {
     # dnf copr enable jle64/gnome-pass-search-provider
     dnf copr enable sunwire/envycontrol
     dnf copr enable toroidalfox/kime
+    dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    dnf upgrade
 }
 
 install_packages() {
-    copr_setup
+    dnf_setup
 	while read -r line; do
 		if [[ -z $line ]] || [[ $line =~ \# ]]; then
             continue
@@ -126,11 +128,17 @@ pass_git_setup() {
     fi
 }
 
+initramfs_setup() {
+    akmods --force
+    dracut --force
+}
+
 default() {
 	root_config
 	update_user_groups
 	install_packages
 	sudo_setup
+    initramfs_setup
 	btrbk_setup
 	docker_setup
 	pass_git_setup
