@@ -571,6 +571,7 @@ makes life much easier
         "C-y" #'vertico-save
         "C-j" #'vertico-next
         "C-k" #'vertico-previous
+        "C-SPC" #'toggle-input-method
         "C-<return>" #'vertico-exit-input)
   (map! :leader
         :desc "M-x" "SPC" #'execute-extended-command

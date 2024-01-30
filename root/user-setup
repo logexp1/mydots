@@ -48,8 +48,6 @@ doom_setup() {
 }
 
 systemd_setup() {
-	cargo install xremap --features wlroots
-	systemctl --user enable xremap
     systemctl --user enable onedrive
 }
 
