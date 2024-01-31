@@ -1,0 +1,12 @@
+[pyprland]
+plugins = [
+    "scratchpads"
+]
+
+[scratchpads.term]
+command = "alacritty --class dropdown -e zsh -c \"tmux new-session -A -s default\""
+animation = "fromTop"
+margin = 50
+unfocus = "hide"
+size = "75% 60%"
+max_size = "1920px 100%"

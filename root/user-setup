@@ -82,8 +82,13 @@ browserpass_setup() {
     fi
 }
 
-gnome_setup() {
-    dconf load /org/gnome/ < $basedir/gnome/.gnome-settings.ini
+pip_setup() {
+    mkdir -p $uhome/.virtualenvs
+    cd $uhome/.virtualenvs
+    python -m venv system
+    source system/bin/activate
+    pip install pyprland
+    deactivate
 }
 
 default() {
@@ -93,6 +98,7 @@ default() {
     doom_setup
     systemd_setup
     browserpass_setup
+    pip_setup
 }
 
 default
