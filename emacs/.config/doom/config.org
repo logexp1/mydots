@@ -1,6 +1,6 @@
 #+PROPERTY: header-args :results silent
 * sane defaults
-:PROPERTIES:
+:PROPERTIE:
 :ID:       609afc78-c5a2-4b87-9d56-25e594f3ba61
 :END:
 # TODO marked sections are excluded from being tangled
@@ -900,8 +900,8 @@ I can't use org mode headline search if I enable this package.
         '(("p" . "src jupyter-python")))
   (add-to-list 'org-structure-template-alist
                '("s" . "src shell"))
-  ;; (add-to-list 'org-structure-template-alist
-  ;;              '("R" . "src restclient"))
+  (add-to-list 'org-structure-template-alist
+               '("R" . "src restclient"))
   (add-to-list 'org-structure-template-alist
                '("r" . "src jupyter-R"))
   (add-to-list 'org-structure-template-alist
@@ -910,8 +910,8 @@ I can't use org mode headline search if I enable this package.
                '("e" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist
                '("q" . "src sql"))
-  ;; (add-to-list 'org-structure-template-alist
-  ;;              '("j" . "src java"))
+  (add-to-list 'org-structure-template-alist
+               '("j" . "src js"))
   (add-to-list 'org-structure-template-alist
                '("h" . "src haskell"))
   (add-to-list 'org-structure-template-alist

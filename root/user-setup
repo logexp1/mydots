@@ -82,6 +82,16 @@ browserpass_setup() {
     fi
 }
 
+flatpak_setup() {
+    flatpak remote-modify --enable flathub
+	while read -r line; do
+		if [[ -z $line ]] || [[ $line =~ \# ]]; then
+            continue
+        fi
+		flatpak install flathub "$line" -y
+	done < flatpaks
+}
+
 pip_setup() {
     mkdir -p $uhome/.virtualenvs
     cd $uhome/.virtualenvs

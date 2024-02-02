@@ -71,6 +71,7 @@ dnf_setup() {
     dnf upgrade -y
 }
 
+
 install_packages() {
     dnf_setup
 	while read -r line; do
@@ -79,6 +80,7 @@ install_packages() {
         fi
 		install_package "$line"
 	done < packages
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 }
 
 

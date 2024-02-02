@@ -175,6 +175,7 @@
        ;;terra             ; Earth and Moon in alignment for performance.
        (web +lsp)              ; the tubes
        (yaml +lsp)              ; JSON, but readable
+       (javascript +lsp)
 
        :email
        (mu4e +gmail +org)
