@@ -6,7 +6,7 @@ export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
 
-# PATH=$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$PATH
+# hyprland related
 export GTK_IM_MODULE=kime
 export QT_IM_MODULE=kime
 export XMODIFIERS=@im=kime
@@ -19,6 +19,27 @@ export WLR_NO_HARDWARE_CURSORS=1
 export __NV_PRIME_RENDER_OFFLOAD=1
 export __VK_LAYER_NV_optimus=NVIDIA_only
 export XCURSOR_SIZE=24
-export QT_QPA_PLATFORMTHEME=qt5ct # change to qt6ct if you have that
+export QT_QPA_PLATFORMTHEME=qt5ct
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# XDG settings
+source /etc/profile.d/flatpak.sh
+
+pathdirs="
+$HOME/.config/emacs/bin
+"
+
+while read -r dir; do
+	if [[ -n $dir ]] && [[ ! ${dir:0:1} == '#' ]]; then
+		PATH="$PATH":"$dir"
+	fi
+done <<< "$pathdirs"
+
+WIRELESS_INTERFACE=$(ip link \
+	| awk -F ":" '/^[0-9]: wl/ {sub(" ",""); print $2}')
+ETHERNET_INTERFACE=$(ip link \
+	| awk -F ":" '/^[0-9]: en/ {sub(" ",""); print $2}')
+
+export WIRELESS_INTERFACE ETHERNET_INTERFACE
 
 exec Hyprland
