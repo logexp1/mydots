@@ -28,17 +28,7 @@
         "on-click": "rofi -show drun -theme ~/.config/rofi/launcher.rasi",
     },
     "hyprland/workspaces":{
-        "active-only": false,
-        "all-outputs": true,
-        "disable-scroll": false,
-		    "format": "{icon}",
-		    "on-click": "activate",
-		    "format-icons": {
-			    "urgent": "",
-			    "active": "",
-			    "default": "󰧞",
-            "sort-by-number": true
-        },
+        "format": "{name}",
     },
 
     "memory": {
@@ -60,16 +50,16 @@
         "path": "/"
     },
 
-	  "tray": {
+	"tray": {
 		"icon-size": 16,
 		"spacing": 5
 	},
     "pulseaudio": {
-		    "format": "{icon} {volume}%",
+		"format": "{icon} {volume}%",
         "format-muted": "󰝟",
-		    "format-icons": {
-			      "default": ["󰕿", "󰖀", "󰕾"]
-		    },
+		"format-icons": {
+			"default": ["󰕿", "󰖀", "󰕾"]
+		},
         "on-click": "pavucontrol",
     },
     "network": {
@@ -82,8 +72,8 @@
         "on-click-right": "nm-connection-editor"
     },
     "clock": {
-		    "format": " {:%H:%M}",
-		    "tooltip": "true",
+		"format": " {:%H:%M}",
+		"tooltip": "true",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": " {:%d/%m}"
     }
