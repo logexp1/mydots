@@ -1,0 +1,48 @@
+{
+    "layer": "top",
+    "height": 25,
+    "modules-left":[
+        "hyprland/workspaces",
+        "hyprland/submap"
+    ],
+    "modules-right":[
+        "pulseaudio",
+        "network"
+    ],
+    "hyprland/workspaces":{
+        "format": "{name}"
+    },
+    "pulseaudio": {
+        "format": "<span foreground='#928374'>{icon}</span> {volume}%   {format_source}",
+        "format-bluetooth": "<span foreground='#928374'>{icon}</span> {volume}%   {format_source}",
+        "format-bluetooth-muted": "<span foreground='#928374'> {icon}</span>   {format_source}",
+        "format-muted": "<span foreground='#928374'></span>   {format_source}",
+        "format-source": "<span foreground='#928374'></span> {volume}%",
+        "format-source-muted": "<span foreground='#928374'></span>",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "push2talk -t",
+        "on-click-middle": "helvum"
+    },
+    "network": {
+        "interval": 2,
+        "interface": "wlp2s0",
+        "format-wifi": "<span foreground='#928374'></span> {essid}",
+        "format-ethernet": "<span foreground='#928374'></span> {ifname}",
+        "format-linked": "<span foreground='#928374'></span> {ifname}",
+        "format-disconnected": " <span foreground='#928374'></span> ",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n {bandwidthDownBits}\n {bandwidthUpBits}"
+    },
+}
