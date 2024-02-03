@@ -18,10 +18,11 @@ client_fullscreen = "[{icon}]{delim}"
 
 [title_in_class."(brave-browser|firefox|chrom.*)"]
 "(?i)youtube" = ""
-"(?i)github" = ""
+"(?i)github" = "<span color='grey'></span>"
 
 [title_in_class_active."(brave-browser|firefox|chrom.*)"]
 "(?i)youtube" = "<span color='red'></span>"
+"(?i)github" = ""
 
 
 [class]
@@ -40,6 +41,7 @@ DEFAULT = ""
 "pavucontrol" = ""
 "(?i)slack" = "󰒱"
 "swappy" = ""
+"(?i)zathura" = ""
 ".*transmission.*" = ""
 "virt-manager" = ""
 "zoom" = ""
