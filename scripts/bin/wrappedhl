@@ -5,6 +5,7 @@ cd ~
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
+export BROWSER="firefox"
 
 # hyprland related
 export GTK_IM_MODULE=kime
