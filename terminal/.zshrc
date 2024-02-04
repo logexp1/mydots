@@ -139,7 +139,6 @@ alias ports='sudo lsof -i -P -n'
 # concatenate images horizontally or vertically
 alias hor_concat_img='montage -mode Concatenate -tile x1 -border 20 -background black -bordercolor black'
 alias vert_concat_img='montage -mode Concatenate -tile 1x -border 20 -background black -bordercolor black'
-
 alias dump_gnome='dconf dump /org/gnome/ > ~/mydots/settings/gnome-settings.ini'
-
 alias snaps='sudo btrbk list snapshots'
+alias query_class='hyprctl clients | grep -i class'

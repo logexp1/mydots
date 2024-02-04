@@ -45,3 +45,7 @@
 (package! kbd-mode
   :recipe (:host github
            :repo "kmonad/kbd-mode"))
+
+(package! dirvish
+  :recipe (:host github
+           :repo "alexluigit/dirvish"))

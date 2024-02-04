@@ -294,7 +294,8 @@
 (map! :map general-override-mode-map
       :n "T" #'+vterm/toggle
       :n "S" #'magit-status
-      :n "-" #'dired-jump
+      ;; :n "-" #'dired-jump
+      :n "-" #'dirvish-dwim
       :nivm "C-f"  #'+vertico/search-symbol-at-point)
 (general-def
   "C-v" #'yank
@@ -2351,6 +2352,22 @@ Git gutter:
 
 
 * dired
+** divish
+#+begin_src emacs-lisp
+(use-package! dirvish
+  :config
+  (dirvish-override-dired-mode)
+  (setq! dirvish-header-line-format
+         '(:left (path symlink)
+           :right (free-space))
+         dirvish-mode-line-format
+         '(:left (" " file-modes " " file-link-number " " file-user ":" file-group " " symlink omit vc-info)
+           :right (sort yank index)))
+  (setq! dirvish-attributes '(all-the-icons file-size vc-state symlink-arrow)
+         dirvish-yank-new-name-style 'append-to-filename
+         dirvish-use-mode-line 'global))
+#+end_src
+
 ** y-or-n confirm instead of yes-or-no
 #+begin_src emacs-lisp
 (setq! dired-deletion-confirmer 'y-or-n-p
@@ -2359,7 +2376,6 @@ Git gutter:
 #+end_src
 
 ** custom functions
-
 #+begin_src emacs-lisp
 ;; to use rifle
 (defun js/dired-open-external ()
@@ -2473,20 +2489,15 @@ unzip/zip things
 #+end_src
 
 ** dired-toggle-sudo
-:PROPERTIES:
-:ID:       dfaaeed4-f39a-4cc7-af29-07a8ed76e5c9
-:END:
 #+begin_src emacs-lisp
 (use-package dired-toggle-sudo
   :general ('normal dired-mode-map "zs" #'dired-toggle-sudo))
 #+end_src
 
 ** dired-ranger
-:PROPERTIES:
-:ID:       e4909e97-af7e-4ea0-a0bb-9232cbaee156
-:END:
 #+begin_src emacs-lisp
 (use-package! dired-ranger
+  :disabled t
   :general ('normal dired-mode-map
                     "yy" #'dired-ranger-copy
                     "pP" #'dired-ranger-move
