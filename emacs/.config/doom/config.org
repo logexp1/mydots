@@ -2363,7 +2363,7 @@ Git gutter:
          dirvish-mode-line-format
          '(:left (" " file-modes " " file-link-number " " file-user ":" file-group " " symlink omit vc-info)
            :right (sort yank index)))
-  (setq! dirvish-attributes '(all-the-icons file-size vc-state symlink-arrow)
+  (setq! dirvish-attributes '(vscode-icons file-size vc-state symlink-arrow)
          dirvish-yank-new-name-style 'append-to-filename
          dirvish-use-mode-line 'global))
 #+end_src
