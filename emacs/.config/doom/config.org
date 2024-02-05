@@ -2357,6 +2357,7 @@ Git gutter:
 (use-package! dirvish
   :config
   (dirvish-override-dired-mode)
+  (dirvish-peek-mode)
   (setq! dirvish-header-line-format
          '(:left (path symlink)
            :right (free-space))
@@ -2429,9 +2430,14 @@ Git gutter:
        :n "cm" #'dired-do-chmod
        :n "co" #'dired-do-chown
        :n "cg" #'dired-do-chgrp
+       :n "yp" #'dirvish-copy-file-path
+       :n "yn" #'dirvish-copy-file-name
+       :n "pp" #'dirvish-yank
+       :n "pm" #'dirvish-move
+       :n "pl" #'dirvish-symlink
        ;; :n "C" #'dired-do-copy
        :n "D" #'dired-do-delete
-       :n "o" #'dired-do-shell-command
+       :n "o" #'dirvish-quicksort
        ;; :n "Q" #'hydra-dired-quick-sort/body
        :n "zd" #'dired-hide-details-mode)
 #+end_src
@@ -2470,6 +2476,7 @@ Git gutter:
         :desc "Videos directory" :n "v" '(lambda() (interactive) (find-file "~/Videos"))
         :desc "emacs directory" :n "e" '(lambda() (interactive) (find-file "~/.doom.d/"))
         :desc "downloads directory" :n "d" (lambda() (interactive) (find-file "~/Downloads"))
+        :desc "pictures directory" :n "p" (lambda() (interactive) (find-file "~/Pictures"))
         :desc "screenshots directory" :n "c" '(lambda() (interactive) (find-file "~/move"))
         :desc "Documents directory" :n "D" '(lambda() (interactive) (find-file "~/OneDrive/Documents"))))
 #+end_src
