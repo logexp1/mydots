@@ -2357,7 +2357,6 @@ Git gutter:
 (use-package! dirvish
   :config
   (dirvish-override-dired-mode)
-  (dirvish-peek-mode)
   (setq! dirvish-header-line-format
          '(:left (path symlink)
            :right (free-space))
