@@ -47,7 +47,6 @@ hyprland-nvidia
 udiskie
 flatpak
 papirus-icon-theme
-font-manager
 hyprland-autoname-workspaces
 swappy
 cliphist
@@ -55,3 +54,6 @@ zathura-pdf-poppler
 gtkmm3.0-devel
 ranger
 pqiv
+polkit-kde
+swaylock-effects
+swww

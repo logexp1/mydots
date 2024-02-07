@@ -23,6 +23,7 @@ font_setup() {
 
 link_setup() {
     ln -sn "$uhome"/OneDrive/org "$uhome"/.org
+    ln -sn "$basedir"/media/wallpapers "$uhome"/.wallpapers
 }
 
 

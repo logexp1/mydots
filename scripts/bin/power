@@ -1,21 +1,37 @@
 #!/bin/bash
 
-options=$(echo -e "  Poweroff\n  Restart\n  Suspend\n  Logout")
+uptime=$(uptime -p | sed -e 's/up //g')
 
-selected_option=$(echo -e "$options" | rofi -dmenu -i -mesg "Bye "$USER"!" -config ~/.config/rofi/power.rasi)
+dir="$HOME/.config/rofi"
+theme="power"
+rofi_command="rofi -dmenu -theme $dir/$theme.rasi"
 
-# Handle the selected option
-case $selected_option in
-    "  Poweroff")
-        systemctl poweroff
+# Options
+shutdown=""
+reboot=""
+lock=""
+suspend=""
+logout=""
+
+options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+
+chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 2)"
+case $chosen in
+    $shutdown)
+		systemctl poweroff
         ;;
-    "  Restart")
-        systemctl reboot
+    $reboot)
+		systemctl reboot
         ;;
-    "  Suspend")
-        systemctl suspend
+    $lock)
+        swaylock
         ;;
-    "  Logout")
+    $suspend)
+		# amixer set Master mute
+		systemctl suspend
+        ;;
+    $logout)
         pkill -KILL -u "$USER"
         ;;
+
 esac
