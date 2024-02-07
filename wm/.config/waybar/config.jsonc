@@ -18,14 +18,14 @@
     ],
     "modules-right":[
         "tray",
+        "custom/randwall",
         "pulseaudio",
         "network",
         "clock"
     ],
-
     "custom/launcher": {
         "format": "󰈸",
-        "on-click": "rofi -show drun -theme ~/.config/rofi/launcher.rasi",
+        "on-click": "rofi -show drun -theme ~/.config/rofi/styles/launcher.rasi",
     },
     "hyprland/workspaces":{
         "format": "{name}",
@@ -54,6 +54,10 @@
 		"icon-size": 16,
 		"spacing": 5
 	},
+    "custom/randwall": {
+        "format": "󰏘",
+        "on-click": "randwall",
+    },
     "pulseaudio": {
 		"format": "{icon} {volume}%",
         "format-muted": "󰝟",
