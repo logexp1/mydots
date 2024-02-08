@@ -2416,12 +2416,12 @@ Git gutter:
 (map! :map dired-mode-map
        :n "C" #'magit-clone
        :n "RET" #'js/dired-open-external
-       : "C-d" #'js/dired-dragon-drop
-       :n "q" #'js/kill-this-buffer
+       :n "C-d" #'js/dired-dragon-drop
+       :n "q" #'dirvish-quit
        :n "h" #'dired-up-directory
        :n "j" #'dired-next-line
        :n "k" #'dired-previous-line
-       :n "l" #'dired-find-alternate-file
+       :n "l" #'dired-view-file
        :n "f" #'find-file
        :nv "<tab>" #'dired-mark
        :n "\"" #'dired-mark-files-regexp
