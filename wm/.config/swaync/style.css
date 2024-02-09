@@ -1,6 +1,6 @@
 /* ----------- 💫 https://github.com/JaKooLit 💫 -------- */
 
-@import '~/.cache/wal/colors-waybar.css';
+@import '../../.cache/wal/colors-waybar.css';
 
 @define-color noti-border-color #7aa2f7;
 @define-color noti-bg rgba(0, 0, 0, 0.8);
@@ -11,15 +11,15 @@
 @define-color text-color-disabled rgba(150, 150, 150, 0.8);
 
 * {
-    font-family: Fira Code;
-    font-weight: SemiBold;
+    font-family: FiraCode;
+    font-weight: Bolder;
 }
 
 .control-center .notification-row:focus,
 .control-center .notification-row:hover {
     opacity: 1;
     background: @noti-bg;
-    border-radius: 10px
+    border-radius: 10px;
 }
 
 .notification-row {

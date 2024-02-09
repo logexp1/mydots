@@ -63,24 +63,18 @@
         "buttons-grid": {
             "actions": [
                 {
-                    "label": "",
-                    "command": "hyprctl dispatch exit"
-                },
-                {
-                    "label": "󰕾",
-                    "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+                "label": "󰍃","command": "hyprctl dispatch exit"
+            },
+            {
+                "label": "󰕾","command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
                 },
                 {
                     "label": "󰌾",
-                    "command": "~/.config/hypr/scripts/LockScreen.sh"
+                    "command": "swaylock"
                 },
                 {
                     "label": "󰂯",
                     "command": "blueman-manager"
-                },
-                {
-                    "label": "󰌾",
-                    "command": "~/.config/hypr/scripts/LockScreen.sh"
                 },
                 {
                     "label": "󰜉",
