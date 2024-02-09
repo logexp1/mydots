@@ -98,7 +98,7 @@ pip_setup() {
     cd $uhome/.virtualenvs
     python -m venv system
     source system/bin/activate
-    pip install pyprland
+    pip install pyprland pywal
     deactivate
 }
 

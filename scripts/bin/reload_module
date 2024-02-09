@@ -12,7 +12,7 @@ case "$choice" in
         killall -SIGUSR2 waybar
 	    ;;
 	swaync)
-        swaync-client --reload-config
+        swaync-client -rs
         ;;
 esac
 

@@ -1,2 +1,6 @@
-#/bin/bash
-swww img `find ~/.wallpapers/ -type f | shuf -n 1` --transition-type any --transition-fps 60
+#!/bin/bash
+
+randwall=$(find ~/.wallpapers/ -type f | shuf -n 1)
+swww img "$randwall" --transition-type any --transition-fps 60
+wal="$HOME/.virtualenvs/system/bin/wal"
+$wal -i "$randwall" -s -t &

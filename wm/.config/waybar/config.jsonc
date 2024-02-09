@@ -1,108 +1,62 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+
+// ### DEFAULT - Top ### //
 {
-    "position": "top",
+    "include": "~/.config/waybar/modules.jsonc",
     "layer": "top",
-    "height": 16,
-    "margin-top": 0,
-    "margin-bottom": 0,
-    "margin-left": 0,
-    "margin-right": 0,
-    "modules-left":[
-        "custom/launcher",
-        "hyprland/workspaces",
-        "hyprland/submap"
-    ],
+    //"mode": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "position": "top",
+    "spacing": 3,
+    "fixed-center": true,
+    "ipc": true,
+    "margin-top": 3,
+    "margin-left": 8,
+    "margin-right": 8,
+
+    "modules-left": [
+	    "custom/menu",
+	    "custom/separator#dot-line",
+	    "hyprland/workspaces",
+	    "custom/separator#dot-line",
+	    "cpu",
+	    "custom/separator#dot-line",
+	    "temperature",
+	    "custom/separator#dot-line",
+	    "memory",
+	    // "custom/separator#dot-line",
+	    // "disk",
+	    "custom/separator#dot-line",
+	    "custom/weather",
+	],
+
     "modules-center": [
-        "cpu",
-        "memory"
-        // "disk"
-    ],
-    "modules-right":[
-        "tray",
-        "custom/notification",
-        "custom/randwall",
-        "pulseaudio",
-        "network",
-        "clock"
-    ],
-    "custom/launcher": {
-        "format": "󰈸",
-        "on-click": "rofi -show drun -theme ~/.config/rofi/styles/launcher.rasi",
-    },
-    "hyprland/workspaces":{
-        "format": "{name}",
-    },
+	    "clock",
+	    "custom/separator#dot-line",
+	    "hyprland/window",
+	    "custom/separator#dot-line",
+	],
 
-    "memory": {
-        "format": "󰍛 {}%",
-        "format-alt": "󰍛 {used}/{total} GiB",
-        "interval": 5
-    },
-
-    "cpu": {
-        "format": "󰻠 {usage}%",
-        "format-alt": "󰻠 {avg_frequency} GHz",
-        "interval": 5
-    },
-
-    "disk": {
-        "format": "󰋊 {}%",
-        "format-alt": "󰋊 {used}/{total} GiB",
-        "interval": 5,
-        "path": "/"
-    },
-
-	"tray": {
-		"icon-size": 16,
-		"spacing": 5
-	},
-    "custom/notification": {
-        "tooltip": false,
-        "format": "{icon}",
-        "format-icons": {
-            "notification": "<span foreground='red'><sup></sup></span>",
-            "none": "",
-            "dnd-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-none": "",
-            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "inhibited-none": "",
-            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-inhibited-none": ""
-        },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
-    },
-    "custom/randwall": {
-        "format": "󰏘",
-        "on-click": "randwall",
-    },
-    "pulseaudio": {
-		"format": "{icon} {volume}%",
-        "format-muted": "󰝟",
-		"format-icons": {
-			"default": ["󰕿", "󰖀", "󰕾"]
-		},
-        "on-click": "pavucontrol",
-    },
-    "network": {
-        "format-wifi": "󰤨",
-        "format-ethernet": " {ifname}: Aesthetic",
-        "format-linked": " {ifname} (No IP)",
-        "format-disconnected": "󰤭",
-        "format-alt": " {ifname}: {ipaddr}/{cidr}",
-        "tooltip-format": "{essid}",
-        "on-click-right": "nm-connection-editor"
-    },
-    "clock": {
-		"format": " {:%H:%M}",
-		"tooltip": "true",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": " {:%d/%m}"
-    }
+    "modules-right": [
+	    "tray",
+	    "custom/separator#dot-line",
+	    "bluetooth",
+	    "custom/separator#dot-line",
+	    "network#speed",
+	    "custom/separator#dot-line",
+	    "pulseaudio",
+	    "custom/separator#dot-line",
+	    "pulseaudio#microphone",
+	    "custom/separator#dot-line",
+	    "custom/swaync",
+	    "custom/separator#dot-line",
+        "group/laptop",
+	    "custom/separator#dot-line",
+	    "custom/power",
+	],
 }
+
 
 // Local Variables:
 // mode: jsonc

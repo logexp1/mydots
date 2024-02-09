@@ -58,3 +58,5 @@ polkit-kde
 swaylock-effects
 swww
 SwayNotificationCenter
+python-pyquery
+brightnessctl
