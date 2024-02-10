@@ -70,13 +70,15 @@ dnf_setup() {
     dnf copr enable -y trs-sod/swaylock-effects
     dnf copr enable -y mhartgring/pqiv
     dnf copr enable -y alebastr/sway-extras
-    dnf copr enable erikreider/SwayNotificationCenter
+    dnf copr enable -y erikreider/SwayNotificationCenter
+    dnf copr enable -y deathwish/emacs-pgtk-nativecomp
     dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
     dnf upgrade -y
 }
 
 
 install_packages() {
+    # only remove swaylock, otherwise it will not boot
     dnf remove swaylock --noautoremove
     dnf_setup
 	while read -r line; do
