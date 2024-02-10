@@ -1,0 +1,5 @@
+* About
+my dotfile for Fedora Hyprland
+
+* Credit
+waybar and swaync configurations are mostly from [[https://github.com/0xl30/Hyprland-Rice][0xl30]]'s.

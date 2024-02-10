@@ -224,8 +224,7 @@
         "tooltip-format-ethernet": "{ifname} 󰌘",
         "tooltip-format-disconnected": "󰌙 Disconnected",
         "max-length": 50,
-        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
-        "on-click": "nm-connection-editor",
+        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
     },
 
     "network#speed": {
@@ -240,7 +239,8 @@
         "tooltip-format-ethernet": "{ifname} ",
         "tooltip-format-disconnected": "󰌙 Disconnected",
         "max-length": 50,
-        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"]
+        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+        "on-click": "nm-connection-editor",
     },
 
     "pulseaudio": {

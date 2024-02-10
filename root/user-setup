@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 # Before executing this, should do some things like
-# - onedrive authentification and synchronize
+# - onedrive authentication and synchronize
 # - GnuPG settings and pass initialization
 
 if [[ $EUID -eq 0 ]]; then
