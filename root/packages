@@ -61,3 +61,7 @@ SwayNotificationCenter
 python-pyquery
 brightnessctl
 foot
+zeromq-devel
+editorconfig
+python3-notebook
+libstdc++-static
