@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if [ -z $1 ]; then
+	echo "usage: $0 {name of the virutalenv to create}"
+	exit 1
+fi
+
+venv_name=$1
+mkdir -p $WORKON_HOME
+cd "$WORKON_HOME"
+
+if [ -d "$venv_name" ]; then
+	echo "virtualenv named $venv_name already exists"
+	exit 1
+else
+	python -m venv "$venv_name"
+	source "$venv_name"/bin/activate
+	pip install --upgrade pip
+	pip install ipykernel python-lsp-server
+	python -m ipykernel install --user --name=$venv_name
+fi

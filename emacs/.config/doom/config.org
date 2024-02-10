@@ -2234,7 +2234,7 @@ pyenv activation was not recognized by lsp, (maybe fixed by now) so used pyvenv 
   ;; pyvenv-workon refers this environment variable
   :init
   (setq! python-shell-interpreter "python3")
-  (setenv "WORKON_HOME" "~/.virtualenvs")
+  ;; (setenv "WORKON_HOME" "~/.virtualenvs")
   :hook (python-mode . pyvenv-mode)
   (projectile-after-switch-project . js/projectile-pyenv-mode-set)
   :config
@@ -2464,7 +2464,7 @@ Git gutter:
         :desc "var directory" :n "V" '(lambda() (interactive) (find-file "/var/"))
         :desc "scripts directory" :n "b" '(lambda() (interactive) (find-file "~/dotfiles/scripts/bin/"))
         :desc "XDG data directory" :n "l" '(lambda() (interactive) (find-file "~/.local/share"))
-        :desc "source directory" :n "s" '(lambda() (interactive) (find-file "~/OneDrive/src"))
+        :desc "source directory" :n "s" '(lambda() (interactive) (find-file "~/src"))
         :desc "org directory" :n "o" '(lambda() (interactive) (find-file "~/OneDrive/org"))
         :desc "home directory" :n "h" '(lambda() (interactive) (find-file "~/"))
         :desc "Videos directory" :n "v" '(lambda() (interactive) (find-file "~/Videos"))
