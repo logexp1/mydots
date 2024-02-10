@@ -142,3 +142,4 @@ alias vert_concat_img='montage -mode Concatenate -tile 1x -border 20 -background
 alias dump_gnome='dconf dump /org/gnome/ > ~/mydots/settings/gnome-settings.ini'
 alias snaps='sudo btrbk list snapshots'
 alias query_class='hyprctl clients | grep -i class'
+alias doom_sync='doom sync && doom doctor'

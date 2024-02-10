@@ -4,9 +4,12 @@ plugins = [
 ]
 
 [scratchpads.term]
-command = "alacritty --class dropdown -e zsh -c \"tmux new-session -A -s default\""
+# command = "alacritty --class dropdown -e zsh -c \"tmux new-session -A -s default\""
+command = "foot -a dropdown zsh -c \"tmux new-session -A -s default\""
+class = "dropdown"
 animation = "fromTop"
 margin = 50
-unfocus = "hide"
-size = "75% 60%"
-max_size = "1920px 100%"
+# unfocus = "hide"
+lazy = false
+size = "75% 80%"
+# max_size = "1920px 100%"

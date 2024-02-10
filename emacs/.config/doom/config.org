@@ -2352,13 +2352,14 @@ Git gutter:
 
 
 * dired
-** divish
+** dirvish
 #+begin_src emacs-lisp
 (use-package! dirvish
   :init
   (put 'dired-find-alternate-file 'disabled nil)
   :config
   (dirvish-override-dired-mode)
+  (remove-hook! 'dired-mode-hook #'dired-omit-mode)
   (setq! dirvish-header-line-format
          '(:left (path symlink)
            :right (free-space))
@@ -2367,7 +2368,15 @@ Git gutter:
            :right (sort yank index)))
   (setq! dirvish-attributes '(vscode-icons file-size file-time vc-state symlink-arrow)
          dirvish-yank-new-name-style 'append-to-filename
-         dirvish-use-mode-line 'global))
+         dirvish-use-mode-line 'global)
+  (map! :map dirvish-mode-map
+        :n "q" #'dirvish-quit
+        :n "o" #'dirvish-quicksort
+        :n "yp" #'dirvish-copy-file-path
+        :n "yn" #'dirvish-copy-file-name
+        :n "pp" #'dirvish-yank
+        :n "pm" #'dirvish-move
+        :n "pl" #'dirvish-symlink))
 #+end_src
 
 ** y-or-n confirm instead of yes-or-no
@@ -2414,33 +2423,17 @@ Git gutter:
 :END:
 #+begin_src emacs-lisp
 (map! :map dired-mode-map
-       :n "C" #'magit-clone
-       :n "RET" #'js/dired-open-external
-       :n "C-d" #'js/dired-dragon-drop
-       :n "q" #'dirvish-quit
-       :n "h" #'dired-up-directory
-       :n "j" #'dired-next-line
-       :n "k" #'dired-previous-line
-       :n "l" #'dired-view-file
-       :n "f" #'find-file
-       :nv "<tab>" #'dired-mark
-       :n "\"" #'dired-mark-files-regexp
-       :nv "<backtab>" #'dired-unmark
-       :n "cd" #'dired-create-directory
-       :n "cc" #'dired-do-rename
-       :n "cm" #'dired-do-chmod
-       :n "co" #'dired-do-chown
-       :n "cg" #'dired-do-chgrp
-       :n "yp" #'dirvish-copy-file-path
-       :n "yn" #'dirvish-copy-file-name
-       :n "pp" #'dirvish-yank
-       :n "pm" #'dirvish-move
-       :n "pl" #'dirvish-symlink
-       ;; :n "C" #'dired-do-copy
-       :n "D" #'dired-do-delete
-       :n "o" #'dirvish-quicksort
-       ;; :n "Q" #'hydra-dired-quick-sort/body
-       :n "zd" #'dired-hide-details-mode)
+      :n "C" #'magit-clone
+      :n "RET" #'js/dired-open-external
+      :n "C-d" #'js/dired-dragon-drop
+      :nv "<tab>" #'dired-mark
+      :nv "<backtab>" #'dired-unmark
+      :n "cd" #'dired-create-directory
+      :n "cc" #'dired-do-rename
+      :n "cm" #'dired-do-chmod
+      :n "co" #'dired-do-chown
+      :n "cg" #'dired-do-chgrp
+      :n "D" #'dired-do-delete)
 #+end_src
 
 ** dired-quick-sort
