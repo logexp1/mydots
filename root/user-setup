@@ -2,7 +2,10 @@
 set -e
 # Before executing this, should do some things like
 # - onedrive authentication and synchronize
-# - pass initialization
+# - GnuPG settings and pass initialization
+# After this,
+# - sync firefox account, and do :nativeinstall
+# - run emacsclient from terminal to respond to message
 
 if [[ $EUID -eq 0 ]]; then
 	echo "Please run this script as user"
@@ -111,6 +114,8 @@ default() {
     systemd_setup
     browserpass_setup
     pip_setup
+    flatpak_setup
+    randwall
 }
 
 default

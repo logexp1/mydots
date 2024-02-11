@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # exit immediately if command exits with a non-zero status
 
-# Before executing this, should do some things like
-# - GnuPG settings
 set -e
 
 if [[ $EUID -ne 0 ]]; then

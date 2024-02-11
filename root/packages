@@ -58,10 +58,11 @@ polkit-kde
 # swaylock-effects
 swww
 SwayNotificationCenter
-python-pyquery
+python3-pyquery
 brightnessctl
 foot
 zeromq-devel
 editorconfig
 python3-notebook
 libstdc++-static
+atool
