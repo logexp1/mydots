@@ -55,7 +55,7 @@ gtkmm3.0-devel
 ranger
 pqiv
 polkit-kde
-swaylock-effects
+# swaylock-effects
 swww
 SwayNotificationCenter
 python-pyquery

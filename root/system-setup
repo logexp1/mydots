@@ -79,7 +79,7 @@ dnf_setup() {
 
 install_packages() {
     # only remove swaylock, otherwise it will not boot
-    dnf remove swaylock --noautoremove
+    # dnf remove swaylock --noautoremove
     dnf_setup
 	while read -r line; do
 		if [[ -z $line ]] || [[ $line =~ \# ]]; then
