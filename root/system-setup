@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 # exit immediately if command exits with a non-zero status
+
+# Before executing this, should do some things like
+# - GnuPG settings
 set -e
 
 if [[ $EUID -ne 0 ]]; then
@@ -67,7 +70,7 @@ dnf_setup() {
     # dnf copr enable -y sunwire/envycontrol
     dnf copr enable -y toroidalfox/kime
     dnf copr enable -y solopasha/hyprland
-    dnf copr enable -y trs-sod/swaylock-effects
+    # dnf copr enable -y trs-sod/swaylock-effects
     dnf copr enable -y mhartgring/pqiv
     dnf copr enable -y alebastr/sway-extras
     dnf copr enable -y erikreider/SwayNotificationCenter

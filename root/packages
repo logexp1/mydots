@@ -43,7 +43,7 @@ akmod-nvidia
 xorg-x11-drv-nvidia-cuda
 libva-nvidia-driver
 xorg-x11-drv-nvidia-libs.i686
-hyprland-nvidia
+hyprland
 udiskie
 flatpak
 papirus-icon-theme

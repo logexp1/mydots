@@ -2,7 +2,7 @@
 set -e
 # Before executing this, should do some things like
 # - onedrive authentication and synchronize
-# - GnuPG settings and pass initialization
+# - pass initialization
 
 if [[ $EUID -eq 0 ]]; then
 	echo "Please run this script as user"
