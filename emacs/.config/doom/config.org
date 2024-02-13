@@ -2017,6 +2017,7 @@ _k_ : previous
   :general (general-m org-mode-map
              "S" #'org-download-screenshot)
   :config
+  (setq! org-download-screenshot-method "grim -g \"$(slurp)\" %s")
   (setq! org-download-link-format "[[file:%s]]\n")
   (setq-default org-download-image-dir org-attach-id-dir)
   (setq! org-download-abbreviate-filename-function 'file-relative-name)

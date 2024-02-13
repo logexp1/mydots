@@ -23,6 +23,17 @@ export XCURSOR_SIZE=24
 export QT_QPA_PLATFORMTHEME=qt5ct
 export _JAVA_AWT_WM_NONREPARENTING=1
 export WORKON_HOME="$HOME"/.virtualenvs
+export XDG_PICTURES_DIR="$HOME"/Pictures
+export XDG_SCREENSHOTS_DIR="$XDG_PICTURES_DIR"/Screenshots
+
+if [[ -d /proc/driver/nvidia && -f /usr/lib64/dri/nvidia_drv_video.so ]]; then
+	export LIBVA_DRIVER_NAME=nvidia
+	export MOZ_DISABLE_RDD_SANDBOX=1
+
+	nvidia_gpu=$(ls "/proc/driver/nvidia/gpus" | tail -1)
+	export MOZ_DRM_DEVICE="/dev/dri/by-path/pci-${nvidia_gpu}-render"
+	export NVD_BACKEND=direct
+fi
 
 # XDG settings
 source /etc/profile.d/flatpak.sh

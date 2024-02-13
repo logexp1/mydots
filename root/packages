@@ -41,8 +41,8 @@ kime
 alacritty
 akmod-nvidia
 xorg-x11-drv-nvidia-cuda
+# xorg-x11-drv-nvidia-libs.i686
 libva-nvidia-driver
-xorg-x11-drv-nvidia-libs.i686
 hyprland
 udiskie
 flatpak
@@ -66,3 +66,5 @@ editorconfig
 python3-notebook
 libstdc++-static
 atool
+dropbox
+grimblast
