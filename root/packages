@@ -68,3 +68,7 @@ libstdc++-static
 atool
 dropbox
 grimblast
+texlive-collection-mathscience
+texlive-collection-latexextra
+texlive-collection-langkorean
+texlive-collection-plaingeneric

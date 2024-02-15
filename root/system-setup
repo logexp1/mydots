@@ -177,6 +177,7 @@ default() {
 	btrbk_setup
 	docker_setup
 	pass_git_setup
+    dragon_setup
 }
 
 case $1 in
