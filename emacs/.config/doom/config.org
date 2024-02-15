@@ -889,6 +889,10 @@ I can't use org mode headline search if I enable this package.
     (if (f-directory? preview-cache)
         (f-delete preview-cache t)
       (message "%s" "Directory 'ltximg' does not exist."))))
+
+(after! org
+  (add-to-list 'org-latex-packages-alist '("" "amsmath" t))
+  (add-to-list 'org-latex-packages-alist '("" "amssymb" t)))
 #+end_src
 
 *** structure templates
