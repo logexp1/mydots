@@ -41,7 +41,6 @@ kime
 alacritty
 akmod-nvidia
 xorg-x11-drv-nvidia-cuda
-# xorg-x11-drv-nvidia-libs.i686
 libva-nvidia-driver
 hyprland
 udiskie
@@ -77,3 +76,4 @@ texlive-collection-langkorean
 texlive-collection-plaingeneric
 texlive-collection-binextra
 latexmk
+libreoffice
