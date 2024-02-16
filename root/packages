@@ -68,6 +68,9 @@ libstdc++-static
 atool
 dropbox
 grimblast
+libva-utils
+btop
+nvtop
 texlive-collection-mathscience
 texlive-collection-latexextra
 texlive-collection-langkorean

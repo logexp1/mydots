@@ -889,10 +889,6 @@ I can't use org mode headline search if I enable this package.
     (if (f-directory? preview-cache)
         (f-delete preview-cache t)
       (message "%s" "Directory 'ltximg' does not exist."))))
-
-(after! org
-  (add-to-list 'org-latex-packages-alist '("" "amsmath" t))
-  (add-to-list 'org-latex-packages-alist '("" "amssymb" t)))
 #+end_src
 
 *** structure templates
@@ -1956,19 +1952,23 @@ _k_ : previous
 #+end_src
 
 #+begin_src emacs-lisp
-(setq! org-latex-packages-alist
-    '(("" "booktabs" nil)
-    ("" "amsthm" t))
-    org-latex-listings 'minted
-    org-latex-minted-options
-    '(("mathescape" "true")
-    ("linenos" "true")
-    ("frame" "lines")
-    ("framesep" "2mm"))
-    org-latex-compiler "xelatex"
-    org-latex-classes
-    '(("article"
-         "\\documentclass{article}
+(after! org
+  (setq! org-latex-packages-alist
+         '(("" "booktabs" nil)
+           ("" "amsthm" t)
+           ("" "amsmath" t)
+           ("" "amssymb" t)
+           ("" "cancel" t))
+         org-latex-listings 'minted
+         org-latex-minted-options
+         '(("mathescape" "true")
+           ("linenos" "true")
+           ("frame" "lines")
+           ("framesep" "2mm"))
+         org-latex-compiler "xelatex"
+         org-latex-classes
+         '(("article"
+            "\\documentclass{article}
             [NO-DEFAULT-PACKAGES]
             [PACKAGES]
             [EXTRA]
@@ -1993,22 +1993,22 @@ _k_ : previous
                                     ItalicFont={*-Italic},
                                     BoldItalicFont={*-BoldItalic}]
 \\setmathfont{latinmodern-math.otf}"
-         ("\\section{%s}" . "\\section*{%s}")
-         ("\\subsection{%s}" . "\\subsection*a{%s}")
-         ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-         ("\\paragraph{%s}" . "\\paragraph*{%s}")
-         ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-        ("beamer"
-         "\\documentclass[presentation]{beamer}
+            ("\\section{%s}" . "\\section*{%s}")
+            ("\\subsection{%s}" . "\\subsection*a{%s}")
+            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+            ("\\paragraph{%s}" . "\\paragraph*{%s}")
+            ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+           ("beamer"
+            "\\documentclass[presentation]{beamer}
           [DEFAULT-PACKAGES]
           [PACKAGES]
           [EXTRA]
           \\usepackage{kotex}")
-        ("\\section{%s}" . "\\section*{%s}")
-        ("\\subsection{%s}" . "\\subsection*{%s}")
-        ("\\subsection{%s}" . "\\subsection*{%s}"))
-      org-latex-pdf-process
-      '("latexmk -pdf -synctex=1 -shell-escape -xelatex -f %f"))
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}"))
+         org-latex-pdf-process
+         '("latexmk -pdf -synctex=1 -shell-escape -xelatex -f %f")))
 #+end_src
 
 
