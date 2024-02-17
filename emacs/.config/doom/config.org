@@ -354,9 +354,6 @@ not as nice as undo-tree, but stable
 #+end_src
 
 * font/theme
-:PROPERTIES:
-:ID:       4b265680-c4bb-4fc3-ae08-105695396442
-:END:
 ** ewal/pywal
 I really prefer default doom-one theme...
 
@@ -2161,6 +2158,14 @@ _k_ : previous
 
 
 * Programming
+** formatter
+#+begin_src emacs-lisp
+;; disable lsp formatter universally
+(setq +format-with-lsp nil)
+;; specify formatter
+(setq-hook! 'python-mode-hook +format-with 'black)
+(setq-hook! 'sh-mode-hook +format-with 'shfmt)
+#+end_src
 
 ** program mode keymapping
 #+begin_src emacs-lisp
@@ -2176,17 +2181,11 @@ _k_ : previous
 #+end_src
 
 ** woman
-:PROPERTIES:
-:ID:       5eeb6fa8-11e9-46bf-b1aa-829e28e0c181
-:END:
 #+begin_src emacs-lisp
 (general-s "w" #'+default/man-or-woman)
 #+end_src
 
 ** LSP
-:PROPERTIES:
-:ID:       56e7c40e-6617-459a-b78a-df44ccbdd058
-:END:
 
 #+begin_src emacs-lisp
 (use-package! lsp-mode
@@ -2195,9 +2194,6 @@ _k_ : previous
 
 
 *** lsp-ui
-:PROPERTIES:
-:ID:       227479fc-ccd3-47aa-a9e7-87051cffd103
-:END:
 #+begin_src emacs-lisp
 (use-package! lsp-ui
   :after lsp-mode
@@ -2206,9 +2202,6 @@ _k_ : previous
 #+end_src
 
 *** dap-mode
-:PROPERTIES:
-:ID:       ae2937cb-7503-4073-90fc-056490e61a26
-:END:
 
 #+begin_src emacs-lisp :tangle no
 (after! dap-mode
@@ -2238,9 +2231,6 @@ _k_ : previous
 
 
 ** python
-:PROPERTIES:
-:ID:       c46e6b44-49d2-4423-91a9-631d3f3e2d77
-:END:
 #+begin_src emacs-lisp :tangle no
 (use-package! python
   :config
@@ -2284,6 +2274,7 @@ Install docset with =dash-docs-install-docset=, if not found, try =dash-docs-ins
   (setq! dash-docs-docsets '("R" "Matplotlib"))
   (set-popup-rule! "*eww*" :side 'right :size .50 :select t :vslot 2 :ttl 3))
 #+end_src
+
 
 ** lua
 #+begin_src emacs-lisp
