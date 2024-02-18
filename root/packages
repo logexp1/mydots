@@ -81,3 +81,5 @@ aspell
 shfmt
 python3-isort
 python3-pyflakes
+ffmpeg --allowerasing
+libavcodec-freeworld

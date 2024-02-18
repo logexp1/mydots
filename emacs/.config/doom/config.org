@@ -2007,7 +2007,7 @@ _k_ : previous
 	    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 	    ("\\paragraph{%s}" . "\\paragraph*{%s}")
 	    ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-	   ("beamer" "\\documentclass[ignorenonframetext,presentation]{beamer}"
+	   ("beamer" "\\documentclass[ignorenonframetext,presentation]{beamer}\n[DEFAULT-PACKAGES]\n[PACKAGES]\n[EXTRA]\n"
 	    ("\\section{%s}" . "\\section*{%s}")
 	    ("\\subsection{%s}" . "\\subsection*{%s}"))
 	   ("article" "\\documentclass[11pt]{article}"
