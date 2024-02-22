@@ -16,11 +16,11 @@ client_fullscreen = "[{icon}]{delim}"
 [title_in_class."(?i)foot"]
 "emerge: (.+?/.+?)-.*" = "{match1}"
 
-[title_in_class."(brave-browser|firefox|chrom.*)"]
+[title_in_class."(brave-browser|firefox|chrom.*|floorp)"]
 "(?i)youtube" = ""
 "(?i)github" = "<span color='grey'></span>"
 
-[title_in_class_active."(brave-browser|firefox|chrom.*)"]
+[title_in_class_active."(brave-browser|firefox|chrom.*|floorp)"]
 "(?i)youtube" = "<span color='red'></span>"
 "(?i)github" = ""
 
@@ -29,6 +29,7 @@ client_fullscreen = "[{icon}]{delim}"
 DEFAULT = ""
 "(?i)firefox" = "<span color='orange'> </span>"
 "(?i)brave-browser" = "<span>󰖟</span>"
+"(?i)floorp" = "<span color='green'>󰖟</span>"
 "dropdown" = "<span color='yellow'>󰆍</span>"
 "foot" = "󰆍"
 "chromium" = ""
