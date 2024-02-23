@@ -1045,7 +1045,7 @@ I can't use org mode headline search if I enable this package.
   ("a" org-archive-subtree-default-with-confirmation)
   ("d" org-cut-subtree)
   ("p" org-refile-to-projects)
-  ;; ("i" org-refile-to-incubate)
+  ("i" org-refile-to-incubate)
   ("t" org-refile-to-tickler)
   ("r" org-refile)
   ("<escape>" nil)
@@ -2203,7 +2203,7 @@ _k_ : previous
 
 *** dap-mode
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (after! dap-mode
   (setq! dap-python-debugger 'debugpy)
   (map! :map dap-mode-map
@@ -2236,6 +2236,7 @@ _k_ : previous
         :desc "dap breakpoint condition"   "c" #'dap-breakpoint-condition
 
         :desc "dap breakpoint log message" "l" #'dap-breakpoint-log-message))
+
 #+end_src
 
 
@@ -2271,14 +2272,17 @@ pyenv activation was not recognized by lsp, (maybe fixed by now) so used pyvenv 
   ;; pyvenv-workon refers this environment variable
   :init
   (setq! python-shell-interpreter "python3")
-  ;; (setenv "WORKON_HOME" "~/.virtualenvs")
   :hook (python-mode . pyvenv-mode)
-  (projectile-after-switch-project . js/projectile-pyenv-mode-set)
+  (projectile-after-switch-project . js/projectile-pyvenv-mode-set)
+  (python-mode . js/projectile-pyvenv-mode-set)
   :config
-  (defun js/projectile-pyenv-mode-set ()
-    (let ((pyenv-version-path (f-expand ".python-version" (projectile-project-root))))
-      (if (f-exists? pyenv-version-path)
-          (pyvenv-workon (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
+  (defun js/projectile-pyvenv-mode-set ()
+    (require 'projectile)
+    (let* ((pdir (projectile-project-root)) (pfile (concat pdir ".venv")))
+      (if (file-exists-p pfile)
+          (pyvenv-workon (with-temp-buffer
+                           (insert-file-contents pfile)
+                           (nth 0 (split-string (buffer-string)))))
         (pyvenv-deactivate)))))
 #+end_src
 

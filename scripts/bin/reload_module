@@ -5,7 +5,7 @@ set -euo pipefail
 
 ROFI="rofi -dmenu -i -l 10 -p"
 # actions=('sxhkd' 'bspwm' 'qtile' 'picom' 'keybinding' 'polybar' 'dunst' 'fonts' 'restow')
-actions=('waybar' 'swaync')
+actions=('waybar' 'swaync' 'pypr')
 choice=$(printf '%s\n' "${actions[@]}" | ${ROFI} "select which one to reload" -selected-row 1)
 case "$choice" in
 	waybar)
@@ -15,7 +15,7 @@ case "$choice" in
         swaync-client -rs
         ;;
     pypr)
-        %HOME/.virtualenvs/system/bin/pypr reload
+        pypr reload
         ;;
 esac
 

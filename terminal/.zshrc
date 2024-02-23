@@ -146,3 +146,10 @@ alias doom_sync='doom sync && doom doctor'
 alias nsa='(pass navercorp/KR17397 && read -s pw && echo $pw) | sudo openconnect --juniper nsa-pi.navercorp.com/emergency -u jisoo.h.lee --useragent="Mozila" --no-dtls'
 alias mons='hyprctl monitors all'
 alias windows='hyprctl clients'
+
+alias pipi="pip install --user"
+
+# functions
+function venv-local() {
+	echo $1 > .venv
+}

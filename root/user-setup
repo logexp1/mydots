@@ -97,13 +97,8 @@ flatpak_setup() {
 }
 
 pip_setup() {
-    mkdir -p $uhome/.virtualenvs
-    cd $uhome/.virtualenvs
-    python -m venv system
-    source system/bin/activate
     pip install --upgrade pip
-    pip install pyprland pywal
-    deactivate
+    pip install --user pyprland pywal python-lsp-server debugpy
 }
 
 default() {
