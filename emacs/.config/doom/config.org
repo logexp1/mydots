@@ -2408,7 +2408,9 @@ Git gutter:
          dirvish-mode-line-format
          '(:left (" " file-modes " " file-link-number " " file-user ":" file-group " " symlink omit vc-info)
            :right (sort yank index)))
-  (setq! dirvish-attributes '(vscode-icons file-size file-time vc-state symlink-arrow)
+  (setq! dirvish-attributes '(vscode-icon file-size file-time vc-state symlink-arrow)
+         dirvish-default-layout '(0 0.4 0.6)
+         dirvish-vscode-icon-size 16
          dirvish-yank-new-name-style 'append-to-filename
          dirvish-use-mode-line 'global)
   (map! :map dirvish-mode-map
@@ -2419,6 +2421,23 @@ Git gutter:
         :n "pp" #'dirvish-yank
         :n "pm" #'dirvish-move
         :n "pl" #'dirvish-symlink))
+
+(dirvish-define-preview eza (file)
+  "Use `exa' to generate directory preview."
+  :require ("eza") ; tell Dirvish to check if we have the executable
+  (when (file-directory-p file) ; we only interest in directories here
+    `(shell . ("eza" "-al" "--color=always" "--icons"
+               "--group-directories-first" ,file))))
+
+(add-to-list 'dirvish-preview-dispatchers 'eza)
+
+#+end_src
+
+*** vscode-icon
+#+begin_src emacs-lisp
+(use-package! vscode-icon
+  :config
+  (push '("jpg" . "image") vscode-icon-file-alist))
 #+end_src
 
 ** y-or-n confirm instead of yes-or-no

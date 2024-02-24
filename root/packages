@@ -85,3 +85,4 @@ ffmpeg --allowerasing
 libavcodec-freeworld
 NetworkManager-tui
 floorp
+eza
