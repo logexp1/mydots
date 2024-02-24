@@ -41,6 +41,7 @@ source /etc/profile.d/flatpak.sh
 
 pathdirs="
 $HOME/.config/emacs/bin
+$HOME/.local/bin
 "
 
 while read -r dir; do

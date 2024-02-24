@@ -97,7 +97,6 @@ flatpak_setup() {
 }
 
 pip_setup() {
-    pip install --upgrade pip
     pip install --user pyprland pywal python-lsp-server debugpy
 }
 
