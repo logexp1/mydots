@@ -2430,7 +2430,6 @@ Git gutter:
                "--group-directories-first" ,file))))
 
 (add-to-list 'dirvish-preview-dispatchers 'eza)
-
 #+end_src
 
 *** vscode-icon

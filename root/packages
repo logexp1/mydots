@@ -86,3 +86,6 @@ libavcodec-freeworld
 NetworkManager-tui
 floorp
 eza
+zoxide
+ffmpegthumbnailer
+mediainfo

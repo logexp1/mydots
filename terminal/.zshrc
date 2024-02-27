@@ -103,6 +103,9 @@ alias tree='tree -a -I .git'
 alias ls="eza -a"
 alias ll="eza -al --color=always --icons --group-directories-first"
 
+# zoxide
+eval "$(zoxide init --cmd cd zsh)"
+
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
@@ -148,10 +151,11 @@ alias doom_sync='doom sync && doom doctor'
 alias nsa='(pass navercorp/KR17397 && read -s pw && echo $pw) | sudo openconnect --juniper nsa-pi.navercorp.com/emergency -u jisoo.h.lee --useragent="Mozila" --no-dtls'
 alias mons='hyprctl monitors all'
 alias windows='hyprctl clients'
-
+alias od_status='systemctl status --user onedrive'
 alias pipi="pip install --user"
 
 # functions
 function venv-local() {
-	echo $1 > .venv
+	venv=$(echo $(basename $VIRTUAL_ENV))
+	echo $venv > .venv
 }
