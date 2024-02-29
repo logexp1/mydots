@@ -41,7 +41,6 @@ root_config() {
 
 btrbk_setup() {
     mkdir -p /btrbk_snapshots
-    systemctl enable btrbk.timer
 }
 
 install_package() {
@@ -112,7 +111,6 @@ update_user_groups() {
 docker_setup(){
 	/usr/bin/dnf4 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 	dnf install -y docker-ce docker-ce-cli containerd.io
-	systemctl enable docker
 
 }
 
@@ -169,6 +167,12 @@ initramfs_setup() {
     dracut --force
 }
 
+systemd_setup() {
+    systemctl enable btrbk.timer
+	systemctl enable docker
+    systemctl enable libvirtd
+}
+
 default() {
 	root_config
 	update_user_groups
@@ -179,6 +183,7 @@ default() {
 	docker_setup
 	pass_git_setup
     dragon_setup
+    systemd_setup
 }
 
 case $1 in
