@@ -2571,6 +2571,7 @@ unzip/zip things
 (use-package! gptel
   :config
   (gptel-make-gemini "Gemini" :key (password-store-get "google/aistudio/apikey") :stream t)
+  (setq! gptel-default-mode #'org-mode)
   (setq-default
    gptel-model "gemini-pro"
    gptel-backend (gptel-make-gemini "Gemini"
