@@ -2566,6 +2566,18 @@ unzip/zip things
 #+end_src
 
 * applications
+** GPTel
+#+begin_src emacs-lisp
+(use-package! gptel
+  :config
+  (gptel-make-gemini "Gemini" :key (password-store-get "google/aistudio/apikey") :stream t)
+  (setq-default
+   gptel-model "gemini-pro"
+   gptel-backend (gptel-make-gemini "Gemini"
+                   :key (password-store-get "google/aistudio/apikey")
+                   :stream t)))
+#+end_src
+
 
 ** emacs-slack
 :PROPERTIES:
