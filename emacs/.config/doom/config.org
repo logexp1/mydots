@@ -2569,6 +2569,7 @@ unzip/zip things
 ** GPTel
 #+begin_src emacs-lisp
 (use-package! gptel
+  :commands (gptel gptel-send)
   :config
   (gptel-make-gemini "Gemini" :key (password-store-get "google/aistudio/apikey") :stream t)
   (setq! gptel-default-mode #'org-mode)
