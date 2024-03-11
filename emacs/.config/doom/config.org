@@ -2576,7 +2576,8 @@ unzip/zip things
    gptel-model "gemini-pro"
    gptel-backend (gptel-make-gemini "Gemini"
                    :key (password-store-get "google/aistudio/apikey")
-                   :stream t)))
+                   :stream t))
+  (add-to-list 'gptel-directives '(translator . "I will give you some text from scientific paper. I want you to give me translation of the text into Korean. Here's the text: ")))
 #+end_src
 
 
