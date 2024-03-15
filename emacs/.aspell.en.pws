@@ -1,4 +1,4 @@
-personal_ws-1.1 en 128
+personal_ws-1.1 en 133
 Confounder
 FFmpeg
 Mahalanobis
@@ -96,6 +96,9 @@ pomodoro
 positivity
 pre
 preprocessor
+pretrain
+pretrained
+pretraining
 probit
 pyspark
 pyvenv
@@ -118,6 +121,8 @@ surjection
 surjective
 svm
 tcp
+tokenize
+tokenized
 tradeoff
 underly
 undirected

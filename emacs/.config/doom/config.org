@@ -350,7 +350,7 @@ not as nice as undo-tree, but stable
 (setq! default-input-method "korean-hangul")
 (map! :map general-override-mode-map
       :i "C-SPC" #'toggle-input-method)
-(global-set-key (kbd "C-SPC") 'toggle-input-method)
+;; (global-set-key (kbd "C-SPC") 'toggle-input-method)
 #+end_src
 
 * font/theme
@@ -2567,6 +2567,7 @@ unzip/zip things
 
 * applications
 ** GPTel
+
 #+begin_src emacs-lisp
 (use-package! gptel
   :commands (gptel gptel-send)
