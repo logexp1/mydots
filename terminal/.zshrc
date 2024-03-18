@@ -154,8 +154,19 @@ alias windows='hyprctl clients'
 alias od_status='systemctl status --user onedrive'
 alias pipi="pip install --user"
 
+
+
 # functions
 function venv-local() {
 	venv=$(echo $(basename $VIRTUAL_ENV))
 	echo $venv > .venv
 }
+
+function s3-ls() {
+	aws --endpoint-url=$CLOVA_STORAGE_ENDPOINT s3 ls s3://clue-dataset/$1
+}
+
+function s3-download() {
+	aws --endpoint-url=$CLOVA_STORAGE_ENDPOINT s3 cp s3://clue-dataset/$1 .
+}
+
