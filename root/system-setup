@@ -188,6 +188,7 @@ default() {
 	pass_git_setup
     dragon_setup
     systemd_setup
+    grub2-mkconfig -o /boot/grub2/grub.cfg
 }
 
 case $1 in
