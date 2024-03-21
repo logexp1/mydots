@@ -74,6 +74,9 @@ dnf_setup() {
     dnf copr enable -y deathwish/emacs-pgtk-nativecomp
     dnf copr enable -y randalthor17/floorp
     dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    # for cuda
+    distro=fedora39
+    dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/$distro/x86_64/cuda-$distro.repo
     dnf upgrade -y
 }
 
@@ -113,6 +116,7 @@ docker_setup(){
 	dnf install -y docker-ce docker-ce-cli containerd.io
 
 }
+
 
 pass_git_setup() {
     build_dir=/tmp/build

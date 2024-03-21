@@ -94,3 +94,5 @@ unrar
 p7zip
 p7zip-plugins
 waydroid
+# * CUDA
+cuda-toolkit
