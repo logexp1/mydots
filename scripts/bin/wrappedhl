@@ -26,6 +26,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export WORKON_HOME="$HOME"/.virtualenvs
 export XDG_PICTURES_DIR="$HOME"/Pictures
 export XDG_SCREENSHOTS_DIR="$XDG_PICTURES_DIR"/Screenshots
+export LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64/${LD_LIBRARY_PATH}
 
 if [[ -d /proc/driver/nvidia && -f /usr/lib64/dri/nvidia_drv_video.so ]]; then
 	export LIBVA_DRIVER_NAME=nvidia
@@ -40,6 +41,7 @@ fi
 source /etc/profile.d/flatpak.sh
 
 pathdirs="
+/usr/local/cuda-12.4/bin
 $HOME/.config/emacs/bin
 $HOME/.local/bin
 "

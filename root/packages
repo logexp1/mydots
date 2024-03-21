@@ -95,4 +95,5 @@ p7zip
 p7zip-plugins
 waydroid
 # * CUDA
+mesa-libGLU-devel
 cuda-toolkit
