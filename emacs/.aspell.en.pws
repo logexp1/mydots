@@ -1,4 +1,4 @@
-personal_ws-1.1 en 134
+personal_ws-1.1 en 136
 Confounder
 FFmpeg
 Mahalanobis
@@ -32,6 +32,7 @@ complier
 configs
 contrapositive
 contrastive
+convolutional
 covariate
 covariates
 covector
@@ -68,6 +69,7 @@ invertible
 ipynb
 ipython
 isopleth
+jacobian
 json
 jupyter
 keymapping
