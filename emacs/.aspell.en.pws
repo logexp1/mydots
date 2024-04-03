@@ -1,4 +1,4 @@
-personal_ws-1.1 en 133
+personal_ws-1.1 en 134
 Confounder
 FFmpeg
 Mahalanobis
@@ -56,6 +56,7 @@ homomorphism
 homoscedastic
 hyperboloid
 hyperparameter
+hypersphere
 identifiability
 iff
 ignorability
