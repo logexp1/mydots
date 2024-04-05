@@ -43,6 +43,7 @@ akmod-nvidia
 xorg-x11-drv-nvidia-cuda
 libva-nvidia-driver
 hyprland
+hyprland-devel
 udiskie
 flatpak
 papirus-icon-theme
@@ -99,3 +100,5 @@ mesa-libGLU-devel
 cuda-toolkit
 python3-devel
 chromium
+meson
+fcitx5-hangul

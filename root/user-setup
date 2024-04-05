@@ -100,6 +100,14 @@ pip_setup() {
     pip install --user pyprland pywal python-lsp-server debugpy
 }
 
+hyprpm_setup() {
+    hyprpm add https://github.com/hyprwm/hyprland-plugins
+    hyprpm update
+    hyprpm add https://github.com/VortexCoyote/hyprfocus
+    hyprpm enable hyprfocus
+    hyprpm reload
+}
+
 default() {
     font_setup
     link_setup
