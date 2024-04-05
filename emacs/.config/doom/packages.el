@@ -47,5 +47,5 @@
            :repo "kmonad/kbd-mode"))
 
 (package! vscode-icon)
-
 (package! gptel)
+(package! fcitx)

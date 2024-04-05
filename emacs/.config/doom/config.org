@@ -343,15 +343,22 @@ not as nice as undo-tree, but stable
 
 
 ** input methods
-:PROPERTIES:
-:ID:       4a4df415-86ec-4394-9656-0893928da69c
-:END:
 #+begin_src emacs-lisp
-(setq! default-input-method "korean-hangul")
-(map! :map general-override-mode-map
-      :i "C-SPC" #'toggle-input-method)
+(use-package! fcitx
+  :after evil
+  :config
+  (setq! fcitx-use-dbus 'fcitx5)
+  (setq! fcitx-remote-command "fcitx5-remote")
+  (fcitx-evil-turn-on))
+#+end_src
+
+#+begin_src emacs-lisp
+;; (setq! default-input-method "korean-hangul")
+;; (map! :map general-override-mode-map
+;;       :i "C-SPC" #'toggle-input-method)
 ;; (global-set-key (kbd "C-SPC") 'toggle-input-method)
 #+end_src
+
 
 * font/theme
 ** ewal/pywal
