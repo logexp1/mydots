@@ -15,7 +15,12 @@ case "$choice" in
         swaync-client -rs
         ;;
     pypr)
-        pypr reload
+        if pgrep pypr > /dev/null
+        then
+            pypr reload
+        else
+            pypr
+        fi
         ;;
 esac
 

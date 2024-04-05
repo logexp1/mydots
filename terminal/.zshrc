@@ -155,7 +155,6 @@ alias od_status='systemctl status --user onedrive'
 alias pipi="pip install --user"
 
 
-
 # functions
 function venv-local() {
 	venv=$(echo $(basename $VIRTUAL_ENV))
@@ -170,3 +169,10 @@ function s3-download() {
 	aws --endpoint-url=$CLOVA_STORAGE_ENDPOINT s3 cp s3://clue-dataset/$1 .
 }
 
+function pipu() {
+	if [ -z $1 ]; then
+		echo "usage: $0 {package to be updated via pip}"
+		exit 1
+	fi
+	pip install $1 --upgrade --user
+}
