@@ -101,8 +101,8 @@ pip_setup() {
 }
 
 hyprpm_setup() {
-    hyprpm add https://github.com/hyprwm/hyprland-plugins
     hyprpm update
+    hyprpm add https://github.com/hyprwm/hyprland-plugins
     hyprpm add https://github.com/VortexCoyote/hyprfocus
     hyprpm enable hyprfocus
     hyprpm reload
