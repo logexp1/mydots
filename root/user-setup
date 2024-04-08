@@ -103,7 +103,7 @@ pip_setup() {
 hyprpm_setup() {
     hyprpm update
     hyprpm add https://github.com/hyprwm/hyprland-plugins
-    hyprpm add https://github.com/VortexCoyote/hyprfocus
+    hyprpm add https://github.com/pyt0xic/hyprfocus
     hyprpm enable hyprfocus
     hyprpm reload
 }
