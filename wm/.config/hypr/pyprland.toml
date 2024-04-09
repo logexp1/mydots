@@ -1,6 +1,7 @@
 [pyprland]
 plugins = [
-    "scratchpads"
+    "scratchpads",
+    "monitors"
 ]
 
 [scratchpads.term]
@@ -13,3 +14,6 @@ margin = 50
 lazy = false
 size = "75% 80%"
 # max_size = "1920px 100%"
+
+[monitors.placement]
+"DP-1".leftOf = "eDP-1"
