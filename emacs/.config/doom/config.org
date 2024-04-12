@@ -2165,6 +2165,13 @@ _k_ : previous
 
 
 * Programming
+
+** dockerfile
+#+begin_src emacs-lisp
+(after! dockerfie-mode
+  (setq! dockerfile-enable-auto-indent nil))
+#+end_src
+
 ** formatter
 #+begin_src emacs-lisp
 ;; disable lsp formatter universally
