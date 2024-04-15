@@ -8,7 +8,7 @@ colourscheme dark
 set newtab about:blank
 set hintchars fdsqjklmrezauiopwxcvghtybn
 # prevent automatic focus on textfield
-set allowautofocus false
+# set allowautofocus false
 set hintuppercase false
 set minincsearchlen 2
 set searchengine duckduckgo
