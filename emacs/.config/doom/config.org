@@ -490,6 +490,8 @@ makes life much easier
 :END:
 #+begin_src emacs-lisp
 (after! avy
+  ;; do not ignore case when searching
+  (setq! avy-case-fold-search nil)
   (general-r
     "a" #'avy-goto-char
     "A" #'avy-goto-char-2))

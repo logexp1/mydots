@@ -154,6 +154,8 @@ alias windows='hyprctl clients'
 alias od_status='systemctl status --user onedrive'
 alias pipi="pip install --user"
 
+alias kernelspecs="jupyter kernelspec list"
+
 
 # functions
 function venv-local() {
