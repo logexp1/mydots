@@ -65,13 +65,12 @@ install_package() {
 dnf_setup() {
     # dnf copr enable jle64/gnome-pass-search-provider
     # dnf copr enable -y sunwire/envycontrol
-    dnf copr enable -y toroidalfox/kime
+    # dnf copr enable -y toroidalfox/kime
     dnf copr enable -y solopasha/hyprland
     # dnf copr enable -y trs-sod/swaylock-effects
     dnf copr enable -y mhartgring/pqiv
     dnf copr enable -y alebastr/sway-extras
     dnf copr enable -y erikreider/SwayNotificationCenter
-    dnf copr enable -y deathwish/emacs-pgtk-nativecomp
     dnf copr enable -y randalthor17/floorp
     dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
     # for cuda
@@ -92,6 +91,13 @@ install_packages() {
 		install_package "$line"
 	done < packages
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+}
+
+install_emacs() {
+    author="stevenlin"
+    repo="emacs-pgtk-nativecomp"
+    dnf copr enable -y "$author/$repo"
+    dnf --disablerepo="*" --enablerepo=copr:copr.fedorainfracloud.org:$author:$repo install emacs
 }
 
 
@@ -181,6 +187,7 @@ default() {
 	root_config
 	update_user_groups
 	install_packages
+    install_emacs
 	sudo_setup
     initramfs_setup
 	btrbk_setup

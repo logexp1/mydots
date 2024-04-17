@@ -1,4 +1,4 @@
-emacs
+# emacs
 vim-enhanced
 stow
 golang
@@ -37,7 +37,7 @@ rofi-wayland
 gpaste
 # gnome-shell-extension-gpaste
 btrbk
-kime
+# kime
 alacritty
 akmod-nvidia
 xorg-x11-drv-nvidia-cuda
