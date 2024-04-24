@@ -15,5 +15,8 @@ lazy = false
 size = "75% 80%"
 # max_size = "1920px 100%"
 
-[monitors.placement]
-"DP-1".leftOf = "eDP-1"
+[monitors]
+unknown = "wlrlui"
+
+[monitors.placement."HP"]
+leftOf = "eDP-1"

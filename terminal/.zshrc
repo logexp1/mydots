@@ -174,7 +174,18 @@ function s3-download() {
 function pipu() {
 	if [ -z $1 ]; then
 		echo "usage: $0 {package to be updated via pip}"
-		exit 1
+	else
+		pip install $1 --upgrade --user
 	fi
-	pip install $1 --upgrade --user
+}
+
+function foccur() {
+	# search files under current directory containing the query
+	if [ -z $1 ]; then
+		echo "usage: $0 {query to search} {(OPTIONAL) file extension}"
+	elif [ -z $2 ]; then
+		find -type f -exec grep -l "$1" {} \;
+	else
+		find . -name "*.$2" -exec grep -l "$1" {} \;
+	fi
 }

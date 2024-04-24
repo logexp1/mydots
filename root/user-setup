@@ -97,7 +97,7 @@ flatpak_setup() {
 }
 
 pip_setup() {
-    pip install --user pywal python-lsp-server debugpy
+    pip install --user pywal python-lsp-server debugpy wlr-layout-ui
 }
 
 hyprpm_setup() {
