@@ -38,6 +38,12 @@
 (global-subword-mode 1)
 #+end_src
 
+** tramp
+
+#+begin_src emacs-lisp
+;; need to use ~/.ssh/config settings
+(customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
+#+end_src
 
 * Key Bindings
 ** kbd mode
