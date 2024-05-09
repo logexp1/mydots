@@ -88,7 +88,6 @@
        grammar           ; tasing grammar mistake every you make
 
        :tools
-       ein
        ;;ansible
        (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        ;;direnv

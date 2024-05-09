@@ -1946,10 +1946,13 @@ _k_ : previous
            ("thr" "Insert theorem env" "" cdlatex-environment ("theorem") t nil)
            ("def" "Insert defintion env" "" cdlatex-environment ("definition") t nil)))
 
+  ;; can't insert backticks in org-mode without this
+  (map! :map cdlatex-mode-map
+        "`" nil)
   (map! :map org-cdlatex-mode-map
-        :mi "<tab>" #'cdlatex-tab))
+        :mi "<tab>" #'cdlatex-tab
+        "`" nil))
 #+end_src
-
 
 *** ox-latex
 :PROPERTIES:
