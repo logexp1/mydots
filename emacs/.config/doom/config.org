@@ -2372,6 +2372,7 @@ Install docset with =dash-docs-install-docset=, if not found, try =dash-docs-ins
 *** ein
 #+begin_src emacs-lisp
 (use-package! ein
+  :disabled t
   :init
   (setq! ein:jupyter-default-notebook-directory "~/Downloads"))
 #+end_src
