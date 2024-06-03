@@ -27,7 +27,8 @@ python3-pip
 zsh
 onedrive
 nodejs-bash-language-server
-python3-lsp-server
+# python3-lsp-server
+conda
 typescript
 # gnome-shell-extension-pop-shell
 xprop

@@ -43,6 +43,8 @@
 #+begin_src emacs-lisp
 ;; need to use ~/.ssh/config settings
 (customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
+;; set login shell
+;; (setq! explicit-shell-file-name "/bin/bash")
 #+end_src
 
 * Key Bindings
@@ -588,10 +590,10 @@ makes life much easier
         "C-<return>" #'vertico-exit-input)
   (map! :leader
         :desc "M-x" "SPC" #'execute-extended-command
-        :desc "project-find-file" "p" #'project-find-file
-        :desc "project-switch-project" "c" #'projectile-switch-project
+        :desc "project-find-file" "p" #'(lambda () (interactive) (project-find-file '(4)))
+        :desc "project-switch-project" "c" #'project-switch-project
         ;; :desc "search within project" "/" #'+default/search-project
-        :desc "search within project" "/" #'+vertico/project-search
+        :desc "search within project" "/" #'consult-git-grep
         :desc "resume last search" "'" #'vertico-repeat))
 #+end_src
 
@@ -604,9 +606,12 @@ makes life much easier
   (general-t "p" #'consult-yank-from-kill-ring)
   ('normal "/" #'consult-line)
   :config
-  (map! :leader
-        :desc "switch buffer" "s" #'consult-buffer
-        :desc "locate file" "l" #'consult-locate)
+  (map!
+   :m "'" #'consult-global-mark
+   :leader
+   :desc "switch buffer" "s" #'consult-buffer
+   :desc "locate file" "l" #'consult-locate)
+  (setq! consult-project-function #'consult--default-project-function)
   (defun js/consult-line-evil-history (&rest _)
     "Add latest `consult-line' search pattern to the evil search history ring."
     (when (and (bound-and-true-p evil-mode)
@@ -2261,6 +2266,26 @@ _k_ : previous
 
         :desc "dap breakpoint log message" "l" #'dap-breakpoint-log-message))
 
+#+end_src
+
+** Eglot
+#+begin_src emacs-lisp
+(defun pyrightconfig-write (virtualenv)
+  "Write a `pyrightconfig.json' file at the Git root of a project
+with `venvPath' and `venv' set to the absolute path of
+`virtualenv'.  When run interactively, prompts for a directory to
+select."
+  (interactive "DEnv: ")
+  ;; Naming convention for venvPath matches the field for pyrightconfig.json
+  (let* ((venv-dir (tramp-file-local-name (file-truename virtualenv)))
+         (venv-file-name (directory-file-name venv-dir))
+         (venvPath (file-name-directory venv-file-name))
+         (venv (file-name-base venv-file-name))
+         (base-dir (vc-git-root default-directory))
+         (out-file (expand-file-name "pyrightconfig.json" base-dir))
+         (out-contents (json-encode (list :venvPath venvPath :venv venv))))
+    (with-temp-file out-file (insert out-contents))
+    (message (concat "Configured `" out-file "` to use environment `" venv-dir))))
 #+end_src
 
 
