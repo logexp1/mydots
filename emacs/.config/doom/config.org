@@ -42,9 +42,8 @@
 
 #+begin_src emacs-lisp
 ;; need to use ~/.ssh/config settings
-(use-package! tramp
-  :config
-  (customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
+(customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
+(after! tramp-sh
   (setq! tramp-default-remote-shell "/bin/bash"))
 #+end_src
 
