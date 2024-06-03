@@ -42,10 +42,12 @@
 
 #+begin_src emacs-lisp
 ;; need to use ~/.ssh/config settings
-(customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
-;; set login shell
-;; (setq! explicit-shell-file-name "/bin/bash")
+(use-package! tramp
+  :config
+  (customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
+  (setq! tramp-default-remote-shell "/bin/bash"))
 #+end_src
+
 
 * Key Bindings
 ** kbd mode
