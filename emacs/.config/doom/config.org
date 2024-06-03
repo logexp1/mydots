@@ -588,9 +588,10 @@ makes life much easier
         "C-<return>" #'vertico-exit-input)
   (map! :leader
         :desc "M-x" "SPC" #'execute-extended-command
-        :desc "projectile-find-file" "p" #'projectile-find-file
-        :desc "projectile-switch-project" "c" #'projectile-switch-project
-        :desc "search within project" "/" #'+default/search-project
+        :desc "project-find-file" "p" #'project-find-file
+        :desc "project-switch-project" "c" #'projectile-switch-project
+        ;; :desc "search within project" "/" #'+default/search-project
+        :desc "search within project" "/" #'+vertico/project-search
         :desc "resume last search" "'" #'vertico-repeat))
 #+end_src
 
@@ -663,14 +664,12 @@ makes life much easier
 #+end_src
 
 ** editing
-:PROPERTIES:
-:ID:       87b9c43b-a4ab-406a-9995-5d43e37ecb11
-:END:
 
 *** show parenthesis
 :PROPERTIES:
 :ID:       49d3b134-7ea6-4c5f-a694-08833ef02f95
 :END:
+
 #+begin_src emacs-lisp
 (use-package paren
   :init
@@ -2294,6 +2293,7 @@ pyenv activation was not recognized by lsp, (maybe fixed by now) so used pyvenv 
 
 #+begin_src emacs-lisp
 (use-package pyvenv
+  :disabled t
   ;; pyvenv-workon refers this environment variable
   :init
   (setq! python-shell-interpreter "python3")
