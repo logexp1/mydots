@@ -41,10 +41,22 @@
 ** tramp
 
 #+begin_src emacs-lisp
-;; need to use ~/.ssh/config settings
-(customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
-(after! tramp-sh
-  (setq! tramp-default-remote-shell "/bin/bash"))
+(use-package! tramp
+  :init
+  (customize-set-variable
+   'tramp-use-ssh-controlmaster-options nil)
+  :config
+  ;; (add-to-list 'tramp-connection-properties
+  ;;              (list (regexp-quote "/ssh:tmp/") "remote-shell" "/bin/bash"))
+  ;; (add-to-list 'tramp-connection-properties
+  ;;              (list (regexp-quote "/ssh:gpu/") "remote-shell" "/bin/bash"))
+  ;; (add-to-list 'tramp-connection-properties
+  ;;              (list (regexp-quote "/ssh:gpu8/") "remote-shell" "/bin/bash"))
+  (setq! tramp-connection-timeout 10)
+  (setq! tramp-verbose 6)
+  ;; (setq! tramp-default-remote-shell "/bin/bash")
+  ;; reads remote's PATH variable
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 #+end_src
 
 
@@ -592,7 +604,7 @@ makes life much easier
   (map! :leader
         :desc "M-x" "SPC" #'execute-extended-command
         :desc "project-find-file" "p" #'(lambda () (interactive) (project-find-file '(4)))
-        :desc "project-switch-project" "c" #'project-switch-project
+        :desc "project-switch-project" "c" #'projectile-switch-project
         ;; :desc "search within project" "/" #'+default/search-project
         :desc "search within project" "/" #'consult-git-grep
         :desc "resume last search" "'" #'vertico-repeat))
@@ -2271,29 +2283,17 @@ _k_ : previous
 
 ** Eglot
 #+begin_src emacs-lisp
-(defun pyrightconfig-write (virtualenv)
-  "Write a `pyrightconfig.json' file at the Git root of a project
-with `venvPath' and `venv' set to the absolute path of
-`virtualenv'.  When run interactively, prompts for a directory to
-select."
-  (interactive "DEnv: ")
-  ;; Naming convention for venvPath matches the field for pyrightconfig.json
-  (let* ((venv-dir (tramp-file-local-name (file-truename virtualenv)))
-         (venv-file-name (directory-file-name venv-dir))
-         (venvPath (file-name-directory venv-file-name))
-         (venv (file-name-base venv-file-name))
-         (base-dir (vc-git-root default-directory))
-         (out-file (expand-file-name "pyrightconfig.json" base-dir))
-         (out-contents (json-encode (list :venvPath venvPath :venv venv))))
-    (with-temp-file out-file (insert out-contents))
-    (message (concat "Configured `" out-file "` to use environment `" venv-dir))))
+(use-package! eglot
+  :hook (prog-mode . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs
+               ;; just alias pyright-langserver from remote
+               ;; `((python-mode python-ts-mode) . ("/home/nsml/.conda/envs/torch/bin/pyright-langserver" "--stdio"))))
+               `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio"))))
 #+end_src
 
 
 ** emacs lisp
-:PROPERTIES:
-:ID:       6e838a99-ad9b-44fe-b9e1-8bb1d124a0a7
-:END:
 #+begin_src emacs-lisp
 (use-package! elisp-mode
   :config
