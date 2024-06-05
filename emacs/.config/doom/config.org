@@ -43,18 +43,12 @@
 #+begin_src emacs-lisp
 (use-package! tramp
   :init
+  ;; required to use local ~/.ssh/config
   (customize-set-variable
    'tramp-use-ssh-controlmaster-options nil)
   :config
-  ;; (add-to-list 'tramp-connection-properties
-  ;;              (list (regexp-quote "/ssh:tmp/") "remote-shell" "/bin/bash"))
-  ;; (add-to-list 'tramp-connection-properties
-  ;;              (list (regexp-quote "/ssh:gpu/") "remote-shell" "/bin/bash"))
-  ;; (add-to-list 'tramp-connection-properties
-  ;;              (list (regexp-quote "/ssh:gpu8/") "remote-shell" "/bin/bash"))
-  (setq! tramp-connection-timeout 10)
-  (setq! tramp-verbose 6)
-  ;; (setq! tramp-default-remote-shell "/bin/bash")
+  ;; for debugging
+  ;; (setq! tramp-verbose 6)
   ;; reads remote's PATH variable
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 #+end_src
@@ -612,6 +606,9 @@ makes life much easier
 
 
 *** consult
+:PROPERTIES:
+:ID:       3d55af96-c2d3-4619-bcb8-a1ef53220a81
+:END:
 #+begin_src emacs-lisp
 (use-package! consult
   :defer 1
@@ -620,7 +617,7 @@ makes life much easier
   ('normal "/" #'consult-line)
   :config
   (map!
-   :m "'" #'consult-global-mark
+   ;; :m "'" #'consult-global-mark
    :leader
    :desc "switch buffer" "s" #'consult-buffer
    :desc "locate file" "l" #'consult-locate)
@@ -2284,12 +2281,12 @@ _k_ : previous
 ** Eglot
 #+begin_src emacs-lisp
 (use-package! eglot
-  :hook (prog-mode . eglot-ensure)
-  :config
-  (add-to-list 'eglot-server-programs
-               ;; just alias pyright-langserver from remote
-               ;; `((python-mode python-ts-mode) . ("/home/nsml/.conda/envs/torch/bin/pyright-langserver" "--stdio"))))
-               `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio"))))
+  :hook (prog-mode . eglot-ensure))
+;; :config
+;; (add-to-list 'eglot-server-programs
+;; just alias pyright-langserver from remote
+;; `((python-mode python-ts-mode) . ("/home/nsml/.conda/envs/torch/bin/pyright-langserver" "--stdio"))))
+;; `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio"))))
 #+end_src
 
 
