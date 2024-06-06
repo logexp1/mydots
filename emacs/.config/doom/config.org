@@ -2289,12 +2289,25 @@ _k_ : previous
 ** Eglot
 #+begin_src emacs-lisp
 (use-package! eglot
-  :hook (prog-mode . eglot-ensure))
-;; :config
-;; (add-to-list 'eglot-server-programs
-;; just alias pyright-langserver from remote
-;; `((python-mode python-ts-mode) . ("/home/nsml/.conda/envs/torch/bin/pyright-langserver" "--stdio"))))
-;; `((python-mode python-ts-mode) . ("pyright-langserver" "--stdio"))))
+  :hook (prog-mode . eglot-ensure)
+  :config
+  ;; enable lsp in org-src-block https://github.com/joaotavora/eglot/issues/523#issuecomment-1746342643
+  (defun sloth/org-babel-edit-prep (info)
+    (setq buffer-file-name (or (alist-get :file (caddr info))
+                               "org-src-babel-tmp"))
+    (eglot-ensure))
+  (advice-add 'org-edit-src-code
+              :before (defun sloth/org-edit-src-code/before (&rest args)
+                        (when-let* ((element (org-element-at-point))
+                                    (type (org-element-type element))
+                                    (lang (org-element-property :language element))
+                                    (mode (org-src-get-lang-mode lang))
+                                    ((eglot--lookup-mode mode))
+                                    (edit-pre (intern
+                                               (format "org-babel-edit-prep:%s" lang))))
+                          (if (fboundp edit-pre)
+                              (advice-add edit-pre :after #'sloth/org-babel-edit-prep)
+                            (fset edit-pre #'sloth/org-babel-edit-prep))))))
 #+end_src
 
 
