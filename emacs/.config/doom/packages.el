@@ -49,3 +49,5 @@
 (package! vscode-icon)
 (package! gptel)
 (package! fcitx)
+
+(package! treesit-auto)

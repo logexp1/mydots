@@ -112,4 +112,4 @@ emacs-common
 hypridle
 hyprlock
 material-icons-fonts
-sshfs
+fuse-sshfs

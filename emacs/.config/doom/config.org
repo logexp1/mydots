@@ -2190,6 +2190,14 @@ _k_ : previous
 
 
 * Programming
+** treesit
+#+begin_src emacs-lisp
+(use-package! treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (global-treesit-auto-mode))
+#+end_src
 
 ** dockerfile
 #+begin_src emacs-lisp
@@ -2316,7 +2324,6 @@ pyenv activation was not recognized by lsp, (maybe fixed by now) so used pyvenv 
 
 #+begin_src emacs-lisp
 (use-package pyvenv
-  :disabled t
   ;; pyvenv-workon refers this environment variable
   :init
   (setq! python-shell-interpreter "python3")
