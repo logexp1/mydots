@@ -597,10 +597,11 @@ makes life much easier
         "C-<return>" #'vertico-exit-input)
   (map! :leader
         :desc "M-x" "SPC" #'execute-extended-command
-        :desc "project-find-file" "p" #'(lambda () (interactive) (project-find-file '(4)))
+        ;; :desc "project-find-file" "p" #'(lambda () (interactive) (project-find-file '(4)))
+        :desc "project-find-file" "p" #'projectile-find-file
         :desc "project-switch-project" "c" #'projectile-switch-project
-        ;; :desc "search within project" "/" #'+default/search-project
-        :desc "search within project" "/" #'consult-git-grep
+        :desc "search within project" "/" #'+default/search-project
+        ;; :desc "search within project" "/" #'consult-git-grep
         :desc "resume last search" "'" #'vertico-repeat))
 #+end_src
 
@@ -2307,7 +2308,9 @@ _k_ : previous
                                                (format "org-babel-edit-prep:%s" lang))))
                           (if (fboundp edit-pre)
                               (advice-add edit-pre :after #'sloth/org-babel-edit-prep)
-                            (fset edit-pre #'sloth/org-babel-edit-prep))))))
+                            (fset edit-pre #'sloth/org-babel-edit-prep)))))
+  ;; need this to accomodate python-ts-mode as well
+  (setf (alist-get "python" org-src-lang-modes nil nil #'equal) 'python-ts))
 #+end_src
 
 

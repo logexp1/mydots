@@ -17,7 +17,7 @@ pkgconf
 maildir-utils
 fd-find
 cascadia-code-fonts
-naver-nanum-fonts-all
+# naver-nanum-fonts-all
 cmake
 libtool
 # gnome-tweaks
