@@ -869,7 +869,7 @@ I can't use org mode headline search if I enable this package.
 (defvar org-default-inbox-file (expand-file-name "inbox.org" org-directory))
 (defvar org-default-projects-file (expand-file-name "projects.org" org-directory))
 (defvar org-default-tickler-file (expand-file-name "tickler.org" org-directory))
-;; (defvar org-default-incubate-file (expand-file-name "incubate.org" org-directory))
+(defvar org-default-incubate-file (expand-file-name "incubate.org" org-directory))
 (defvar org-anki-file (expand-file-name "anki.org" org-directory))
 #+end_src
 
@@ -971,8 +971,8 @@ I can't use org mode headline search if I enable this package.
 #+begin_src emacs-lisp
 (after! org
   (setq! org-refile-targets
-         ;; '((org-default-incubate-file :level . 1)
-         '((org-default-projects-file :maxlevel . 3)
+         '((org-default-incubate-file :level . 1)
+           (org-default-projects-file :maxlevel . 3)
            (org-default-tickler-file :maxlevel . 2))))
 #+end_src
 
@@ -1046,10 +1046,10 @@ I can't use org mode headline search if I enable this package.
       (apply 'kill-region region)
       (save-window-excursion (dump-it contents)))))
 
-;; (defun org-refile-to-incubate ()
-;;   "Refile to incubate file."
-;;   (interactive)
-;;   (org-refile-directly org-default-incubate-file))
+(defun org-refile-to-incubate ()
+  "Refile to incubate file."
+  (interactive)
+  (org-refile-directly org-default-incubate-file))
 
 (defun org-refile-to-projects ()
   "Refile to projects file."
@@ -1141,7 +1141,8 @@ I can't use org mode headline search if I enable this package.
               '(todo-state-down effort-up category-keep))))
            ("c" "Agenda"
             ((agenda ""
-                     ((org-agenda-span 2)
+                     ((org-agenda-span 4)
+                      (org-agenda-start-day "-1d")
                       (org-agenda-remove-tags t)
                       (org-agenda-skip-timestamp-if-done t)
                       (org-agenda-skip-deadline-if-done t)
@@ -1546,19 +1547,19 @@ Switch projects and subprojects from NEXT back to TODO."
 :ID:       0a600463-96ce-410d-86cb-77acc19ae39e
 :END:
 #+begin_src emacs-lisp
-(use-package! org-pomodoro
-  :commands org-pomodoro
-  :config
-  (defun org-pomodoro-prompt ()
-    (interactive)
-    (org-clock-goto)
-    (if (y-or-n-p "Start a new pomodoro?")
-        (progn
-          (org-pomodoro))))
+;; (use-package! org-pomodoro
+;;   :commands org-pomodoro
+;;   :config
+;;   (defun org-pomodoro-prompt ()
+;;     (interactive)
+;;     (org-clock-goto)
+;;     (if (y-or-n-p "Start a new pomodoro?")
+;;         (progn
+;;           (org-pomodoro))))
   ;; (setq! org-pomodoro-finished-sound (concat (expand-file-name "~") "/.config/resources/finish.wav"))
   ;; (setq! org-pomodoro-short-break-sound (concat (expand-file-name "~") "/.config/resources/start.wav"))
   ;; (setq! org-pomodoro-long-break-sound (concat (expand-file-name "~") "/.config/resources/start.wav"))
-  (add-hook! 'org-pomodoro-break-finished-hook #'org-pomodoro-prompt))
+  ;; (add-hook! 'org-pomodoro-break-finished-hook #'org-pomodoro-prompt))
 #+end_src
 
 *** org alert
@@ -1567,14 +1568,77 @@ Switch projects and subprojects from NEXT back to TODO."
 :END:
 parse agenda for current day(and tomorrow) whenever agenda file changed
 #+begin_src emacs-lisp
-(after! org-agenda
-  (require 'org-alert)
-  (setq! alert-default-style 'libnotify)
-  (org-alert-check)
-  (require 'filenotify)
+;; (after! org-agenda
+;;   (require 'org-alert)
+;;   (setq! alert-default-style 'libnotify)
+;;   (org-alert-check)
+;;   (require 'filenotify)
   ;; (file-notify-add-watch org-default-projects-file '(change) #'org-alert-check)
-  (run-at-time "24:01" nil #'org-alert-check))
+  ;; (run-at-time "24:01" nil #'org-alert-check))
 #+end_src
+
+*** appt for notification
+:PROPERTIES:
+:ID:       16e1241a-df70-4458-a30b-65b619bb1f99
+:END:
+reference : [[https://gist.github.com/Gavinok/50f804ea5a2856ee52dee1ba02e97cb9]]
+
+#+begin_src emacs-lisp
+(use-package appt
+  :demand t
+  :defer 5
+  :custom
+  ((appt-message-warning-time 15)
+   (appt-display-duration 360)
+   (appt-disp-window-function #'my/appt-display)
+   (appt-delete-window-function #'ignore))
+  :init
+  (require 'plz)
+  (defun my/appt-display (min-to-app _new-time appt-msg)
+    (require 'notifications)
+    ;; Close the last iteration of this notification
+    (let ((title  (pcase min-to-app
+                    ("0" "Appointment Is Starting")
+                    ("5" "Appointment in 5 Minute")
+                    (min (concat " Appointment in " min " Minutes"))))
+          (body appt-msg)
+          (urgency (if (< (string-to-number min-to-app) 3)
+                       'critical
+                     'normal)))
+
+      ;; Send a desktop notification for this appointment
+      (funcall (if  (eq system-type 'android)
+                   ;; support for android notifications
+                   'android-notifications-notify
+                 'notifications-notify)
+               :title title
+               :body body
+               :urgency urgency
+               :actions '("Open" "Open this appointment")
+               :on-action (lambda (_id _key) (org-agenda 'd)))
+
+      ;; Notify me on my phone
+      (plz 'post "https://ntfy.sh/org-agenda"
+        :headers `(("Title"  . ,title)
+                   ("Priority" . ,(if (eql urgency 'critical)
+                                      "high"
+                                    "default"))
+                   ("Tags" . "calendar")
+                   ("Markdown" . "yes"))
+        :body body)))
+  ;; Check for if a notification needs to be sent
+  (appt-activate +1)
+  ;; generate appointments from my org agenda
+  (org-agenda-to-appt)
+
+  ;; Run when I am idle for a minute at a time
+  ;; (usually when looking at my browser)
+  (defvar appt-update-org-timer
+    ;; wait till emacs is idle for 1 minute before processing org appointments
+    (run-with-idle-timer 60 t #'org-agenda-to-appt)
+    "Timer used to update appt to the current org events"))
+#+end_src
+
 
 
 ** org mode keybinding

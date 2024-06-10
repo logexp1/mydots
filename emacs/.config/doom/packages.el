@@ -33,7 +33,7 @@
 (package! ob-async)
 ;; (package! jupyter
 ;;   :recipe (:host github :repo "nnicandro/emacs-jupyter"))
-(package! org-alert)
+;; (package! org-alert)
 ;; slack client for emacs
 (package! slack)
 ;; (package! ox-slack)
@@ -51,3 +51,4 @@
 (package! fcitx)
 
 (package! treesit-auto)
+(package! plz)
