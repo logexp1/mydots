@@ -1663,7 +1663,8 @@ some useful evil-org-mode keybinding (https://github.com/Somelauw/evil-org-mode)
   (map! :leader
         (:prefix ("o" . "org")
          :desc "org-agenda" "a" #'org-agenda
-         :desc "org-store-link" "l" #'org-store-link
+         :desc "org-id-store-link" "l" #'org-id-store-link
+         :desc "org-store-link" "L" #'org-store-link
          :desc "org-clock-goto" "g" #'org-clock-goto
          :desc "clock-in default task" "i" #'js/punch-in
          :desc "clock-out current task" "o" #'js/punch-out
@@ -1761,10 +1762,10 @@ some useful evil-org-mode keybinding (https://github.com/Somelauw/evil-org-mode)
 #+begin_src emacs-lisp
 (use-package! org-roam
   :config
+  (setq-hook! 'org-roam-find-file-hook org-id-link-to-org-use-id nil)
   ;; suppress annoying warning messages when using org-roam
   (setq warning-suppress-types (append warning-suppress-types '((org-element-cache))))
   (setq! org-roam-directory (file-truename js/roam-directory)
-         org-id-link-to-org-use-id t
          org-roam-completion-everywhere nil
          org-roam-extract-new-file-path "${slug}.org")
   (setq! org-roam-capture-templates
