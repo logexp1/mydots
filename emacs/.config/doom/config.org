@@ -2421,9 +2421,9 @@ _k_ : previous
                                                (format "org-babel-edit-prep:%s" lang))))
                           (if (fboundp edit-pre)
                               (advice-add edit-pre :after #'sloth/org-babel-edit-prep)
-                            (fset edit-pre #'sloth/org-babel-edit-prep)))))
-  ;; need this to accomodate python-ts-mode as well
-  (setf (alist-get "python" org-src-lang-modes nil nil #'equal) 'python-ts))
+                            (fset edit-pre #'sloth/org-babel-edit-prep))))))
+;; need this to accomodate python-ts-mode as well
+;; (setf (alist-get "python" org-src-lang-modes nil nil #'equal) 'python-ts))
 #+end_src
 
 
