@@ -50,7 +50,7 @@
 (package! gptel)
 (package! fcitx)
 
-(package! treesit-auto)
+;; (package! treesit-auto)
 (package! plz)
 (package! org-present
   :recipe (:host github :repo "rlister/org-present"))

@@ -1528,9 +1528,13 @@ Switch projects and subprojects from NEXT back to TODO."
     (org-clock-in '(16))))
 
 (setq! org-clock-persist t
-      org-clock-in-switch-to-state 'js/clock-in-to-next
-      org-clock-out-remove-zero-time-clocks t
-      org-clock-persist-query-resume nil)
+       org-clock-in-switch-to-state 'js/clock-in-to-next
+       org-clock-out-remove-zero-time-clocks t
+       org-clock-persist-query-resume nil)
+
+;; automatically punch out if I am idle for 30 mins
+(defvar punch-out-timer
+  (run-with-idle-timer 1800 t #'js/punch-out))
 #+end_src
 
 *** org clock-convenience
@@ -1589,7 +1593,8 @@ reference : [[https://gist.github.com/Gavinok/50f804ea5a2856ee52dee1ba02e97cb9]]
   :defer 5
   :custom
   ((appt-message-warning-time 15)
-   (appt-display-duration 360)
+   (appt-display-duration 30)
+   (appt-display-interval 5)
    (appt-disp-window-function #'my/appt-display)
    (appt-delete-window-function #'ignore))
   :init
@@ -1599,7 +1604,6 @@ reference : [[https://gist.github.com/Gavinok/50f804ea5a2856ee52dee1ba02e97cb9]]
     ;; Close the last iteration of this notification
     (let ((title  (pcase min-to-app
                     ("0" "Appointment Is Starting")
-                    ("5" "Appointment in 5 Minute")
                     (min (concat " Appointment in " min " Minutes"))))
           (body appt-msg)
           (urgency (if (< (string-to-number min-to-app) 3)
@@ -2302,6 +2306,7 @@ _k_ : previous
 ** treesit
 #+begin_src emacs-lisp
 (use-package! treesit-auto
+  :disabled t
   :custom
   (treesit-auto-install 'prompt)
   :config
