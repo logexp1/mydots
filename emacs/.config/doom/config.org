@@ -1191,6 +1191,7 @@ I can't use org mode headline search if I enable this package.
                                                                    ""
                                                                  " (including WAITING and SCHEDULED tasks)")))
                          (org-agenda-skip-function 'js/skip-project-tasks)
+                         (org-agenda-files (remove org-default-tickler-file org-agenda-files))
                          (org-agenda-todo-ignore-scheduled js/hide-scheduled-and-waiting-next-task)
                          (org-agenda-todo-ignore-deadlines js/hide-scheduled-and-waiting-next-task)
                          (org-agenda-todo-ignore-with-date js/hide-scheduled-and-waiting-next-task)
