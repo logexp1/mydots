@@ -113,3 +113,13 @@ hypridle
 hyprlock
 material-icons-fonts
 fuse-sshfs
+cuda
+# * packages required for building emacs
+gnutls-devel
+libXpm-devel
+giflib-devel
+ncurses-devel
+webkit2gtk4.0-devel
+libtree-sitter-devel
+jansson-devel
+libgccjit-devel

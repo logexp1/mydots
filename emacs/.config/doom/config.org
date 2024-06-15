@@ -2249,6 +2249,7 @@ _k_ : previous
 :END:
 #+begin_src emacs-lisp
 (use-package! mu4e
+  :disabled t
   :config
   (map! :map mu4e-view-mode-map
         :n "C-j" nil
