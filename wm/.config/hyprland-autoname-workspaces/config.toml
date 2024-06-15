@@ -1,55 +1,70 @@
-version = "1.1.13"
+version = "1.1.14"
 
-[format]
-dedup = true
-dedup_inactive_fullscreen = false
-delim = " "
-client = "{icon}"
-client_active = "<span>{icon}</span>"
-workspace = "<b><span>{id}:</span></b>{delim}{clients}"
-workspace_empty = "<b><span color='grey'>{id}:</span></b>{delim}{clients}"
-client_dup = "{icon}{counter_sup}{delim}"
-client_dup_fullscreen = "[{icon}]{delim}{icon}{counter_unfocused_sup}"
-client_fullscreen = "[{icon}]{delim}"
+[class]
+foot = "󰆍"
+libreoffice-writer = ""
+"(?i)waydroid.*" = "droid"
+"(?i)emacs" = "<span color='purple'></span>"
+"(?i)floorp" = "<span color='green'>󰖟</span>"
+dropdown = "<span color='yellow'>󰆍</span>"
+virt-manager = ""
+zoom = ""
+"(?i)brave-browser" = "<span>󰖟</span>"
+DEFAULT = ""
+libreoffice-impress = ""
+chromium = ""
+".*transmission.*" = ""
+"(?i)zathura" = ""
+libreoffice-startcenter = ""
+pavucontrol = ""
+"(?i)firefox" = "<span color='orange'> </span>"
+"(?i)slack" = "󰒱"
+swappy = ""
+libreoffice-calc = ""
 
-# regex captures support is supported
-[title_in_class."(?i)foot"]
-"emerge: (.+?/.+?)-.*" = "{match1}"
+[class_active]
+
+[initial_class]
+
+[initial_class_active]
+
+[workspaces_name]
 
 [title_in_class."(brave-browser|firefox|chrom.*|floorp)"]
 "(?i)youtube" = ""
 "(?i)github" = "<span color='grey'></span>"
 
+[title_in_class."(?i)foot"]
+"emerge: (.+?/.+?)-.*" = "{match1}"
+
 [title_in_class_active."(brave-browser|firefox|chrom.*|floorp)"]
 "(?i)youtube" = "<span color='red'></span>"
 "(?i)github" = ""
 
+[title_in_initial_class]
 
-[class]
-DEFAULT = ""
-"(?i)firefox" = "<span color='orange'> </span>"
-"(?i)brave-browser" = "<span>󰖟</span>"
-"(?i)floorp" = "<span color='green'>󰖟</span>"
-"dropdown" = "<span color='yellow'>󰆍</span>"
-"foot" = "󰆍"
-"chromium" = ""
-"(?i)emacs" = "<span color='purple'></span>"
-"(?i)waydroid.*" = "droid"
-"libreoffice-calc" = ""
-"libreoffice-impress" = ""
-"libreoffice-startcenter" = ""
-"libreoffice-writer" = ""
-"pavucontrol" = ""
-"(?i)slack" = "󰒱"
-"swappy" = ""
-"(?i)zathura" = ""
-".*transmission.*" = ""
-"virt-manager" = ""
-"zoom" = ""
+[title_in_initial_class_active]
+
+[initial_title_in_class]
+
+[initial_title_in_class_active]
+
+[initial_title_in_initial_class]
+
+[initial_title_in_initial_class_active]
 
 [exclude]
-"" = "^$" # prevent displaying clients with empty class
+"" = "^$"
 
-# Local Variables
-# eval: (rainbow-mode 1)
-# End:
+[format]
+dedup = true
+dedup_inactive_fullscreen = false
+delim = " "
+workspace = "<b><span>{id}:</span></b>{delim}{clients}"
+workspace_empty = "<b><span color='grey'>{id}:</span></b>{delim}{clients}"
+client = "{icon}"
+client_fullscreen = "[{icon}]{delim}"
+client_active = "<span>{icon}</span>"
+client_dup = "{icon}{counter_sup}{delim}"
+client_dup_active = "*{icon}*{delim}{icon}{counter_unfocused_sup}"
+client_dup_fullscreen = "[{icon}]{delim}{icon}{counter_unfocused_sup}"

@@ -71,7 +71,7 @@ dnf_setup() {
     dnf copr enable -y mhartgring/pqiv
     dnf copr enable -y alebastr/sway-extras
     dnf copr enable -y erikreider/SwayNotificationCenter
-    dnf copr enable -y randalthor17/floorp
+    # dnf copr enable -y randalthor17/floorp
     dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
     # for cuda
     distro=fedora39
@@ -94,10 +94,23 @@ install_packages() {
 }
 
 install_emacs() {
-    author="stevenlin"
-    repo="emacs-pgtk-nativecomp"
-    dnf copr enable -y "$author/$repo"
-    dnf --disablerepo="*" --enablerepo=copr:copr.fedorainfracloud.org:$author:$repo install emacs
+    build_dir=/tmp/build
+	mkdir -p $build_dir
+    git clone git://git.savannah.gnu.org/emacs.git
+    cd emacs
+    git checkout emacs-29
+    ./autogen.sh
+    configure --with-dbus --with-gif --with-jpeg --with-png --with-rsvg \
+        --with-tiff --with-xft --with-xpm --with-gpm=no \
+        --with-xwidgets --with-modules --with-harfbuzz --with-cairo --with-json \
+        --with-pgtk --with-native-compilation --enable-link-time-optimization \
+        --with-tree-sitter --with-sqlite3 --with-webp
+    make -j$(nproc)
+    sudo make install
+    # author="stevenlin"
+    # repo="emacs-pgtk-nativecomp"
+    # dnf copr enable -y "$author/$repo"
+    # dnf --disablerepo="*" --enablerepo=copr:copr.fedorainfracloud.org:$author:$repo install emacs
 }
 
 

@@ -86,7 +86,7 @@ python3-pyflakes
 ffmpeg --allowerasing
 libavcodec-freeworld
 NetworkManager-tui
-floorp
+# floorp
 eza
 zoxide
 ffmpegthumbnailer
