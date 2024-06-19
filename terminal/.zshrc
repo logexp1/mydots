@@ -164,7 +164,7 @@ function venv-local() {
 }
 
 function s3-ls() {
-	aws --endpoint-url=$CLOVA_STORAGE_ENDPOINT s3 ls s3://clue-dataset/$1
+	aws --endpoint-url=$CLOVA_STORAGE_ENDPOINT s3 ls s3://clue-dataset/$1 | sort -k 1,2
 }
 
 function s3-download() {
