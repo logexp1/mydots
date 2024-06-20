@@ -24,8 +24,8 @@ case $chosen in
 		systemctl reboot
         ;;
     $lock)
-        # swaylock -f
-        hyprlock
+        swaylock -f
+        # hyprlock
         ;;
     $suspend)
 		# amixer set Master mute
