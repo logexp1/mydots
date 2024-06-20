@@ -24,7 +24,8 @@ case $chosen in
 		systemctl reboot
         ;;
     $lock)
-        swaylock -f
+        notify-send "no lockscreen at this point"
+        # swaylock -f
         # hyprlock
         ;;
     $suspend)
