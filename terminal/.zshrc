@@ -102,6 +102,7 @@ alias tree='tree -a -I .git'
 # alias ls="${aliases[ls]:-ls} -A"
 alias ls="eza -a"
 alias ll="eza -al --color=always --icons --group-directories-first"
+alias llt="ll --sort=newest"
 
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"

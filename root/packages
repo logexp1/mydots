@@ -78,7 +78,7 @@ texlive-collection-langkorean
 texlive-collection-plaingeneric
 texlive-collection-binextra
 latexmk
-libreoffice
+# libreoffice
 aspell
 shfmt
 python3-isort
