@@ -2303,6 +2303,13 @@ _k_ : previous
 ;;     (setq! evil-collection-mu4e-end-region-misc "\\[q\\]uit")))
 #+end_src
 
+** org exports
+
+*** ox-jira
+#+begin_src emacs-lisp
+(use-package! ox-jira)
+#+end_src
+
 
 * Programming
 ** treesit

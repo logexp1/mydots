@@ -54,3 +54,5 @@
 (package! plz)
 (package! org-present
   :recipe (:host github :repo "rlister/org-present"))
+
+(package! ox-jira)
