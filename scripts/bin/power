@@ -24,9 +24,9 @@ case $chosen in
 		systemctl reboot
         ;;
     $lock)
-        notify-send "no lockscreen at this point"
+        # notify-send "no lockscreen at this point"
         # swaylock -f
-        # hyprlock
+        hyprlock
         ;;
     $suspend)
 		# amixer set Master mute

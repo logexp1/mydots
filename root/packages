@@ -42,7 +42,7 @@ btrbk
 alacritty
 akmod-nvidia
 xorg-x11-drv-nvidia-cuda
-libva-nvidia-driver
+# libva-nvidia-driver
 hyprland
 hyprland-devel
 udiskie
@@ -124,4 +124,3 @@ libtree-sitter-devel
 jansson-devel
 librsvg2-devel
 libgccjit-devel
-floorp
