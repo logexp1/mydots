@@ -2760,10 +2760,42 @@ unzip/zip things
 #+end_src
 
 * applications
-** GPTel
+** ellama
+#+begin_src emacs-lisp
+(use-package! ellama
+  :init
+  (setopt ellama-keymap-prefix "C-c e")
+  (setopt ellama-language "English")
+  (require 'llm-ollama)
+  (setopt ellama-provider
+          (make-llm-ollama
+           :chat-model "llama3.2"
+           :embedding-model "nomic-embed-text"
+           :default-chat-non-standard-params '(("num_ctx" . 8192))))
+  (setopt ellama-providers
+	  '(("zephyr" . (make-llm-ollama
+			 :chat-model "zephyr"
+			 :embedding-model "zephyr"))
 
+	    ("llama3.1" . (make-llm-ollama
+			   :chat-model "llama3.1"
+			   :embedding-model "llama3.1"))
+	    ("mixtral" . (make-llm-ollama
+			  :chat-model "mixtral"
+			  :embedding-model "mixtral"))))
+  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
+  :config
+  (map! :leader
+        (:prefix ("e" . "ellama")
+         :desc "ask-about" "a" #'ellama-ask-about
+         :desc "chat" "c" #'ellama-chat
+         :desc "provider-select" "p" #'ellama-provider-select)))
+#+end_src
+
+** GPTel
 #+begin_src emacs-lisp
 (use-package! gptel
+  :disabled t
   :commands (gptel gptel-send)
   :config
   (gptel-make-gemini "Gemini" :key (password-store-get "google/aistudio/apikey") :stream t)

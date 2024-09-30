@@ -47,7 +47,6 @@
            :repo "kmonad/kbd-mode"))
 
 (package! vscode-icon)
-(package! gptel)
 (package! fcitx)
 
 ;; (package! treesit-auto)
@@ -56,3 +55,6 @@
   :recipe (:host github :repo "rlister/org-present"))
 
 (package! ox-jira)
+
+;; (package! gptel)
+(package! ellama)
