@@ -8,6 +8,9 @@ ROFI="rofi -dmenu -i -l 10 -p"
 actions=('waybar' 'swaync' 'pypr')
 choice=$(printf '%s\n' "${actions[@]}" | ${ROFI} "select which one to reload" -selected-row 1)
 case "$choice" in
+    hyprland)
+        hyprctl reload
+        ;;
 	waybar)
         killall -SIGUSR2 waybar
 	    ;;

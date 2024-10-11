@@ -1,4 +1,4 @@
-personal_ws-1.1 en 140
+personal_ws-1.1 en 142
 Confounder
 FFmpeg
 Mahalanobis
@@ -41,6 +41,7 @@ differencing
 differentiability
 dimensionality
 dired
+discriminative
 distro
 docset
 eigenspace
@@ -126,6 +127,7 @@ surjection
 surjective
 svm
 tcp
+timestep
 tokenization
 tokenize
 tokenized
