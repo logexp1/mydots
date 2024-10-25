@@ -5,14 +5,19 @@ set -euo pipefail
 
 ROFI="rofi -dmenu -i -l 10 -p"
 # actions=('sxhkd' 'bspwm' 'qtile' 'picom' 'keybinding' 'polybar' 'dunst' 'fonts' 'restow')
-actions=('waybar' 'swaync' 'pypr')
+actions=('hyprland' 'waybar' 'swaync' 'pypr')
 choice=$(printf '%s\n' "${actions[@]}" | ${ROFI} "select which one to reload" -selected-row 1)
 case "$choice" in
     hyprland)
         hyprctl reload
         ;;
 	waybar)
-        killall -SIGUSR2 waybar
+        if pgrep waybar > /dev/null
+        then
+            killall -SIGUSR2 waybar
+        else
+            waybar
+        fi
 	    ;;
 	swaync)
         swaync-client -rs

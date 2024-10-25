@@ -3058,3 +3058,4 @@ need key authentication info in =.config/lastfmrc=, get the info from https://ww
    '(mathpix-app-key (password-store-get "mathpix/app-key"))
    '(mathpix-screenshot-method "maim -s %s")))
 #+end_src
+
