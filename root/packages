@@ -125,3 +125,6 @@ jansson-devel
 librsvg2-devel
 libgccjit-devel
 cargo
+# * battery optimization
+tlp
+tlp-rdw

@@ -194,6 +194,7 @@ systemd_setup() {
     systemctl enable btrbk.timer
 	systemctl enable docker
     systemctl enable libvirtd
+    systemctl enable tlp
 }
 
 default() {
