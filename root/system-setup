@@ -76,6 +76,8 @@ dnf_setup() {
     # for cuda
     distro=fedora39
     dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/$distro/x86_64/cuda-$distro.repo
+    dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+    rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
     dnf upgrade -y
 }
 
