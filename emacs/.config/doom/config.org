@@ -352,7 +352,7 @@ not as nice as undo-tree, but stable
 (after! flycheck
   (map! :map prog-mode-map
         :localleader
-        "f" #'consult-flycheck))
+        "c" #'consult-flycheck))
         ;; "f" #'flycheck-list-errors))
 #+end_src
 
@@ -661,6 +661,7 @@ makes life much easier
 (use-package! link-hint
   :general
   (general-t
+    "y" #'link-hint-copy-link
     "f" #'link-hint-open-link
     "F" #'link-hint-open-multiple-links))
 #+end_src
@@ -2344,7 +2345,8 @@ _k_ : previous
 
 (map! :map prog-mode-map
       :localleader
-      :desc     "repl"  :n      "'"     #'+eval/open-repl-other-window
+      :desc     "repl"          :n      "'"     #'+eval/open-repl-other-window
+      :desc     "format"        :n      "f"     #'+format/buffer
       (:prefix ("e" . "code eval")
        :desc    "send region"   :n      "e"     #'+eval/send-region-to-repl
        :desc    "send buffer"   :n      "b"     #'+eval/buffer))

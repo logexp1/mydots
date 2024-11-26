@@ -59,7 +59,7 @@
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        ;;(format +onsave)  ; automated prettiness
-       format
+       (format +lsp)
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        ;;multiple-cursors  ; editing in many places at once
@@ -89,7 +89,7 @@
 
        :tools
        ;;ansible
-       (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
+       ;; (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        ;;direnv
        (docker +lsp)
        editorconfig      ; let someone else argue about tabs vs spaces

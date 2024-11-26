@@ -136,6 +136,11 @@ docker_setup(){
 	/usr/bin/dnf4 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 	dnf install -y docker-ce docker-ce-cli containerd.io
 
+    # dockfmt
+    export DOCKFMT_SHA256="f6bc025739cf4f56287e879c75c11cc73ebafdf93a57c9bcd8805d1ab82434a0"
+    curl -fSL "https://github.com/jessfraz/dockfmt/releases/download/v0.3.3/dockfmt-linux-amd64" -o "/usr/local/bin/dockfmt" \
+	    && echo "${DOCKFMT_SHA256}  /usr/local/bin/dockfmt" | sha256sum -c - \
+	    && chmod a+x "/usr/local/bin/dockfmt"
 }
 
 
