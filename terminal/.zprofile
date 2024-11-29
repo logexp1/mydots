@@ -4,7 +4,7 @@
 source /etc/profile.d/flatpak.sh
 
 pathdirs="
-/usr/local/cuda-12.4/bin
+/usr/local/cuda/bin
 $HOME/.config/emacs/bin
 $HOME/.local/bin
 "

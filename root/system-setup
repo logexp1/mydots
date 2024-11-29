@@ -73,10 +73,7 @@ dnf_setup() {
     dnf copr enable -y erikreider/SwayNotificationCenter
     # dnf copr enable -y sneexy/floorp
     dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-    # for cuda
-    distro=fedora39
-    dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/$distro/x86_64/cuda-$distro.repo
-    dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+    dnf config-manager add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
     rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
     dnf upgrade -y
 }
