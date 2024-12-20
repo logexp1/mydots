@@ -2255,6 +2255,13 @@ _k_ : previous
 
 * Programming
 
+** yaml
+#+begin_src emacs-lisp
+(use-package! yaml
+  :config
+  (add-hook! 'yaml-mode-hook (lambda () (spell-fu-mode 0))))
+#+end_src
+
 ** kubernetes
 #+begin_src emacs-lisp
 ;; (use-package! kubernetes

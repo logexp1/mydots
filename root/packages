@@ -127,3 +127,4 @@ tlp-rdw
 # * browser
 brave-browser
 kubernetes-client
+yamllint
