@@ -210,7 +210,7 @@ default() {
     initramfs_setup
 	btrbk_setup
 	docker_setup
-	pass_git_setup
+	# pass_git_setup
     dragon_setup
     systemd_setup
     grub2-mkconfig -o /boot/grub2/grub.cfg
