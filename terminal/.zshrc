@@ -122,7 +122,7 @@ local dnfprog="dnf"
 command -v dnf5 > /dev/null && dnfprog=dnf5
 
 alias dnfl="${dnfprog} list"                       # List packages
-alias dnfli="${dnfprog} list installed"            # List installed packages
+alias dnfli="${dnfprog} list --installed"            # List installed packages
 alias dnfgl="${dnfprog} grouplist"                 # List package groups
 alias dnfmc="${dnfprog} makecache"                 # Generate metadata cache
 alias dnfp="${dnfprog} info"                       # Show package information
@@ -156,7 +156,27 @@ alias od_status='systemctl status --user onedrive'
 alias pipi="pip install --user"
 
 alias kernelspecs="jupyter kernelspec list"
+alias brave="brave-browser --enable-wayland-ime --wayland-text-input-version=3"
 
+# alias c3d='docker run -d -t --network host --name jisoo-container -v /home1/irteam/jisoo/workspace:/home1/irteam/workspace -v /home1/irteam/jisoo/c3/bashrc:/home1/irteam/.bashrc jisoo-c3'
+# alias c3i='docker exec -it jisoo-container bash'
+# alias c3d='docker run -d -t \
+#     --network host  \
+# 	--name c3-container \
+#     -v /home/jisoo/c3:/home1/irteam/workspace  \
+#     c3-env \
+#     zsh'
+# alias c3i='docker exec -it c3-container zsh'
+
+alias c3='docker run -it --rm \
+    --network host  \
+	--name c3-container \
+    -v /home/jisoo/c3/workspace:/home1/irteam/workspace  \
+    c3-env \
+    zsh'
+
+# kubernetes
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 # functions
 function venv-local() {

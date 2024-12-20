@@ -524,62 +524,6 @@ makes life much easier
 #+end_src
 
 
-*** ivy
-:PROPERTIES:
-:ID:       681f2c2e-9ace-4d13-995e-7e92a75477a7
-:END:
-#+begin_src emacs-lisp
-(if (doom-module-p :completion 'ivy)
- (use-package! ivy
-   :config
-   (setq! ivy-height 25
-         ;; wait for user to stop typing for this long before refreshing dynamic
-         ;; collections
-         ivy-dynamic-exhibit-delay-ms 50
-         ivy-count-format "%d/%d "
-         ivy-use-virtual-buffers t
-         swiper-goto-start-of-match t)
-
-   (map! :map ivy-minibuffer-map
-         "<escape>" #'minibuffer-keyboard-quit
-         "C-w" #'evil-delete-backward-word
-         "C-j" #'next-line
-         "C-k" #'previous-line
-         "C-y" #'ivy-kill-line
-         "<tab>" #'ivy-insert-current
-         "<backtab>" #'ivy-partial
-         "C-h" nil
-         "C-SPC" nil
-         "C-v" nil
-         "C-<backspace>" #'ivy-backward-kill-word
-         "M-d" #'ivy-dispatching-done
-         "C-<return>" #'ivy-immediate-done
-         "C-p" #'previous-history-element
-         "C-n" #'next-history-element
-         "M-a" #'ivy-avy
-         "M-c" #'ivy-occur)
-   (map! :map ivy-switch-buffer-map
-         "C-j" #'next-line
-         "C-k" #'previous-line)
-
-   (map!
-    :n    "/"   #'counsel-grep-or-swiper
-    :n    "?"   #'ivy-resume
-    :nivm "C-f" #'swiper-thing-at-point)
-
-   ;; counsel keybdings
-   (map! :leader
-         :desc "counsel-M-x"               "SPC" #'counsel-M-x
-         :desc "ivy-switch-buffer"         "s"   #'ivy-switch-buffer
-         :desc "counsel-locate"            "l"   #'counsel-locate
-         :desc "ivy/projectile-find-file"  "p"   #'+ivy/projectile-find-file
-         :desc "projectile-switch-project" "c"   #'counsel-projectile-switch-project
-         :desc "counsel-projectile-git-grep" "/" #'counsel-projectile-git-grep)
-
-   (general-t
-     "p" #'counsel-yank-pop)))
-#+end_src
-
 *** vertico
 :PROPERTIES:
 :ID:       829d255e-c653-4450-aa1f-15f5ba6d7d5c
@@ -1736,27 +1680,15 @@ some useful evil-org-mode keybinding (https://github.com/Somelauw/evil-org-mode)
          bibtex-completion-bibliography `(,js/bibliography-file)))
 #+end_src
 
-*** ivy-bibtex
-:PROPERTIES:
-:ID:       ab0f8480-ecb5-43ab-a141-65684901dfca
-:END:
-#+begin_src emacs-lisp
-(if (doom-module-p :completion 'ivy)
-    (use-package! ivy-bibtex
-      :general (general-def "C-c b" #'ivy-bibtex)
-      :config
-      (setq! ivy-bibtex-default-action 'ivy-bibtex-edit-notes)))
-#+end_src
-
 *** citar
 #+begin_src emacs-lisp
-(if (doom-module-p :completion 'vertico)
-    (use-package! citar
-      ;; :general (general-def "C-c b" #'citar-open-notes)
-      :config
-      (setq! citar-bibliography `(,js/bibliography-file)
-             org-cite-global-bibliography `(,js/bibliography-file)
-             citar-notes-paths (list (concat js/roam-directory "references")))))
+
+(use-package! citar
+  ;; :general (general-def "C-c b" #'citar-open-notes)
+  :config
+  (setq! citar-bibliography `(,js/bibliography-file)
+         org-cite-global-bibliography `(,js/bibliography-file)
+         citar-notes-paths (list (concat js/roam-directory "references"))))
 ;;        citar-library-paths js/pdf-directory
 #+end_src
 
@@ -2312,7 +2244,36 @@ _k_ : previous
 #+end_src
 
 
+*** ox-pandoc
+#+begin_src emacs-lisp
+(use-package! ox-pandoc
+  :custom
+  (org-pandoc-options-for-gfm '((toc . nil)
+                                (wrap . "none"))))
+#+end_src
+
+
 * Programming
+
+** kubernetes
+#+begin_src emacs-lisp
+;; (use-package! kubernetes
+;;   :config
+;;   (map! :leader
+;;         :desc "k8s" "k" #'kubernetes-overview))
+
+;; (use-package! kubernetes-evil
+;;   :after kubernetes)
+
+(use-package! kubel
+  :config
+  (map! :leader
+        :desc "k8s" "k" #'kubel))
+
+(use-package! kubel-evil
+  :after kubel)
+#+end_src
+
 ** treesit
 #+begin_src emacs-lisp
 (use-package! treesit-auto
@@ -2598,6 +2559,7 @@ Git gutter:
   :config
   (dirvish-override-dired-mode)
   (remove-hook! 'dired-mode-hook #'dired-omit-mode)
+  (add-to-list 'dirvish-preview-disabled-exts "html")
   (setq! dirvish-header-line-format
          '(:left (path symlink)
            :right (free-space))
