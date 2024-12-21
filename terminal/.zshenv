@@ -44,3 +44,4 @@ fi
 
 setopt rcs
 source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
