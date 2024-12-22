@@ -2272,22 +2272,31 @@ _k_ : previous
 ;; (use-package! kubernetes-evil
 ;;   :after kubernetes)
 
-(use-package! kubel
-  :config
-  (map! :leader
-        :desc "k8s" "k" #'kubel))
+;; (use-package! kubel
+;;   :config
+;;   (kubel-vterm-setup)
+;;   (map! :leader
+;;         :desc "k8s" "k" #'kubel))
 
-(use-package! kubel-evil
-  :after kubel)
+;; (use-package! kubel-evil
+;;   :after kubel)
+
+(use-package! kubed
+  :config
+  (kubed-define-resource serviceaccount () :plural nil)
+  (kubed-define-resource pvc () :plural nil)
+  (general-def "C-c k" #'kubed-prefix-map)
+  (map! :map kubed-list-mode-map
+        :n "?" #'kubed-list-transient))
 #+end_src
 
 ** treesit
 #+begin_src emacs-lisp
 (use-package! treesit-auto
-  :disabled t
   :custom
   (treesit-auto-install 'prompt)
   :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
 #+end_src
 

@@ -49,7 +49,7 @@
 (package! vscode-icon)
 (package! fcitx)
 
-;; (package! treesit-auto)
+(package! treesit-auto)
 (package! plz)
 (package! org-present
   :recipe (:host github :repo "rlister/org-present"))
@@ -68,5 +68,8 @@
 
 ;; (package! kubernetes)
 ;; (package! kubernetes-evil)
-(package! kubel)
-(package! kubel-evil)
+;; (package! kubel)
+;; (package! kubel-evil)
+
+(package! kubed)
+;; (package! kele)
