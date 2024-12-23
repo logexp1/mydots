@@ -2283,11 +2283,19 @@ _k_ : previous
 
 (use-package! kubed
   :config
-  (kubed-define-resource serviceaccount () :plural nil)
-  (kubed-define-resource pvc () :plural nil)
+  (kubed-define-resource serviceaccount () :plural serviceaccount)
+  (kubed-define-resource pvc
+      ((phase ".status.phase" 10)
+       (capacity ".status.capacity.storage" 10)
+       (storage ".spec.storageClassName" 10)
+       (since ".status.starttime" 20))
+    :logs t
+    :plural pvc)
   (general-def "C-c k" #'kubed-prefix-map)
   (map! :map kubed-list-mode-map
         :n "?" #'kubed-list-transient))
+
+(use-package! kubedoc)
 #+end_src
 
 ** treesit

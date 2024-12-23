@@ -139,7 +139,7 @@
        ;; (haskell +lsp)
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
-       (json +lsp)              ; At least it ain't XML
+       (json +tree-sitter)              ; At least it ain't XML
        ;; (java +lsp) ; the poster child for carpal tunnel syndrome
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB

@@ -129,3 +129,4 @@ brave-browser
 kubernetes-client
 yamllint
 tree-sitter-cli
+k9s
