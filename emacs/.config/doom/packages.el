@@ -66,6 +66,8 @@
   :recipe (:host github :repo "magit/git-modes"
 	   :files ("gitignore-mode.el")))
 
+(package! kubel)
+(package! kubel-evil)
+;; (package! kubed)
 
-(package! kubed)
 (package! kubedoc)

@@ -2259,7 +2259,7 @@ _k_ : previous
 #+begin_src emacs-lisp
 (use-package! yaml
   :config
-  (add-hook! 'yaml-mode-hook (lambda () (spell-fu-mode 0))))
+  (add-hook! 'yaml-ts-mode-hook (lambda () (spell-fu-mode 0))))
 #+end_src
 
 ** kubernetes
@@ -2272,28 +2272,31 @@ _k_ : previous
 ;; (use-package! kubernetes-evil
 ;;   :after kubernetes)
 
-;; (use-package! kubel
-;;   :config
-;;   (kubel-vterm-setup)
-;;   (map! :leader
-;;         :desc "k8s" "k" #'kubel))
-
-;; (use-package! kubel-evil
-;;   :after kubel)
-
-(use-package! kubed
+(use-package! kubel
   :config
-  (kubed-define-resource serviceaccount () :plural serviceaccount)
-  (kubed-define-resource pvc
-      ((phase ".status.phase" 10)
-       (capacity ".status.capacity.storage" 10)
-       (storage ".spec.storageClassName" 10)
-       (since ".status.starttime" 20))
-    :logs t
-    :plural pvc)
-  (general-def "C-c k" #'kubed-prefix-map)
-  (map! :map kubed-list-mode-map
-        :n "?" #'kubed-list-transient))
+  (kubel-vterm-setup)
+  (map! :map yaml-ts-mode-map
+        :localleader
+        :desc "kubectl apply" "a" #'kubel-apply)
+  (map! :leader
+        :desc "k8s" "k" #'kubel))
+
+(use-package! kubel-evil
+  :after kubel)
+
+;; (use-package! kubed
+;;   :config
+;;   (kubed-define-resource serviceaccount () :plural serviceaccount)
+;;   (kubed-define-resource pvc
+;;       ((phase ".status.phase" 10)
+;;        (capacity ".status.capacity.storage" 10)
+;;        (storage ".spec.storageClassName" 10)
+;;        (since ".status.starttime" 20))
+;;     :logs t
+;;     :plural pvc)
+;;   (general-def "C-c k" #'kubed-prefix-map)
+;;   (map! :map kubed-list-mode-map
+;;         :n "?" #'kubed-list-transient))
 
 (use-package! kubedoc)
 #+end_src
@@ -2664,18 +2667,19 @@ Git gutter:
 :ID:       424aceae-b703-4122-8233-f00cdc694e19
 :END:
 #+begin_src emacs-lisp
-(map! :map dired-mode-map
-      :n "C" #'magit-clone
-      :n "RET" #'js/dired-open-external
-      :n "C-d" #'js/dired-dragon-drop
-      :nv "<tab>" #'dired-mark
-      :nv "<backtab>" #'dired-unmark
-      :n "cd" #'dired-create-directory
-      :n "cc" #'dired-do-rename
-      :n "cm" #'dired-do-chmod
-      :n "co" #'dired-do-chown
-      :n "cg" #'dired-do-chgrp
-      :n "D" #'dired-do-delete)
+(after! dirvish
+  (map! :map dired-mode-map
+        :n "C" #'magit-clone
+        :n "RET" #'js/dired-open-external
+        :n "C-d" #'js/dired-dragon-drop
+        :nv "<tab>" #'dired-mark
+        :nv "<backtab>" #'dired-unmark
+        :n "cd" #'dired-create-directory
+        :n "cc" #'dired-do-rename
+        :n "cm" #'dired-do-chmod
+        :n "co" #'dired-do-chown
+        :n "cg" #'dired-do-chgrp
+        :n "D" #'dired-do-delete))
 #+end_src
 
 ** dired-quick-sort
@@ -2696,7 +2700,7 @@ Git gutter:
 :ID:       9bebf289-ab0d-482c-a6a5-9db31580fcf8
 :END:
 #+begin_src emacs-lisp
-(after! dired
+(after! dirvish
   (map! :map dired-mode-map
         :prefix "'"
         :desc "root directory" :n "/" '(lambda() (interactive) (find-file "/"))
