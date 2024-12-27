@@ -71,3 +71,5 @@
 ;; (package! kubed)
 
 (package! kubedoc)
+
+(package! yaml-pro)
