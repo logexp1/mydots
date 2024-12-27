@@ -447,6 +447,8 @@ size 를 float 로 설정하면 hidpi setting 을 따르게 된다.
   ;; add word to whitelist (that I know it's not typo)
   :general (general-r "s" #'+spell/add-word
              "d" #'+spell/remove-word)
+  :custom
+  (spell-fu-ignore-modes (list 'yaml-ts-mode 'yaml-mode))
   :config
   (setq! spell-fu-idle-delay 0.5))
 #+end_src
@@ -2257,9 +2259,8 @@ _k_ : previous
 
 ** yaml
 #+begin_src emacs-lisp
-(use-package! yaml
-  :config
-  (add-hook! 'yaml-ts-mode-hook (lambda () (spell-fu-mode 0))))
+(use-package! yaml-mode
+  :hook ((yaml-mode yaml-ts-mode) . (lambda () (spell-fu-mode -1))))
 #+end_src
 
 ** kubernetes
@@ -2402,7 +2403,7 @@ _k_ : previous
 ** Eglot
 #+begin_src emacs-lisp
 (use-package! eglot
-  :hook (prog-mode . eglot-ensure)
+  :hook ((prog-mode yaml-ts-mode) . eglot-ensure)
   :config
   ;; enable lsp in org-src-block https://github.com/joaotavora/eglot/issues/523#issuecomment-1746342643
   (defun sloth/org-babel-edit-prep (info)
