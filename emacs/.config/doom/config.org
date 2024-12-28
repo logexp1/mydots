@@ -447,8 +447,6 @@ size 를 float 로 설정하면 hidpi setting 을 따르게 된다.
   ;; add word to whitelist (that I know it's not typo)
   :general (general-r "s" #'+spell/add-word
              "d" #'+spell/remove-word)
-  :custom
-  (spell-fu-ignore-modes (list 'yaml-ts-mode 'yaml-mode))
   :config
   (setq! spell-fu-idle-delay 0.5))
 #+end_src
@@ -2260,23 +2258,23 @@ _k_ : previous
 ** yaml
 #+begin_src emacs-lisp
 (use-package! yaml-mode
-  :hook ((yaml-mode yaml-ts-mode) . (lambda () (spell-fu-mode -1))))
+  :hook (yaml-ts-mode . (lambda () (spell-fu-mode -1)))
+  :config
+  (setq! yaml-ts-mode-hook yaml-mode-hook))
 
 (use-package! yaml-pro
   :config
-  (add-hook 'yaml-mode-hook #'yaml-pro-mode 100))
+  (map! :map yaml-ts-mode-map
+        :v "<tab>" #'yaml-pro-ts-mark-subtree
+        "M-h" #'yaml-pro-unindent-subtree
+        "M-l" #'yaml-pro-indent-subtree
+        "C-M-k" #'yaml-pro-move-subtree-up
+        "C-M-j" #'yaml-pro-move-subtree-down)
+  (add-hook 'yaml-ts-mode-hook #'yaml-pro-mode 100))
 #+end_src
 
 ** kubernetes
 #+begin_src emacs-lisp
-;; (use-package! kubernetes
-;;   :config
-;;   (map! :leader
-;;         :desc "k8s" "k" #'kubernetes-overview))
-
-;; (use-package! kubernetes-evil
-;;   :after kubernetes)
-
 (use-package! kubel
   :config
   (kubel-vterm-setup)
@@ -2409,6 +2407,14 @@ _k_ : previous
 (use-package! eglot
   :hook ((prog-mode yaml-ts-mode) . eglot-ensure)
   :config
+  (setq-default eglot-workspace-configuration
+                '(:yaml (:format (:enable t)
+                         :validate t
+                         :hover t
+                         :completion t
+                         :schemas (:Kubernetes ["**/*.yaml" "**/*.yml"]
+                                               https://json.schemastore.org/yaml ["*.yml"])
+                         :schemaStore (:enable t))))
   ;; enable lsp in org-src-block https://github.com/joaotavora/eglot/issues/523#issuecomment-1746342643
   (defun sloth/org-babel-edit-prep (info)
     (setq buffer-file-name (or (alist-get :file (caddr info))
@@ -2443,6 +2449,7 @@ _k_ : previous
 #+begin_src emacs-lisp :tangle no
 (use-package! python
   :config
+  (setq! python-ts-mode-hook python-mode-hook)
   (map! :map python-mode-map
         :localleader
         :desc   "repl"  :n      "'"     #'+python/open-ipython-repl
