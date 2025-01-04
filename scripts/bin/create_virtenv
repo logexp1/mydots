@@ -22,6 +22,6 @@ else
 	$python_binary -m venv "$venv_name"
 	source "$venv_name"/bin/activate
 	pip install --upgrade pip
-	pip install ipykernel pyright pyflakes black isort debugpy python-lsp-server
+	pip install ipykernel pyright pyflakes black isort debugpy
 	python -m ipykernel install --user --name=$venv_name
 fi

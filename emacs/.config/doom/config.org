@@ -49,6 +49,10 @@
   :config
   ;; for debugging
   ;; (setq! tramp-verbose 6)
+  ;; (setq! tramp-shell-prompt-pattern "[#$%>] *$")
+  ;; (setq! tramp-default-remote-shell "/bin/bash -l")
+  ;; (setenv "ESHELL" "bash")
+  ;; (add-to-list 'tramp-remote-process-environment "PS1=")
   ;; reads remote's PATH variable
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 #+end_src
@@ -2275,31 +2279,34 @@ _k_ : previous
 
 ** kubernetes
 #+begin_src emacs-lisp
-(use-package! kubel
+;; (use-package! kubel
+;;   :config
+;;   (kubel-vterm-setup)
+;;   (map! :map yaml-ts-mode-map
+;;         :localleader
+;;         :desc "kubectl apply" "a" #'kubel-apply)
+;;   (map! :leader
+;;         :desc "k8s" "k" #'kubel))
+
+;; (use-package! kubel-evil
+;;   :after kubel)
+
+(use-package! kubed
   :config
-  (kubel-vterm-setup)
+  (kubed-define-resource serviceaccount () :plural serviceaccount)
+  (kubed-define-resource pvc
+                         ((phase ".status.phase" 10)
+                          (capacity ".status.capacity.storage" 10)
+                          (storage ".spec.storageClassName" 10)
+                          (since ".status.starttime" 20))
+                         :logs t
+                         :plural pvc)
+  (general-def "C-c k" #'kubed-prefix-map)
   (map! :map yaml-ts-mode-map
         :localleader
-        :desc "kubectl apply" "a" #'kubel-apply)
-  (map! :leader
-        :desc "k8s" "k" #'kubel))
-
-(use-package! kubel-evil
-  :after kubel)
-
-;; (use-package! kubed
-;;   :config
-;;   (kubed-define-resource serviceaccount () :plural serviceaccount)
-;;   (kubed-define-resource pvc
-;;       ((phase ".status.phase" 10)
-;;        (capacity ".status.capacity.storage" 10)
-;;        (storage ".spec.storageClassName" 10)
-;;        (since ".status.starttime" 20))
-;;     :logs t
-;;     :plural pvc)
-;;   (general-def "C-c k" #'kubed-prefix-map)
-;;   (map! :map kubed-list-mode-map
-;;         :n "?" #'kubed-list-transient))
+        :desc "kubectl apply" "a" #'kubed-apply)
+  (map! :map kubed-list-mode-map
+        :n "?" #'kubed-list-transient))
 
 (use-package! kubedoc)
 #+end_src

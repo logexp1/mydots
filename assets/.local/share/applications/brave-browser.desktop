@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Brave Browser
+GenericName=Web Browser
+Comment=Access the Internet
+Exec=brave-browser --enable-wayland-ime --wayland-text-input-version=3 %U
+Terminal=false
+Icon=brave-browser
+Categories=Network;WebBrowser;
+StartupWMClass=Brave-browser
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
