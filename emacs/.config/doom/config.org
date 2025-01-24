@@ -145,6 +145,12 @@
       (winner-undo)
     (delete-other-windows)))
 
+(defhydra hydra-zoom ()
+    "zoom"
+    ("i" text-scale-increase "in")
+    ("o" text-scale-decrease "out")
+)
+
 (general-t
   "s" #'evil-save
   "q" #'delete-window
@@ -156,8 +162,7 @@
   "k" #'windmove-up
   "l" #'windmove-right
   "m" #'js/zoom-win
-  "z" #'+hydra/text-zoom/body
-  "Z" #'+hydra/window-nav/body)
+  "z" #'hydra-zoom/body)
 #+end_src
 
 
@@ -169,6 +174,7 @@
 (use-package! ace-window
   :general (general-def "M-w" #'ace-window))
 #+end_src
+
 
 ** toggle map settings
 :PROPERTIES:
@@ -875,6 +881,8 @@ I can't use org mode headline search if I enable this package.
 (after! org
   (setq! org-structure-template-alist
         '(("p" . "src jupyter-python")))
+  (add-to-list 'org-structure-template-alist
+               '("y" . "src yaml"))
   (add-to-list 'org-structure-template-alist
                '("s" . "src shell"))
   (add-to-list 'org-structure-template-alist
@@ -2279,34 +2287,50 @@ _k_ : previous
 
 ** kubernetes
 #+begin_src emacs-lisp
-;; (use-package! kubel
-;;   :config
-;;   (kubel-vterm-setup)
-;;   (map! :map yaml-ts-mode-map
-;;         :localleader
-;;         :desc "kubectl apply" "a" #'kubel-apply)
-;;   (map! :leader
-;;         :desc "k8s" "k" #'kubel))
-
-;; (use-package! kubel-evil
-;;   :after kubel)
-
-(use-package! kubed
+(use-package! kubel
+  :init
+  (defun js/kubel-set-kubectl-config-file ()
+    (interactive)
+    (let ((expanded-configfile (expand-file-name "~/.kube/config")))
+      (if (file-exists-p expanded-configfile)
+          (progn
+            (let ((real-configfile (file-chase-links expanded-configfile)))
+              (setenv "KUBECONFIG" real-configfile))
+            (setq-default kubel-context
+                          (completing-read
+                           "select context: "
+                           (split-string
+                            (kubel--exec-to-string
+                             (format "%s config view -o jsonpath='{.contexts[*].name}'" kubel-kubectl))))))
+        (error "Kubectl config file ~/.kube/config does not exist!"))))
   :config
-  (kubed-define-resource serviceaccount () :plural serviceaccount)
-  (kubed-define-resource pvc
-                         ((phase ".status.phase" 10)
-                          (capacity ".status.capacity.storage" 10)
-                          (storage ".spec.storageClassName" 10)
-                          (since ".status.starttime" 20))
-                         :logs t
-                         :plural pvc)
-  (general-def "C-c k" #'kubed-prefix-map)
+  (kubel-vterm-setup)
   (map! :map yaml-ts-mode-map
         :localleader
-        :desc "kubectl apply" "a" #'kubed-apply)
-  (map! :map kubed-list-mode-map
-        :n "?" #'kubed-list-transient))
+        :desc "kubectl apply" "a" #'kubel-apply)
+  (map! :leader
+        :desc "k8s" "kk" #'kubel
+        :desc "switch namespace" "ks" #'js/kubel-set-kubectl-config-file))
+
+(use-package! kubel-evil
+  :after kubel)
+
+;; (use-package! kubed
+;;   :config
+;;   (kubed-define-resource serviceaccount () :plural serviceaccount)
+;;   (kubed-define-resource pvc
+;;                          ((phase ".status.phase" 10)
+;;                           (capacity ".status.capacity.storage" 10)
+;;                           (storage ".spec.storageClassName" 10)
+;;                           (since ".status.starttime" 20))
+;;                          :logs t
+;;                          :plural pvc)
+;;   (general-def "C-c k" #'kubed-prefix-map)
+;;   (map! :map yaml-ts-mode-map
+;;         :localleader
+;;         :desc "kubectl apply" "a" #'kubed-apply)
+;;   (map! :map kubed-list-mode-map
+;;         :n "?" #'kubed-list-transient))
 
 (use-package! kubedoc)
 #+end_src
@@ -2410,6 +2434,7 @@ _k_ : previous
 #+end_src
 
 ** Eglot
+=:Kubernetes= is alias for
 #+begin_src emacs-lisp
 (use-package! eglot
   :hook ((prog-mode yaml-ts-mode) . eglot-ensure)
@@ -2419,8 +2444,8 @@ _k_ : previous
                          :validate t
                          :hover t
                          :completion t
-                         :schemas (:Kubernetes ["**/*.yaml" "**/*.yml"]
-                                               https://json.schemastore.org/yaml ["*.yml"])
+                         :schemas (http://json.schemastore.org/kustomization ["kustomization.yaml"]
+                                                                             :Kubernetes ["*.yaml" "*.yml"])
                          :schemaStore (:enable t))))
   ;; enable lsp in org-src-block https://github.com/joaotavora/eglot/issues/523#issuecomment-1746342643
   (defun sloth/org-babel-edit-prep (info)
