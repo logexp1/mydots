@@ -2270,19 +2270,19 @@ _k_ : previous
 ** yaml
 #+begin_src emacs-lisp
 (use-package! yaml-mode
-  :hook (yaml-ts-mode . (lambda () (spell-fu-mode -1)))
+  :hook (yaml-mode . (lambda () (spell-fu-mode -1)))
   :config
   (setq! yaml-ts-mode-hook yaml-mode-hook))
 
 (use-package! yaml-pro
   :config
-  (map! :map yaml-ts-mode-map
+  (map! :map yaml-mode-map
         :v "<tab>" #'yaml-pro-ts-mark-subtree
         "M-h" #'yaml-pro-unindent-subtree
         "M-l" #'yaml-pro-indent-subtree
         "C-M-k" #'yaml-pro-move-subtree-up
         "C-M-j" #'yaml-pro-move-subtree-down)
-  (add-hook 'yaml-ts-mode-hook #'yaml-pro-mode 100))
+  (add-hook 'yaml-mode-hook #'yaml-pro-mode 100))
 #+end_src
 
 ** kubernetes
@@ -2305,7 +2305,7 @@ _k_ : previous
         (error "Kubectl config file ~/.kube/config does not exist!"))))
   :config
   (kubel-vterm-setup)
-  (map! :map yaml-ts-mode-map
+  (map! :map yaml-mode-map
         :localleader
         :desc "kubectl apply" "a" #'kubel-apply)
   (map! :leader
@@ -2338,6 +2338,7 @@ _k_ : previous
 ** treesit
 #+begin_src emacs-lisp
 (use-package! treesit-auto
+  :disabled t
   :custom
   (treesit-auto-install 'prompt)
   :config
@@ -2345,12 +2346,6 @@ _k_ : previous
   (global-treesit-auto-mode))
 #+end_src
 
-** dockerfile
-#+begin_src emacs-lisp
-(use-package! dockfile-mode
-  :config
-  (setq! dockerfile-ts-mode-hook dockerfile-ts-mode-hook))
-#+end_src
 
 ** formatter
 #+begin_src emacs-lisp
@@ -2437,7 +2432,7 @@ _k_ : previous
 =:Kubernetes= is alias for
 #+begin_src emacs-lisp
 (use-package! eglot
-  :hook ((prog-mode yaml-ts-mode) . eglot-ensure)
+  :hook ((prog-mode yaml-mode) . eglot-ensure)
   :config
   (setq-default eglot-workspace-configuration
                 '(:yaml (:format (:enable t)
