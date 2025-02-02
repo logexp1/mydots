@@ -77,6 +77,9 @@ dnf_setup() {
     dnf config-manager add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
     rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
     dnf upgrade -y
+
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    sudo -u $user flatpak remote-modify --enable flathub
 }
 
 
@@ -84,13 +87,34 @@ install_packages() {
     # only remove swaylock, otherwise it will not boot
     # dnf remove swaylock --noautoremove
     dnf_setup
+
+    package=$(echo "$line" | awk '{print $1}')
+    method=$(echo "$line" | awk '{print $2}')
+    method=${method:-dnf}
+
 	while read -r line; do
 		if [[ -z $line ]] || [[ $line =~ \# ]]; then
             continue
         fi
-		install_package "$line"
+        if [[ $method == dnf ]]; then
+		    install_package "$package"
+        elif [[ $method == npm ]]; then
+            if ! npm --global --depth 0 list | grep --quiet "$package"; then
+                echo "installing $package"
+                npm install --global "$package" || echo "Failed: npm install --global $package"
+            fi
+        elif [[ $method == pip ]]; then
+            if ! sudo -u $user pip list --user | grep --quiet "$package"; then
+                echo "installing $package"
+                sudo -u $user pip install --user "$package" || echo "Failed: pip install --user $package"
+            fi
+        elif [[ $method == flat ]]; then
+            if ! sudo -u $user flatpak list | grep --quiet "$package"; then
+                echo "installing $package"
+                sudo -u $user flatpak install -y "$package" || echo "Failed: flatpak install $package"
+            fi
+        fi
 	done < packages
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 }
 
 install_emacs() {
@@ -106,7 +130,7 @@ install_emacs() {
         --with-pgtk --with-native-compilation --enable-link-time-optimization \
         --with-tree-sitter --with-sqlite3 --with-webp
     make -j$(nproc)
-    sudo make install
+    make install
     # author="stevenlin"
     # repo="emacs-pgtk-nativecomp"
     # dnf copr enable -y "$author/$repo"

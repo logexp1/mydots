@@ -2347,8 +2347,9 @@ _k_ : previous
 
 ** dockerfile
 #+begin_src emacs-lisp
-(after! dockerfie-mode
-  (setq! dockerfile-enable-auto-indent nil))
+(use-package! dockfile-mode
+  :config
+  (setq! dockerfile-ts-mode-hook dockerfile-ts-mode-hook))
 #+end_src
 
 ** formatter
@@ -2357,6 +2358,7 @@ _k_ : previous
 (setq +format-with-lsp nil)
 ;; specify formatter
 (setq-hook! 'python-mode-hook +format-with 'black)
+(setq-hook! 'dockerfile-ts-mode-hook +format-with 'dockfmt)
 (setq-hook! 'sh-mode-hook +format-with 'shfmt)
 #+end_src
 

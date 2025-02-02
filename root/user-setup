@@ -86,20 +86,6 @@ browserpass_setup() {
     fi
 }
 
-flatpak_setup() {
-    flatpak remote-modify --enable flathub
-	while read -r line; do
-		if [[ -z $line ]] || [[ $line =~ \# ]]; then
-            continue
-        fi
-		flatpak install flathub "$line" -y
-	done < flatpaks
-}
-
-pip_setup() {
-    pip install --user pywal python-lsp-server debugpy wlr-layout-ui
-}
-
 hyprpm_setup() {
     hyprpm update
     hyprpm add https://github.com/hyprwm/hyprland-plugins
@@ -115,8 +101,6 @@ default() {
     doom_setup
     systemd_setup
     browserpass_setup
-    pip_setup
-    flatpak_setup
     randwall
 }
 

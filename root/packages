@@ -131,3 +131,4 @@ yamllint
 tree-sitter-cli
 k9s
 libnotify-devel
+nodejs-npm
