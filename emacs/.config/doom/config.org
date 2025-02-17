@@ -54,6 +54,9 @@
   ;; (setenv "ESHELL" "bash")
   ;; (add-to-list 'tramp-remote-process-environment "PS1=")
   ;; reads remote's PATH variable
+  (add-to-list 'tramp-connection-properties
+               (list (regexp-quote "/sshx:remote")
+                     "remote-shell" "/bin/zsh"))
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 #+end_src
 
