@@ -1884,7 +1884,6 @@ _k_ : previous
         :n "P" #'pdf-view-goto-page
         :n "gg" #'pdf-view-first-page
         :n "G" #'pdf-view-last-page
-        :n "s" #'js/toggle-pdf-view-auto-slice-minor-mode
         :n "m" #'pdf-view-midnight-minor-mode
         :n "M" #'pdf-view-set-slice-using-mouse
         :n "C" #'js/pdf-view-continuous-toggle
@@ -2797,6 +2796,7 @@ unzip/zip things
 ** copilot
 #+begin_src emacs-lisp
 (use-package! copilot
+  :disabled t
   :hook (prog-mode . copilot-mode))
 
 (after! (evil copilot)
@@ -2815,7 +2815,8 @@ unzip/zip things
 
 ** copilot chat
 #+begin_src emacs-lisp
-(use-package! copilot-chat)
+(use-package! copilot-chat
+:after copilot)
 #+end_src
 
 
