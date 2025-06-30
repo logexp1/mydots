@@ -69,7 +69,7 @@ dnf_setup() {
     dnf copr enable -y solopasha/hyprland
     # dnf copr enable -y trs-sod/swaylock-effects
     dnf copr enable -y mhartgring/pqiv
-    dnf copr enable -y alebastr/sway-extras
+    # dnf copr enable -y alebastr/sway-extras
     dnf copr enable -y erikreider/SwayNotificationCenter
     dnf copr enable -y emanuelec/k9s
     # dnf copr enable -y sneexy/floorp
@@ -220,7 +220,7 @@ initramfs_setup() {
 }
 
 systemd_setup() {
-    systemctl enable btrbk.timer
+    # systemctl enable btrbk.timer
 	systemctl enable docker
     systemctl enable libvirtd
     systemctl enable tlp

@@ -37,7 +37,7 @@ rofi-wayland
 # gnome-pass-search-provider
 gpaste
 # gnome-shell-extension-gpaste
-btrbk
+# btrbk
 # kime
 alacritty
 akmod-nvidia
@@ -115,7 +115,7 @@ gnutls-devel
 libXpm-devel
 giflib-devel
 ncurses-devel
-webkit2gtk4.0-devel
+webkit2gtk4.1-devel
 libtree-sitter-devel
 jansson-devel
 librsvg2-devel

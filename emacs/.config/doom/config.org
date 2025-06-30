@@ -1553,9 +1553,9 @@ reference : [[https://gist.github.com/Gavinok/50f804ea5a2856ee52dee1ba02e97cb9]]
   :demand t
   :defer 5
   :custom
-  ((appt-message-warning-time 15)
+  ((appt-message-warning-time 10)
    (appt-display-duration 30)
-   (appt-display-interval 5)
+   (appt-display-interval 10)
    (appt-disp-window-function #'my/appt-display)
    (appt-delete-window-function #'ignore))
   :init
@@ -2307,7 +2307,7 @@ _k_ : previous
                              (format "%s config view -o jsonpath='{.contexts[*].name}'" kubel-kubectl))))))
         (error "Kubectl config file ~/.kube/config does not exist!"))))
   :config
-  (kubel-vterm-setup)
+  ;; (kubel-vterm-setup)
   (map! :map yaml-mode-map
         :localleader
         :desc "kubectl apply" "a" #'kubel-apply)
@@ -2623,8 +2623,8 @@ Git gutter:
 ** dirvish
 #+begin_src emacs-lisp
 (use-package! dirvish
-  :init
-  (put 'dired-find-alternate-file 'disabled nil)
+  ;; :init
+  ;; (put 'dired-find-alternate-file 'disabled nil)
   :config
   (dirvish-override-dired-mode)
   (remove-hook! 'dired-mode-hook #'dired-omit-mode)

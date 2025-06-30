@@ -232,3 +232,4 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+export KALEIDOSCOPE_DIR=/home/jisoo/build/Kaleidoscope
