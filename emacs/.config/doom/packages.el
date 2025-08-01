@@ -78,3 +78,12 @@
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
 (package! copilot-chat
   :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))
+
+(package! visual-fill-column
+	    :recipe (:host github :repo "emacsmirror/visual-fill-column"))
+
+(package! consult-dash
+	  :recipe (:host github :repo "emacsmirror/consult-dash"))
+
+(package! tree-sitter-indent
+	  :recipe (:host github :repo "emacsattic/tree-sitter-indent"))

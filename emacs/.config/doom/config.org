@@ -234,6 +234,8 @@
    :n "a" #'evil-append-line
    :n "A" #'evil-append
    :n "M" #'evil-set-marker
+   :n "n" #'(lambda() (interactive) (search-forward (car consult--line-history)))
+   :n "N" #'(lambda() (interactive) (search-backward (car consult--line-history)))
    :v "c" #'evil-change
    :i "C-w" #'evil-delete-backward-word
    :i "C-o" #'evil-execute-in-normal-state
@@ -258,19 +260,19 @@
    :ni "C-b" #'evil-switch-to-windows-last-buffer)
 
   (setq! evil-move-cursor-back nil
-        evil-move-beyond-eol t
-        evil-ex-visual-char-range t)
+         evil-move-beyond-eol t
+         evil-ex-visual-char-range t)
   ;; default is normal state for all modes
   (setq! evil-normal-state-modes (append evil-emacs-state-modes
-                                        evil-normal-state-modes)
-        evil-emacs-state-modes nil
-        evil-motion-state-modes nil)
+                                         evil-normal-state-modes)
+         evil-emacs-state-modes nil
+         evil-motion-state-modes nil)
 
   (setq! evil-normal-state-cursor '(box "dark gray")
-        evil-motion-state-cursor '(box "YellowGreen")
-        evil-insert-state-cursor '(bar "orchid")
-        evil-emacs-state-cursor '(bar "Red")
-        evil-visual-state-cursor '(box "#F86155"))
+         evil-motion-state-cursor '(box "YellowGreen")
+         evil-insert-state-cursor '(bar "orchid")
+         evil-emacs-state-cursor '(bar "Red")
+         evil-visual-state-cursor '(box "#F86155"))
 
   ;; escape from minibuffer
   (map! :map (minibuffer-local-map
@@ -1958,6 +1960,7 @@ _k_ : previous
   :general (general-def js/toggle-map "l" #'org-cdlatex-mode)
   :commands org-cdlatex-mode
   :config
+  (setq! org-pretty-entities-include-sub-superscripts nil)
   (setq! cdlatex-env-alist
          '(("equation*" "\\begin{equation*}\n?\n\\end{equation*}" nil)
            ("matrix" "\\left[\\begin{matrix}?\\end{matrix}\\right]" nil)
@@ -2816,7 +2819,8 @@ unzip/zip things
 ** copilot chat
 #+begin_src emacs-lisp
 (use-package! copilot-chat
-:after copilot)
+  :config
+  (setq! copilot-chat-default-model "claude-sonnet-4"))
 #+end_src
 
 
