@@ -161,6 +161,7 @@ alias pipi="pip install --user"
 alias kernelspecs="jupyter kernelspec list"
 alias brave="brave-browser --enable-wayland-ime --wayland-text-input-version=3"
 alias k="k9s"
+alias soundfix="systemctl --user restart wireplumber"
 
 # alias c3d='docker run -d -t --network host --name jisoo-container -v /home1/irteam/jisoo/workspace:/home1/irteam/workspace -v /home1/irteam/jisoo/c3/bashrc:/home1/irteam/.bashrc jisoo-c3'
 # alias c3i='docker exec -it jisoo-container bash'

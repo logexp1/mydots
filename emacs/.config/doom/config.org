@@ -478,27 +478,29 @@ consults grammatical error
 makes life much easier
 
 ** auto saving
-:PROPERTIES:
-:ID:       c1274c59-ee89-40e3-b1e8-badbb2e67c1d
-:END:
 #+begin_src emacs-lisp
 (setq! auto-save-interval 30
       auto-save-timeout 5
       ;; don't create auto-save ~ files
       auto-save-default nil)
 
-(defun js/save ()
-  "If in a file buffer and not executing/recording a macro, save."
-  (when (and (buffer-file-name)
-             (not (or executing-kbd-macro defining-kbd-macro)))
-    (let ((inhibit-message t))
-      (save-buffer))))
+;; (defun js/save ()
+;;   "If in a file buffer and not executing/recording a macro, save."
+;;   (when (and (buffer-file-name)
+;;              (not (or executing-kbd-macro defining-kbd-macro)))
+;;     (let ((inhibit-message t))
+;;       (save-buffer))))
 
 ;; save whenever evil exists insert mode
 ;; deprecated since it causes serious lag when using doom emacs
 ;; (add-hook! 'evil-insert-state-exit-hook #'js/save)
 
 (auto-save-visited-mode)
+
+(defadvice basic-save-buffer (around auto-confirm compile activate)
+  (cl-letf (((symbol-function 'yes-or-no-p) (lambda (&rest args) t))
+            ((symbol-function 'y-or-n-p) (lambda (&rest args) t)))
+    ad-do-it))
 #+end_src
 
 ** navigation helpers
@@ -2558,6 +2560,7 @@ Install docset with =dash-docs-install-docset=, if not found, try =dash-docs-ins
         "C-c C-c" #'org-edit-src-exit))
 #+end_src
 
+
 *** org-babel asynchronous
 :PROPERTIES:
 :ID:       e380df61-32e4-4954-b79c-5ace9200d9f7
@@ -2796,6 +2799,13 @@ unzip/zip things
 #+end_src
 
 * applications
+
+** eca - editor code assistant
+#+begin_src emacs-lisp
+(use-package! eca
+  :commands eca)
+#+end_src
+
 ** copilot
 #+begin_src emacs-lisp
 (use-package! copilot
@@ -2819,8 +2829,9 @@ unzip/zip things
 ** copilot chat
 #+begin_src emacs-lisp
 (use-package! copilot-chat
+  :disabled t
   :config
-  (setq! copilot-chat-default-model "claude-sonnet-4"))
+  (setq! copilot-chat-default-model "claude-sonnet-4.5"))
 #+end_src
 
 
@@ -3122,4 +3133,5 @@ need key authentication info in =.config/lastfmrc=, get the info from https://ww
    '(mathpix-app-key (password-store-get "mathpix/app-key"))
    '(mathpix-screenshot-method "maim -s %s")))
 #+end_src
+
 

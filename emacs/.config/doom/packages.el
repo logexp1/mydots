@@ -33,6 +33,7 @@
 (package! ob-async)
 ;; (package! jupyter
 ;;   :recipe (:host github :repo "nnicandro/emacs-jupyter"))
+(unpin! jupyter)
 ;; (package! org-alert)
 ;; slack client for emacs
 (package! slack)
@@ -66,7 +67,8 @@
   :recipe (:host github :repo "magit/git-modes"
 	   :files ("gitignore-mode.el")))
 
-(package! kubel)
+(package! kubel
+  :pin "82f90a8a6cca662baa9a66db4a708b2e906720cb")
 (package! kubel-evil)
 ;; (package! kubed)
 
@@ -86,4 +88,6 @@
 	  :recipe (:host github :repo "emacsmirror/consult-dash"))
 
 (package! tree-sitter-indent
-	  :recipe (:host github :repo "emacsattic/tree-sitter-indent"))
+  :recipe (:host github :repo "emacsattic/tree-sitter-indent"))
+(package! eca
+  :recipe (:host github :repo "editor-code-assistant/eca-emacs" :files ("*.el")))
