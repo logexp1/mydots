@@ -2803,7 +2803,17 @@ unzip/zip things
 ** eca - editor code assistant
 #+begin_src emacs-lisp
 (use-package! eca
-  :commands eca)
+  :commands eca
+  :custom
+  ((eca-chat-prompt-separator "\n==============================================")
+   (eca-chat-custom-model "github-copilot/claude-opus-4.5")
+   (eca-chat-custom-behavior "plan")
+)
+  :config
+  (map! :map eca-chat-mode-map
+        "<return>" nil
+        "RET" nil
+        "C-c C-c" #'eca-chat--key-pressed-return))
 #+end_src
 
 ** copilot
