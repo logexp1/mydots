@@ -2807,12 +2807,15 @@ unzip/zip things
   :custom
   ((eca-chat-prompt-separator "\n==============================================")
    (eca-chat-custom-model "github-copilot/claude-opus-4.5")
-   (eca-chat-custom-behavior "plan")
-)
+   (eca-chat-custom-behavior "plan"))
   :config
   (map! :map eca-chat-mode-map
         "<return>" nil
         "RET" nil
+        "C-," nil
+        "C-c C-," nil
+        "C-c m" #'eca-mcp-details
+        "C-c C-," #'markdown-insert-gfm-code-block
         "C-c C-c" #'eca-chat--key-pressed-return))
 #+end_src
 

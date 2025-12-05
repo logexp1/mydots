@@ -34,6 +34,8 @@
 ;; (package! jupyter
 ;;   :recipe (:host github :repo "nnicandro/emacs-jupyter"))
 (unpin! jupyter)
+(package! jupyter
+  :recipe (:host github :repo "emacs-jupyter/jupyter" :branch "master"))
 ;; (package! org-alert)
 ;; slack client for emacs
 (package! slack)
