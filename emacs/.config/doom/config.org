@@ -3,7 +3,6 @@
 :PROPERTIE:
 :ID:       609afc78-c5a2-4b87-9d56-25e594f3ba61
 :END:
-# TODO marked sections are excluded from being tangled
 ** username and e-mail
 :PROPERTIES:
 :ID:       0ad75442-4324-4793-af29-0f6b1dbde0ce
@@ -54,9 +53,15 @@
   ;; (setenv "ESHELL" "bash")
   ;; (add-to-list 'tramp-remote-process-environment "PS1=")
   ;; reads remote's PATH variable
+
+  ;; followings are required!!
   (add-to-list 'tramp-connection-properties
                (list (regexp-quote "/sshx:remote")
                      "remote-shell" "/bin/zsh"))
+
+  (add-to-list 'tramp-connection-properties
+               (list (regexp-quote "/ssh:jupyter")
+                     "remote-shell" "/bin/bash"))
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 #+end_src
 
@@ -3146,5 +3151,3 @@ need key authentication info in =.config/lastfmrc=, get the info from https://ww
    '(mathpix-app-key (password-store-get "mathpix/app-key"))
    '(mathpix-screenshot-method "maim -s %s")))
 #+end_src
-
-
