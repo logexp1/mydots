@@ -44,22 +44,25 @@ btrbk_setup() {
 }
 
 install_package() {
+	local pkg="$1"
+	shift
+	local extra_args="$@"
 	# Checking if package is already installed
-	if dnf list --installed "$1" &>> /dev/null ; then
-		echo -e "${OK} $1 is already installed. Skipping..."
+	if dnf list --installed "$pkg" &>> /dev/null ; then
+		echo -e "${OK} $pkg is already installed. Skipping..."
 	else
 		# Package not installed
-		echo -e "${NOTE} Installing $1 ..."
-		dnf install -y "$1"
+		echo -e "${NOTE} Installing $pkg ..."
+		dnf install -y $extra_args "$pkg"
 		# Making sure package is installed
-		if dnf list --installed "$1" &>> /dev/null ; then
-			echo -e "\e[1A\e[K${OK} $1 was installed."
+		if dnf list --installed "$pkg" &>> /dev/null ; then
+			echo -e "\e[1A\e[K${OK} $pkg was installed."
 		else
 			# Something is missing, exiting to review log
-			echo -e "\e[1A\e[K${ERROR} $1 failed to install :( , please check the $LOG. You may need to install manually! Sorry I have tried :("
+			echo -e "\e[1A\e[K${ERROR} $pkg failed to install :( , please check the $LOG. You may need to install manually! Sorry I have tried :("
 			exit 1
 		fi
-	fi
+    fi
 }
 
 dnf_setup() {
@@ -88,20 +91,19 @@ install_packages() {
     # dnf remove swaylock --noautoremove
     dnf_setup
 
-    package=$(echo "$line" | awk '{print $1}')
-    method=$(echo "$line" | awk '{print $2}')
-    method=${method:-dnf}
-
 	while read -r line; do
 		if [[ -z $line ]] || [[ $line =~ \# ]]; then
             continue
         fi
+
+        package=$(echo "$line" | awk '{print $1}')
+        extra_args=$(echo "$line" | awk '{$1=""; print}' | xargs)
+        method=${method:-dnf}
         if [[ $method == dnf ]]; then
-		    install_package "$package"
+		    install_package "$package" $extra_args
         elif [[ $method == npm ]]; then
             if ! npm --global --depth 0 list | grep --quiet "$package"; then
                 echo "installing $package"
-                npm install --global "$package" || echo "Failed: npm install --global $package"
             fi
         elif [[ $method == pip ]]; then
             if ! sudo -u $user pip list --user | grep --quiet "$package"; then
@@ -155,7 +157,7 @@ update_user_groups() {
 }
 
 docker_setup(){
-	/usr/bin/dnf4 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+	dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
 	dnf install -y docker-ce docker-ce-cli containerd.io
 
     # dockfmt
@@ -216,6 +218,18 @@ dragon_setup() {
 
 initramfs_setup() {
     akmods --force
+    echo -e "${NOTE} Waiting for nvidia kernel module to be built..."
+    for i in $(seq 1 30); do
+        if modinfo -n nvidia &>/dev/null; then
+            echo -e "${OK} nvidia kernel module is available."
+            break
+        fi
+        echo -e "${NOTE} Attempt $i/30: nvidia module not yet available, waiting 10s..."
+        sleep 10
+    done
+    if ! modinfo -n nvidia &>/dev/null; then
+        echo -e "${WARN} nvidia kernel module not found after waiting. dracut may fail."
+    fi
     dracut --force
 }
 
