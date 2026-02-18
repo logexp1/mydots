@@ -89,9 +89,7 @@ zoxide
 ffmpegthumbnailer
 mediainfo
 unrar
-p7zip
-p7zip-plugins
-waydroid
+7zip
 mesa-libGLU-devel
 python3-devel
 meson
