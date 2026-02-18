@@ -21,7 +21,6 @@ cascadia-code-fonts
 cmake
 libtool
 # gnome-tweaks
-dnf-plugins-core
 adobe-source-han-mono-fonts
 python3-pip
 zsh
