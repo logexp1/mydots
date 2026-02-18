@@ -51,7 +51,6 @@ hyprland-autoname-workspaces
 swappy
 cliphist
 zathura-pdf-poppler
-gtkmm3.0-devel
 ranger
 pqiv
 polkit-kde
@@ -86,7 +85,6 @@ ffmpeg --allowerasing
 libavcodec-freeworld
 NetworkManager-tui
 # floorp
-eza
 zoxide
 ffmpegthumbnailer
 mediainfo
