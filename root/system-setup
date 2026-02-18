@@ -69,7 +69,7 @@ dnf_setup() {
     # dnf copr enable jle64/gnome-pass-search-provider
     # dnf copr enable -y sunwire/envycontrol
     # dnf copr enable -y toroidalfox/kime
-    dnf copr enable -y solopasha/hyprland
+    # dnf copr enable -y solopasha/hyprland
     # dnf copr enable -y trs-sod/swaylock-effects
     dnf copr enable -y mhartgring/pqiv
     # dnf copr enable -y alebastr/sway-extras
@@ -244,7 +244,7 @@ default() {
 	root_config
 	update_user_groups
 	install_packages
-    install_emacs
+    # install_emacs
 	sudo_setup
     initramfs_setup
 	btrbk_setup
