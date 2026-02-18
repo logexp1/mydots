@@ -2806,12 +2806,17 @@ unzip/zip things
 * applications
 
 ** eca - editor code assistant
+어떤 모델이 있는지 보려면, eca-session 에서 이걸 eval 하면 된다.
+#+begin_src emacs-lisp :tangle no
+(eca--session-models (eca-session))
+#+end_src
+
 #+begin_src emacs-lisp
 (use-package! eca
   :commands eca
   :custom
   ((eca-chat-prompt-separator "\n==============================================")
-   (eca-chat-custom-model "github-copilot/claude-opus-4.5")
+   (eca-chat-custom-model "github-copilot/claude-opus-4.6")
    (eca-chat-custom-behavior "plan"))
   :config
   (map! :map eca-chat-mode-map
