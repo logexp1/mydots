@@ -12,7 +12,7 @@ libpng-devel
 make
 poppler-devel
 poppler-glib-devel
-zlib-devel
+zlib-ng-compat-devel
 pkgconf
 maildir-utils
 fd-find
