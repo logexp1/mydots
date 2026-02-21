@@ -98,7 +98,7 @@ default() {
     font_setup
     link_setup
     git_setup
-    doom_setup
+    # doom_setup
     systemd_setup
     browserpass_setup
     randwall
