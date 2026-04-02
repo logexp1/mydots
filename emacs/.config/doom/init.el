@@ -80,7 +80,7 @@
        ;;eshell            ; the elisp shell that works everywhere
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
-       ;; vterm             ; the best terminal emulation in Emacs
+       vterm             ; the best terminal emulation in Emacs
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
@@ -149,7 +149,7 @@
        ;;factor
        ;;ledger            ; an accounting system in Emacs
        lua               ; one-based indices? one-based indices
-       markdown          ; writing docs for people to ignore
+       (markdown +tree-sitter)          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
